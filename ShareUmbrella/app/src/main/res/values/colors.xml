@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="main_color">#fd5d1f</color>
+    <color name="white_color">#fff</color>
+    <color name="gray_color">#808080</color>
+    <color name="black_color">#000</color>
+
+    <color name="bg_button_pressed_normal">#808080</color>
+    <color name="bg_login_button_pressed_color">#fd5d1f</color>
+    <color name="login_hint_text_color">#fff0f0f0</color>
 </resources>

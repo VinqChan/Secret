@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ShareUmbrella</string>
+    <string name="phone_number_hint">请输入手机号</string>
+    <string name="account_password_hint">请输入密码</string>
+    <string name="account_login_button_text">登录</string>
+    <string name="identify_code_login_button_text">短信验证码登录</string>
+    <string name="forget_pwd_text">忘记密码</string>
+    <string name="register_text">新用户注册</string>
 </resources>
