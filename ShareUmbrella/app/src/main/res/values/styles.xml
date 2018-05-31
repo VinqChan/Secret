@@ -8,4 +8,38 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CommonButtonBackgroud">
+        <item name="android:background">@drawable/bg_login_button</item>
+        <item name="android:textColor">@color/white_color</item>
+        <item name="android:textSize">@dimen/common_button_text_size</item>
+    </style>
+
+    <style name="CommonLine">
+        <item name="android:background">@color/gray_line_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="CommonVerfyCodeButtonBackgroud">
+        <item name="android:background">@drawable/bg_verfycode_login_button</item>
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">@dimen/common_button_text_size</item>
+    </style>
+    <style name="CommonIconStyle">
+        <item name="android:layout_width">@dimen/common_icon_size</item>
+        <item name="android:layout_height">@dimen/common_icon_size</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="CommonVerticalLineStyle">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">@color/gray_line_color</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
 </resources>

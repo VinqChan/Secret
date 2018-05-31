@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
 
+    <include layout="@layout/common_title"></include>
+
     <LinearLayout
         android:id="@+id/login_edit_layout"
         android:layout_width="wrap_content"
@@ -20,10 +22,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/icon_login_account"></ImageView>
+                style="@style/CommonIconStyle"
+                android:src="@drawable/icon_login_phone"></ImageView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                     android:src="@drawable/icon_login_input_clear" />
             </RelativeLayout>
         </LinearLayout>
-
+        <View style="@style/CommonLine"/>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -68,9 +68,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:scaleType="centerInside"
+                style="@style/CommonIconStyle"
                 android:src="@drawable/icon_login_password"></ImageView>
 
             <EditText
@@ -87,52 +85,54 @@
                 android:singleLine="true"
                 android:textSize="@dimen/common_text_size" />
         </LinearLayout>
-
+        <View style="@style/CommonLine"/>
         <Button
             android:id="@+id/phone_login_btn"
+            style="@style/CommonButtonBackgroud"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="17dp"
-            android:background="@drawable/bg_login_button"
-            android:text="@string/account_login_button_text"
-            android:textColor="@color/white_color"
-            android:textSize="@dimen/common_button_text_size" />
+            android:text="@string/account_login_button_text" />
 
         <Button
             android:id="@+id/verfycode_login_btn"
+            style="@style/CommonVerfyCodeButtonBackgroud"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/bg_verfycode_login_button"
-            android:text="@string/identify_code_login_button_text"
-            android:textColor="@color/main_color"
-            android:textSize="@dimen/common_button_text_size" />
+            android:text="@string/identify_code_login_button_text" />
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/forget_pwd_tv"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+       android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginStart="70dp"
-        android:text="@string/forget_pwd_text"
-        android:textColor="@color/gray_color" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/register_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
-        android:text="@string/register_text"
-        android:textColor="@color/gray_color" />
+        <TextView
+            android:id="@+id/forget_pwd_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forget_pwd_text"
+            android:textColor="@color/gray_color" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:background="@color/gray_line_color"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+
+        </View>
+        <TextView
+            android:id="@+id/register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_text"
+            android:textColor="@color/gray_color" />
+
+    </LinearLayout>
 </RelativeLayout>

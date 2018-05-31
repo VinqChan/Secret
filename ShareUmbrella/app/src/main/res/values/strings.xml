@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">ShareUmbrella</string>
+    <!--Title-->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
     <string name="account_password_hint">请输入密码</string>
     <string name="account_login_button_text">登录</string>
+    <string name="register_text">新用户注册</string>
     <string name="identify_code_login_button_text">短信验证码登录</string>
     <string name="forget_pwd_text">忘记密码</string>
-    <string name="register_text">新用户注册</string>
+    <string name="phoneNum">手机号码</string>
+    <string name="verfyCode">验证码</string>
+    <string name="getVerfyCode">获取验证码</string>
+    <string name="inputVerfyCode">请输入验证码</string>
+    <string name="setPwd">设置密码</string>
+    <string name="checkPwd">确认密码</string>
+    <string name="InvitationCode">邀请码</string>
+    <string name="yourRole">您的角色</string>
+    <string name="PleaseSelect">请选择</string>
+    <string name="Optional">选填</string>
 </resources>
