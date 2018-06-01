@@ -60,7 +60,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_login_phone"></ImageView>
+            android:src="@drawable/ic_bj_yzm"></ImageView>
 
         <TextView
             android:id="@+id/textView4"
@@ -121,7 +121,7 @@
 
         <ImageView
             style="@style/CommonIconStyle"
-            android:src="@drawable/icon_login_phone"></ImageView>
+            android:src="@drawable/ic_bj_ma"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
 
         <ImageView
             style="@style/CommonIconStyle"
-            android:src="@drawable/icon_login_phone"></ImageView>
+            android:src="@drawable/ic_bj_ma"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
 
         <ImageView
             style="@style/CommonIconStyle"
-            android:src="@drawable/icon_login_phone"></ImageView>
+            android:src="@drawable/ic_bj_yqm"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
             android:id="@+id/imageView"
             style="@style/CommonIconStyle"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_login_phone"></ImageView>
+            android:src="@drawable/ic_bj_ndjs"></ImageView>
 
         <TextView
             android:id="@+id/textView2"
@@ -290,7 +290,7 @@
             android:id="@+id/role_tv"
             style="@style/CommonIconStyle"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_login_phone"/>
+            android:src="@drawable/ic_bj_czdz"/>
 
         <TextView
             android:id="@+id/textView3"

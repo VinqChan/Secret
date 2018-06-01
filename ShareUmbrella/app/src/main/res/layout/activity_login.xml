@@ -3,15 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
 
-    <include layout="@layout/common_title"></include>
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+
+
+    <ImageView
+        android:id="@+id/logo_iv2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_dy_logo" />
+
+    <ImageView
+        android:id="@+id/logo_iv1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/logo_iv2"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_nor_logo2" />
 
     <LinearLayout
         android:id="@+id/login_edit_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/logo_iv1"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -59,7 +81,9 @@
                     android:src="@drawable/icon_login_input_clear" />
             </RelativeLayout>
         </LinearLayout>
-        <View style="@style/CommonLine"/>
+
+        <View style="@style/CommonLine" />
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -85,13 +109,15 @@
                 android:singleLine="true"
                 android:textSize="@dimen/common_text_size" />
         </LinearLayout>
-        <View style="@style/CommonLine"/>
+
+        <View style="@style/CommonLine" />
+
         <Button
             android:id="@+id/phone_login_btn"
             style="@style/CommonButtonBackgroud"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="50dp"
             android:text="@string/account_login_button_text" />
 
         <Button
@@ -107,7 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-       android:layout_centerHorizontal="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
         android:orientation="horizontal">
 
@@ -121,12 +147,12 @@
         <View
             android:layout_width="1dp"
             android:layout_height="20dp"
-            android:background="@color/gray_line_color"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            >
+            android:background="@color/gray_line_color">
 
         </View>
+
         <TextView
             android:id="@+id/register_tv"
             android:layout_width="wrap_content"
