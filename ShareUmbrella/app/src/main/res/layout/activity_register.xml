@@ -226,12 +226,8 @@
 
     <RelativeLayout
         android:id="@+id/selete_role_rl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        style="@style/LinerLaoutClickStyle"
+        >
 
         <ImageView
             android:id="@+id/imageView"
@@ -260,7 +256,6 @@
             android:layout_toLeftOf="@+id/imageView2"
             android:layout_toRightOf="@+id/textView2"
             android:layout_toStartOf="@+id/imageView2"
-            android:background="@drawable/bg_login_input"
             android:gravity="right|center_vertical"
             android:hint="请选择"
             android:textSize="@dimen/common_text_size" />
@@ -279,12 +274,7 @@
 
     <RelativeLayout
         android:id="@+id/selete_address_rl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+       style="@style/LinerLaoutClickStyle">
 
         <ImageView
             android:id="@+id/role_tv"
@@ -313,7 +303,6 @@
             android:layout_toLeftOf="@+id/imageView3"
             android:layout_toRightOf="@+id/textView3"
             android:layout_toStartOf="@+id/imageView3"
-            android:background="@drawable/bg_login_input"
             android:gravity="right|center_vertical"
             android:hint="请选择"
             android:textSize="@dimen/common_text_size" />

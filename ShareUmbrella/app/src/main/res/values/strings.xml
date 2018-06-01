@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">ShareUmbrella</string>
+    <string name="app_name">oksan</string>
     <!--Title-->
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="realnamecerfi">实名认证</string>
+    <string name="submit_audits">提交审核</string>
+    <string name="main_title">oksan共享雨伞</string>
     <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
     <string name="account_password_hint">请输入密码</string>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+
+    <ImageView
+        android:id="@+id/upload_card"
+        android:layout_width="280dp"
+        android:layout_height="185dp"
+        android:src="@drawable/ic_dy_dyzj"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="上传导游相关证件拍照"
+        android:padding="10dp"
+        android:textSize="@dimen/common_text_size" />
+
+    <ImageView
+        android:id="@+id/upload_handle_card"
+        android:layout_width="280dp"
+        android:layout_height="185dp"
+        android:src="@drawable/ic_dy_sczj" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="上传手持导游相关证件"
+        android:padding="10dp"
+        android:textSize="@dimen/common_text_size" />
+
+    <Button
+        android:id="@+id/submit_btn"
+        style="@style/CommonButtonBackgroud"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/submit_audits" />
+</LinearLayout>

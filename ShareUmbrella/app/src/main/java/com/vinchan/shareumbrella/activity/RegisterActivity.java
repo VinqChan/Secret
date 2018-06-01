@@ -1,5 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -84,6 +85,7 @@ public class RegisterActivity extends BaseActivity {
             case R.id.selete_address_rl:
                 break;
             case R.id.register_btn:
+                startActivity(new Intent(RegisterActivity.this,RealNameCertifiActivity.class));
                 break;
             case R.id.service_tv:
                 break;

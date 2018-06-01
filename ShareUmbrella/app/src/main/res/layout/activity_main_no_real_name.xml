@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/ic_dy_gxsbg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_dy_gxstxt" />
+
+        <LinearLayout
+            android:id="@+id/supplementaryInfo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_white_button"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_dy_bczl" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="补充资料     接单赚钱"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/scanner_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_white_button"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_dy_smjs" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="扫码借伞"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/invitation_rl"
+        style="@style/LinerLaoutClickStyle">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            style="@style/CommonIconStyle"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_grzx_yqdyyj"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/input_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageView1"
+            android:layout_toRightOf="@+id/imageView1"
+            android:gravity="center"
+            android:text="邀请导游有奖"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/common_text_size" />
+
+
+        <ImageView
+            android:id="@+id/arrow_1"
+            android:layout_width="@dimen/common_icon_size"
+            android:layout_height="@dimen/common_icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_arrow"></ImageView>
+    </RelativeLayout>
+
+    <View style="@style/CommonLine" />
+
+    <RelativeLayout
+        android:id="@+id/guide_rl"
+        style="@style/LinerLaoutClickStyle">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/CommonIconStyle"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_grzx_lpsc"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/input_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:gravity="center"
+            android:text="导游福利"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/common_text_size" />
+
+        <ImageView
+            android:id="@+id/arrow_2"
+            android:layout_width="@dimen/common_icon_size"
+            android:layout_height="@dimen/common_icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_arrow"></ImageView>
+    </RelativeLayout>
+
+    <View style="@style/CommonLine" />
+
+    <RelativeLayout
+        android:id="@+id/wechat_rl"
+        style="@style/LinerLaoutClickStyle">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            style="@style/CommonIconStyle"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_grzx_zdkf"></ImageView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView3"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageView3"
+            android:layout_toRightOf="@+id/imageView3"
+            android:gravity="center"
+            android:text="致电客服"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/common_text_size" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/input_height"
+            android:layout_toLeftOf="@+id/arrow_3"
+            android:layout_toStartOf="@+id/arrow_3"
+            android:clickable="false"
+            android:gravity="right|center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/phone_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="123456789（手机/微信）"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/work_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="8：00~20：00（工作时间）"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/arrow_3"
+            android:layout_width="@dimen/common_icon_size"
+            android:layout_height="@dimen/common_icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_arrow"></ImageView>
+    </RelativeLayout>
+
+    <View style="@style/CommonLine" />
+</LinearLayout>

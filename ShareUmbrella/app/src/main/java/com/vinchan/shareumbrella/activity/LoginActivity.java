@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.phone_login_btn:
-                ToastUtils.showShort("登录");
+               startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 break;
             case R.id.verfycode_login_btn:
                 break;
