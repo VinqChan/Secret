@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="gridview" type="id"/>
+    <item name="webview" type="id"/>
+    <item name="scrollview" type="id"/>
+
+    <item name="decode" type="id"/>
+    <item name="decode_failed" type="id"/>
+    <item name="decode_succeeded" type="id"/>
+    <item name="launch_product_query" type="id"/>
+    <item name="quit" type="id"/>
+    <item name="restart_preview" type="id"/>
+    <item name="return_scan_result" type="id"/>
+    <item name="expandtab_pos" type="id"/>
+    <item name="expandtab_object" type="id"/>
+    <item name="keyboard_view" type="id"></item>
+    <item name="pb_loading" type="id"></item>
+    <item name="custom_empty_view" type="id"></item>
+    <item name="base_reloading_button" type="id"></item>
+
+    <!--上下拉刷新id-->
+    <item name="pull_to_refresh_view" type="id"></item>
+    <item name="load_more_view" type="id"></item>
+    <item name="list_view" type="id"></item>
+    <item name="grid_view" type="id"></item>
+    <item name="scroll_view" type="id"></item>
+
+</resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vinchan.shareumbrella">
+    package="com.dangong.oksan">
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <!-- 获取CUID，用于鉴权，请求签名等 -->
     <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
@@ -18,8 +18,43 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <!-- 振动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 腾讯的权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <!-- mta系统的权限< -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 友盟统计的权限 -->
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <!-- 显示悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <!-- 添加可以向外拨打电话的权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+
     <application
-        android:name=".App"
+        android:name="com.vinchan.shareumbrella.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_dy_logo"
         android:label="@string/app_name"
@@ -28,7 +63,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="9ClkaunvLdhvFAYdzitpIk0QaqwPraGf" />
+            android:value="hZNFqILSGxrtwjS72fG2wvA4ejEKGCKw" />
 
         <service
             android:name="com.baidu.location.f"
@@ -36,7 +71,7 @@
             android:process=":remote" >
         </service>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.vinchan.shareumbrella.activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,21 +80,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name="com.vinchan.shareumbrella.activity.RegisterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activity.RealNameCertifiActivity"
+            android:name="com.vinchan.shareumbrella.activity.RealNameCertifiActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activity.MainNoRealNameActivity"
+            android:name="com.vinchan.shareumbrella.activity.MainNoRealNameActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.vinchan.shareumbrella.activity.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activity.PersonCenterActivity"
+            android:name="com.vinchan.shareumbrella.activity.PersonCenterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.ScannerBorrowActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.ScannerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

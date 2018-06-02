@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.vinchan.shareumbrella.R;
+import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 import butterknife.BindView;

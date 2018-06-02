@@ -12,12 +12,13 @@
         android:id="@+id/title"
         layout="@layout/common_title"></include>
 
-    <ImageView
+     <ImageView
         android:id="@+id/upload_card"
         android:layout_width="280dp"
         android:layout_height="185dp"
         android:src="@drawable/ic_dy_dyzj"
         android:layout_marginTop="30dp"
+         android:scaleType="centerCrop"
         />
 
     <TextView
@@ -32,6 +33,7 @@
         android:id="@+id/upload_handle_card"
         android:layout_width="280dp"
         android:layout_height="185dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_dy_sczj" />
 
     <TextView

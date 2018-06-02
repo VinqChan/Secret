@@ -1,0 +1,170 @@
+package com.vinchan.shareumbrella.view.dialog;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.dangong.oksan.R;
+import com.vinchan.shareumbrella.util.DimensUtil;
+
+
+/**
+ * 确认或提醒公用对话框
+ * 初始化点击对话框操作 自动关闭对话框 可通过isAutoClose函数进行控制
+ * Created by zhengjiabin on 2016/5/19.
+ */
+public class ConfirmOrTipDialog extends BaseDialog {
+
+    private int width;
+    private EnumDialogType dialogType;
+    private Context context;
+    private View customView;
+    private Listener listener;
+    private boolean isAutoClose = true;
+    private TextView tvTipContent;
+
+    /**
+     * 构造函数 默认宽度为：屏幕宽度 * 5 / 6
+     *
+     * @param context    上下文对象
+     * @param dialogType 对话框类型 枚举EnumDialogType
+     */
+    public ConfirmOrTipDialog(Activity context, EnumDialogType dialogType) {
+        this(context, dialogType, DimensUtil.getDisplayWidth(context) * 5 / 6);
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param context    上下文对象
+     * @param dialogType 对话框类型 枚举EnumDialogType
+     * @param width      自定义宽度
+     */
+    public ConfirmOrTipDialog(Activity context, EnumDialogType dialogType, int width) {
+        super(context);
+        this.context = context;
+        this.dialogType = dialogType;
+        this.width = width;
+        init();
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = width;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        getWindow().setAttributes(params);
+        getWindow().setGravity(Gravity.CENTER);
+    }
+
+    @Override
+    public void initView() {
+        customView = LayoutInflater.from(context).inflate(R.layout.dialog_confirm_or_tip, null);
+        setContentView(customView);
+        LinearLayout llytTipOp = (LinearLayout) customView.findViewById(R.id.llytTipOp);
+        LinearLayout llytConfirmOp = (LinearLayout) customView.findViewById(R.id.llytConfirmOp);
+        tvTipContent = (TextView) customView.findViewById(R.id.tvTipContent);
+        switch (dialogType) {
+            case DIALOG:
+                llytTipOp.setVisibility(View.GONE);
+                llytConfirmOp.setVisibility(View.VISIBLE);
+                break;
+            case TIP:
+                llytTipOp.setVisibility(View.VISIBLE);
+                llytTipOp.setOnClickListener(this);
+                llytConfirmOp.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    /**
+     * 设置提示内容
+     */
+
+    public void setTipContent(String tipContent) {
+        tvTipContent.setText(tipContent);
+    }
+
+    /**
+     * 获取Diolog布局页面 可根据业务需要修改布局元素属性
+     */
+    public View getCustomView() {
+        return customView;
+    }
+
+    /**
+     * 点击对话窗操作时是否默认u自动关闭对话框 初始化为默认关闭
+     */
+    public void isAutoClose(boolean isAutoClose) {
+        this.isAutoClose = isAutoClose;
+    }
+
+    /**
+     * 设置时间监听
+     */
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    /**
+     * 事件监听
+     */
+    public interface Listener {
+        /**
+         * 点击确认监听回掉
+         */
+        void sure();
+
+        /**
+         * 点击取消或提示按钮监听回掉
+         */
+        void cancle();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.llytTipOp) {
+            cancle();
+
+        }
+    }
+
+    /**
+     * 确认操作
+     */
+    private void sure() {
+        if (listener != null) {
+            listener.sure();
+        }
+        if (isAutoClose) {
+            dismiss();
+        }
+    }
+
+    /**
+     * 取消操作
+     */
+    private void cancle() {
+        if (listener != null) {
+            listener.cancle();
+        }
+        if (isAutoClose) {
+            dismiss();
+        }
+    }
+
+    /**
+     * 商品所在仓库发货类型枚举
+     */
+    public enum EnumDialogType {
+        DIALOG, TIP
+    }
+}
+

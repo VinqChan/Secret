@@ -34,4 +34,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.blankj:utilcode:1.9.10'
     implementation files('libs/BaiduLBS_Android.jar')
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
+    compile 'liji.library.dev:citypickerview:3.1.7'
+    compile 'com.mylhyl:zxingscanner:2.1.1'
 }

@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +18,9 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
-import com.vinchan.shareumbrella.R;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 import butterknife.BindView;
@@ -80,6 +81,7 @@ public class MainActivity extends BaseActivity {
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
+            LogUtils.d(mCurrentLat+ "  " +mCurrentLon);
             mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
@@ -152,7 +154,7 @@ public class MainActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.own_info_iv:
-                startActivity(new Intent(MainActivity.this,PersonCenterActivity.class));
+                ActivityUtils.startActivity(PersonCenterActivity.class);
                 break;
             case R.id.my_location_iv:
                 mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
@@ -163,6 +165,7 @@ public class MainActivity extends BaseActivity {
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                 break;
             case R.id.scanner_btn:
+                ActivityUtils.startActivity(ScannerActivity.class);
                 break;
             case R.id.address_list_iv:
                 break;

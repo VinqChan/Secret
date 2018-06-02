@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.vinchan.shareumbrella.R;
+import com.dangong.oksan.R;
 
 /**
  * TODO 可以改变外边缘宽度的圆图片控件

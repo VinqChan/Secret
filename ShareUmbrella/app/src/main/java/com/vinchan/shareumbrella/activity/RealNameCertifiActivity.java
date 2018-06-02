@@ -1,14 +1,18 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vinchan.shareumbrella.R;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.view.pictureTaker.PictureTakeDialog;
+import com.vinchan.shareumbrella.view.pictureTaker.PictureTaker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,15 +31,42 @@ public class RealNameCertifiActivity extends BaseActivity {
     ImageView uploadHandleCard;
     @BindView(R.id.submit_btn)
     Button submitBtn;
-
+    private PictureTaker pictureTaker;//图片选择器
+    private PictureTakeDialog pictureTakeDialog;//图片选择弹窗
+    private boolean isUploadHandle = false;//是否上传手持
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_name);
         ButterKnife.bind(this);
         titleTv.setText(getString(R.string.main_title));
+        initPictureTaker();
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        pictureTaker.onActivityResult(data, requestCode);
+    }
+
+    public void initPictureTaker() {
+
+        pictureTaker = new PictureTaker(this, "/oksan");
+        pictureTaker.setEnableCrop(false);
+        pictureTaker.setOnTakePictureListener(new PictureTaker.OnTakePictureListener() {
+            @Override
+            public void onPictureTaked(Bitmap bitmap) {
+                if (bitmap != null) {
+                    if(isUploadHandle){
+                        uploadHandleCard.setImageBitmap(bitmap);
+                    }else {
+                        uploadCard.setImageBitmap(bitmap);
+                    }
+                }
+            }
+        });
+    }
 
     @Override
     protected void onDestroy() {
@@ -49,12 +80,24 @@ public class RealNameCertifiActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.upload_card:
+                isUploadHandle = false;
+                showPicturePckDialog();
                 break;
             case R.id.upload_handle_card:
+                isUploadHandle = true;
                 break;
             case R.id.submit_btn:
-                startActivity(new Intent(RealNameCertifiActivity.this,MainNoRealNameActivity.class));
+                ActivityUtils.startActivity(MainNoRealNameActivity.class);
                 break;
         }
+    }
+    /**
+     * 修改头像的弹窗
+     */
+    public void showPicturePckDialog() {
+        if (pictureTakeDialog == null) {
+            pictureTakeDialog = new PictureTakeDialog(this, pictureTaker);
+        }
+        pictureTakeDialog.show();
     }
 }

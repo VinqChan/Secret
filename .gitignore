@@ -11,3 +11,4 @@ target/
 .idea/
 *.jar
 ~*
+ShareUmbrella/app/release/app-release.apk

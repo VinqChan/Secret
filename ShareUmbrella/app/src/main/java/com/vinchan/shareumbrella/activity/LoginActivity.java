@@ -1,5 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.vinchan.shareumbrella.R;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.util.permission.PermissionCallBack;
+import com.vinchan.shareumbrella.util.permission.PermissionCenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +51,18 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         titleTv.setText(getString(R.string.login));
+        PermissionCenter.getInstance().checkPermission(this, new PermissionCallBack() {
+
+            @Override
+            public void onSuccess(String permission) {
+
+            }
+
+            @Override
+            public void onfail(String permission) {
+
+            }
+        }, Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     @OnClick({R.id.login_clear_btn, R.id.phone_login_btn, R.id.verfycode_login_btn, R.id.forget_pwd_tv, R.id.register_tv  ,R.id.title_back_iv})
@@ -57,7 +72,7 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.phone_login_btn:
-               startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                ActivityUtils.startActivity(MainActivity.class);
                 break;
             case R.id.verfycode_login_btn:
                 break;
