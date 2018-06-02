@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import pl.droidsonroids.gif.GifImageView;
 
 /**
- * Created by Ethan on 2018/6/2/002.
+ * Created by Vinchan on 2018/6/2/002.
  */
 
 public class ScannerBorrowActivity extends BaseActivity {

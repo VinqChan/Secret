@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_grzx_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:background="@drawable/ic_dy_wdqb"
+            android:gravity="center"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="累计收入 (元)"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/middle_small_text_size"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView5" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/white_color"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/line"
+                android:layout_below="@+id/textView5"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/income_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line"
+                android:layout_centerHorizontal="true"
+                android:text="160"
+                android:textColor="@color/white_color"
+                android:textSize="40dp" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/white_color"
+            android:layout_below="@+id/textView5"
+            android:layout_marginTop="15dp"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/yue_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="可提现余额:"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/yue_tv"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="520元"
+                android:textColor="@color/yellow_color"
+                android:textSize="@dimen/common_text_size" />
+            <TextView
+                android:id="@+id/withdrawal_tv"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_certified_shape"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="去提现"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wallet_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        ></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

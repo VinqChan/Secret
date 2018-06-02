@@ -57,8 +57,8 @@ public class ScannerActivity extends DeCodeActivity {
         int scanMode = 1;
         showThumbnail = false;
         mScannerView.setMediaResId(R.raw.beep);//设置扫描成功的声音
-        mScannerView.setDrawText("将二维码放入框内", true);
-        mScannerView.setDrawTextColor(Color.RED);
+        mScannerView.setDrawText("将二维码放入框内，即可自动扫描", true);
+        mScannerView.setDrawTextColor(Color.WHITE );
         mScannerView.setLaserColor(getResources().getColor(R.color.main_color));
         mScannerView.setLaserFrameBoundColor(getResources().getColor(R.color.main_color));
 

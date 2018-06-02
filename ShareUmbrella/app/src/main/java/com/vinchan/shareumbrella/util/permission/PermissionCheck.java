@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * 应用权限检查
- * Created by ethan
+ * Created by Vinchan
  */
 public class PermissionCheck {
     private Activity activity;

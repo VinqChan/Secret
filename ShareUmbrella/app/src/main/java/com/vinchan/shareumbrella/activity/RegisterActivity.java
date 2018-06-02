@@ -81,6 +81,7 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
         //添加默认的配置，不需要自己定义
         CityConfig cityConfig = new CityConfig.Builder().build();
         cityConfig.setDefaultProvinceName("福建");
+        cityConfig.setConfirmTextColorStr("#fd5d1f");
         mPicker.setConfig(cityConfig);
         mPicker.setOnCityItemClickListener(new OnCityItemClickListener() {
             @Override

@@ -27,7 +27,7 @@ import com.mylhyl.zxing.scanner.result.ProductResult;
 import com.mylhyl.zxing.scanner.result.URIResult;
 
 /**
- * Created by Ethan
+ * Created by Vinchan
  */
 public abstract class BasicScannerActivity extends AppCompatActivity implements
         OnScannerCompletionListener {

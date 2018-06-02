@@ -12,7 +12,7 @@ import java.util.Locale;
 
 
 /**
- * Created by Ethan
+ * Created by Vinchan
  * CountDownUtil
  */
 public class CountDownUtil {

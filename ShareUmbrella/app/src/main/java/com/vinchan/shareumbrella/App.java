@@ -9,7 +9,7 @@ import com.blankj.utilcode.util.Utils;
 import com.dangong.oksan.R;
 
 /**
- * Created by ethan on 2018/5/31.
+ * Created by Vinchan on 2018/5/31.
  */
 
 public class App extends Application{

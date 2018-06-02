@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTakeDialog;
@@ -155,6 +156,7 @@ public class PersonCenterActivity extends BaseActivity {
                 showPicturePckDialog();
                 break;
             case R.id.wallet_rl:
+                ActivityUtils.startActivity(WalletActivity.class);
                 break;
             case R.id.history_rl:
                 break;

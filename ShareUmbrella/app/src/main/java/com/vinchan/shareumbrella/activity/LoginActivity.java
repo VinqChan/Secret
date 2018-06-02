@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
             public void onfail(String permission) {
 
             }
-        }, Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION);
+        }, Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     @OnClick({R.id.login_clear_btn, R.id.phone_login_btn, R.id.verfycode_login_btn, R.id.forget_pwd_tv, R.id.register_tv  ,R.id.title_back_iv})
