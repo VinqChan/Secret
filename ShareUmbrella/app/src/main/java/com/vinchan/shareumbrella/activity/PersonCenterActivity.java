@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.adapter.RankingListAdapter;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTakeDialog;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTaker;
 import com.vinchan.shareumbrella.view.roundImage.RoundedImageView;
@@ -161,6 +162,7 @@ public class PersonCenterActivity extends BaseActivity {
             case R.id.history_rl:
                 break;
             case R.id.ranking_rl:
+                ActivityUtils.startActivity(RankingListActivity.class);
                 break;
             case R.id.invitation_rl:
                 break;
