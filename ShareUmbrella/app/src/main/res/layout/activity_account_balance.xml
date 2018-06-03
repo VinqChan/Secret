@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/backgroud_color"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white_color"
+        >
+    <ImageView
+        android:layout_width="82dp"
+        android:layout_height="92dp"
+        android:src="@drawable/ic_wdqb_zhye" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="账户余额（元）"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/secondary_title_text_size" />
+
+    <TextView
+        android:id="@+id/balance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:textColor="@color/black_color"
+        android:textSize="37sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/withdrawal_btn"
+        style="@style/CommonButtonBackgroud"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:text="立即提现" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white_color"
+        android:paddingTop="15dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+        <View
+            android:layout_width="4dp"
+            android:layout_height="20dp"
+            android:background="@color/main_color"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/secondary_title_text_size"
+                android:text="提现明细"
+                android:layout_marginLeft="15dp"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/select_date_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginLeft="18dp"
+            android:background="@drawable/bg_date_select_button_shape"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_color"
+                android:textSize="@dimen/common_text_size"
+                android:text="2018年5月"
+                />
+            <ImageView
+                style="@style/CommonIconStyle"
+                android:src="@drawable/ic_wdqb_xl"
+                />
+        </LinearLayout>
+       <TextView
+           android:id="@+id/account_tv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/common_text_size"
+           android:textColor="@color/black_color"
+           android:text="合计：1500"
+           android:layout_centerVertical="true"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="10dp"
+           />
+        </RelativeLayout>
+        <View style="@style/CommonLine"
+            android:layout_marginTop="8dp"
+            />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/withdrawal_history_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

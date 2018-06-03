@@ -106,6 +106,9 @@
         <activity
             android:name="com.vinchan.shareumbrella.activity.RankingListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.AccountBalanceActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

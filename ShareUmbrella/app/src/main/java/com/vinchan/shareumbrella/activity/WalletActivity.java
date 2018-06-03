@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.WallteAdapter;
@@ -75,6 +76,7 @@ public class WalletActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.withdrawal_tv:
+                ActivityUtils.startActivity(AccountBalanceActivity.class);
                 break;
         }
     }

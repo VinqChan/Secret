@@ -77,6 +77,7 @@ public class LoginActivity extends BaseActivity {
             case R.id.verfycode_login_btn:
                 break;
             case R.id.forget_pwd_tv:
+
                 break;
             case R.id.register_tv:
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));

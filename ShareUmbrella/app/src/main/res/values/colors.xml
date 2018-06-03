@@ -7,6 +7,7 @@
     <color name="main_color">#fd5d1f</color>
     <color name="white_color">#fff</color>
     <color name="gray_color">#666</color>
+    <color name="picker_line_color">#C7C7C7</color>
     <color name="backgroud_color">#F2F2F2</color>
     <color name="gray_line_color">#ffdddddd</color>
     <color name="gray_text_color">#999999</color>

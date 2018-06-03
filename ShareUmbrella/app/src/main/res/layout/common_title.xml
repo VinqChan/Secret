@@ -41,4 +41,17 @@
         android:visibility="gone"
         android:src="@drawable/ic_grzx" />
 
+    <TextView
+        android:id="@+id/withdrawal_rule_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="提现规则"
+        android:textColor="@color/white_color"
+        android:visibility="gone"
+        android:textSize="@dimen/common_text_size" />
 </RelativeLayout>

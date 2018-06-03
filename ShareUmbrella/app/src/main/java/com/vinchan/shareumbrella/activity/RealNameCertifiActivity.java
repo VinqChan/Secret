@@ -85,6 +85,7 @@ public class RealNameCertifiActivity extends BaseActivity {
                 break;
             case R.id.upload_handle_card:
                 isUploadHandle = true;
+                showPicturePckDialog();
                 break;
             case R.id.submit_btn:
                 ActivityUtils.startActivity(MainNoRealNameActivity.class);

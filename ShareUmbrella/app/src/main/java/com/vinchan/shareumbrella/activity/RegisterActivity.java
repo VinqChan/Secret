@@ -1,6 +1,7 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -17,11 +20,19 @@ import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.api.ApiUtils;
+import com.vinchan.shareumbrella.callback.ApiCallBack;
+import com.vinchan.shareumbrella.constants.Constants;
 import com.vinchan.shareumbrella.util.CountTimer;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.widget.WheelView;
+import okhttp3.Call;
 
 public class RegisterActivity extends BaseActivity implements CountTimer.OnBacllkCountTimer {
 
@@ -66,7 +77,8 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     @BindView(R.id.service_tv)
     TextView serviceTv;
     //申明对象
-    CityPickerView mPicker=new CityPickerView();
+    CityPickerView mPicker = new CityPickerView();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +98,7 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
         mPicker.setOnCityItemClickListener(new OnCityItemClickListener() {
             @Override
             public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
-               StringBuilder stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
                 //省份
                 if (province != null) {
                     stringBuilder.append(province);
@@ -106,12 +118,12 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
 
             @Override
             public void onCancel() {
-              //  ToastUtils.showLongToast(this, "已取消");
+                //  ToastUtils.showLongToast(this, "已取消");
             }
         });
 
         //显示
-      //  mPicker.showCityPicker( );
+        //  mPicker.showCityPicker( );
     }
 
     @Override
@@ -119,29 +131,76 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
         super.onDestroy();
     }
 
-    @OnClick({R.id.title_back_iv, R.id.get_verfy_code_tv, R.id.selete_role_rl, R.id.selete_address_rl, R.id.register_btn,R.id.service_tv})
+    @OnClick({R.id.title_back_iv, R.id.get_verfy_code_tv, R.id.selete_role_rl, R.id.selete_address_rl, R.id.register_btn, R.id.service_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back_iv:
                 finish();
                 break;
             case R.id.get_verfy_code_tv:
+                String phoneNum = phoneNumEt.getText().toString().trim();
+                if (StringUtils.isEmpty(phoneNum)) {
+                    ToastUtils.showShort("请输入手机号码！");
+                    return;
+                }
+                getRegisterCode(phoneNum);
                 CountTimer countTimer = new CountTimer(getVerfyCodeTv);// 短信发送倒计时
                 countTimer.setBackgroundColor(false);
                 countTimer.setBacllkCountTimer(RegisterActivity.this);
                 countTimer.start();
                 break;
             case R.id.selete_role_rl:
+                seleteRoleRl();
                 break;
             case R.id.selete_address_rl:
-                mPicker.showCityPicker( );
+                mPicker.showCityPicker();
                 break;
             case R.id.register_btn:
-                startActivity(new Intent(RegisterActivity.this,RealNameCertifiActivity.class));
+                startActivity(new Intent(RegisterActivity.this, RealNameCertifiActivity.class));
                 break;
             case R.id.service_tv:
                 break;
         }
+    }
+
+    private void seleteRoleRl() {
+
+        OptionPicker picker = new OptionPicker(this, new String[]{
+                "维护人员", "站点管理员", "导购"
+        });
+        picker.setCanceledOnTouchOutside(true);
+        picker.setDividerRatio(WheelView.DividerConfig.FILL);
+        picker.setDividerColor(getResources().getColor(R.color.picker_line_color));
+        picker.setTextColor(getResources().getColor(R.color.gray_color));
+        picker.setTopLineColor(getResources().getColor(R.color.gray_color));
+        picker.setSelectedIndex(1);
+        picker.setCycleDisable(true);
+        picker.setTextSize(16);
+        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+            @Override
+            public void onOptionPicked(int index, String item) {
+                roleEt.setText(item);
+            }
+        });
+        picker.show();
+        picker.getCancelButton().setTextSize(16);
+        picker.getSubmitButton().setTextSize(16);
+        picker.getCancelButton().setTextColor(getResources().getColor(R.color.gray_color));
+        picker.getSubmitButton().setTextColor(getResources().getColor(R.color.main_color));
+    }
+
+    private void getRegisterCode(String phoneNum) {
+        ApiUtils.getRegisterCode(phoneNum, new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
     }
 
     @Override

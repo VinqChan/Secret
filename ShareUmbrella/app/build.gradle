@@ -37,4 +37,8 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
     compile 'liji.library.dev:citypickerview:3.1.7'
     compile 'com.mylhyl:zxingscanner:2.1.1'
+    compile('cn.qqtheme.framework:WheelPicker:1.5.5') {
+        exclude group: 'com.android.support'
+    }
+    compile 'com.zhy:okhttputils:2.6.2'
 }
