@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -48,12 +47,21 @@ public class AccountBalanceActivity extends BaseActivity {
     TextView dateTv;
     private AccountBalanceListAdapter mAdapter;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_balance);
+    public int getLayoutId() {
+        return R.layout.activity_account_balance;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.account_balance);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.account_balance));
         withdrawalRuleTv.setVisibility(View.VISIBLE);
         getData();
     }
@@ -75,11 +83,9 @@ public class AccountBalanceActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.title_back_iv, R.id.withdrawal_btn, R.id.select_date_rl, R.id.withdrawal_rule_tv})
+    @OnClick({ R.id.withdrawal_btn, R.id.select_date_rl, R.id.withdrawal_rule_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_back_iv:
-                break;
             case R.id.withdrawal_btn:
                 break;
             case R.id.select_date_rl:

@@ -1,8 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WalletActivity extends BaseActivity {
@@ -40,14 +37,20 @@ public class WalletActivity extends BaseActivity {
     RecyclerView walletRecyclerview;
     WallteAdapter adapter;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.activity_wallet;
+    }
 
-        setContentView(R.layout.activity_wallet);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.my_wallet));
+    @Override
+    public String setTitle() {
+        return getString(R.string.my_wallet);
+    }
 
+    @Override
+    public void init() {
+        super.init();
         getData();
     }
 
@@ -69,12 +72,9 @@ public class WalletActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.title_back_iv, R.id.withdrawal_tv})
+    @OnClick({ R.id.withdrawal_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_back_iv:
-                finish();
-                break;
             case R.id.withdrawal_tv:
                 ActivityUtils.startActivity(AccountBalanceActivity.class);
                 break;

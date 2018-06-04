@@ -1,134 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
     tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/time_gif"
+                android:layout_width="162dp"
+                android:layout_height="162dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_dy_djs" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="46dp"
+                android:text="剩余时间"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/middle_text_size" />
+
+            <TextView
+                android:id="@+id/remaing_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="08:00"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/big_text_size"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="借出数量"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/middle_text_size" />
+
+            <TextView
+                android:id="@+id/borrow_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="15"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/middle_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="把"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/middle_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="120dp"
+                android:layout_height="1dp"
+                android:background="@color/main_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="规则说明"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/middle_text_size" />
+
+            <View
+                android:layout_width="120dp"
+                android:layout_height="1dp"
+                android:background="@color/main_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ic_dy_gzsm"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="任意伞桩扫码开锁、进入导购状态。"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle" />
 
     <include
         android:id="@+id/title"
         layout="@layout/common_title"></include>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal">
-
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/time_gif"
-            android:layout_width="162dp"
-            android:layout_height="162dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_dy_djs" />
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="46dp"
-            android:text="剩余时间"
-            android:textColor="@color/black_color"
-            android:textSize="@dimen/middle_text_size" />
-
-        <TextView
-            android:id="@+id/remaing_time_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:text="08:00"
-            android:textColor="@color/main_color"
-            android:textSize="@dimen/big_text_size"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="借出数量"
-            android:textColor="@color/black_color"
-            android:textSize="@dimen/middle_text_size" />
-
-        <TextView
-            android:id="@+id/borrow_num_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="15"
-            android:textColor="@color/main_color"
-            android:textSize="@dimen/middle_text_size" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="把"
-            android:textColor="@color/black_color"
-            android:textSize="@dimen/middle_text_size" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="120dp"
-            android:layout_height="1dp"
-            android:background="@color/main_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="规则说明"
-            android:textColor="@color/main_color"
-            android:textSize="@dimen/middle_text_size" />
-
-        <View
-            android:layout_width="120dp"
-            android:layout_height="1dp"
-            android:background="@color/main_color" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp"
-        >
-        <TextView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:background="@drawable/ic_dy_gzsm"
-            android:text="1"
-            android:textSize="@dimen/common_text_size"
-            android:textColor="@color/white_color"
-            android:gravity="center"
-            />
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="@dimen/common_text_size"
-              android:textColor="@color/gray_text_color"
-              android:text="任意伞桩扫码开锁、进入导购状态。"
-              android:layout_marginLeft="10dp"
-              />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

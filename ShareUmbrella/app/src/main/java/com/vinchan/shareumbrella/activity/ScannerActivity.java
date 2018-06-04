@@ -42,12 +42,20 @@ public class ScannerActivity extends DeCodeActivity {
 
     private Result mLastResult;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.scanner_borrow));
+    public int getLayoutId() {
+        return R.layout.activity_scanner;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.scanner_borrow);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         initScannerView();
     }
 
@@ -112,6 +120,7 @@ public class ScannerActivity extends DeCodeActivity {
             }
         }
     }
+
 
     @Override
     protected void onResume() {

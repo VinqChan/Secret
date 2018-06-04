@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Vinchan on 2018/6/3/003.
  */
 
-public class Result implements Serializable {
+public class ResponseModel implements Serializable {
     private String code;
     private String message;
     private String result;

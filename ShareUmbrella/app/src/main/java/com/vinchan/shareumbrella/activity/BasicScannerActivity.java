@@ -25,11 +25,12 @@ import com.mylhyl.zxing.scanner.result.AddressBookResult;
 import com.mylhyl.zxing.scanner.result.ISBNResult;
 import com.mylhyl.zxing.scanner.result.ProductResult;
 import com.mylhyl.zxing.scanner.result.URIResult;
+import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 /**
  * Created by Vinchan
  */
-public abstract class BasicScannerActivity extends AppCompatActivity implements
+public abstract class BasicScannerActivity extends BaseActivity implements
         OnScannerCompletionListener {
     public static final int REQUEST_CODE_SCANNER = 188;
     public static final String EXTRA_RETURN_SCANNER_RESULT = "return_scanner_result";

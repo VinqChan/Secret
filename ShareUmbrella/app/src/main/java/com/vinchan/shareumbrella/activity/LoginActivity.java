@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
@@ -45,12 +46,21 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.title_tv)
     TextView titleTv;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.login));
+    public int getLayoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.login);
+    }
+
+    @Override
+    public void init() {
+        super.init();
+
         PermissionCenter.getInstance().checkPermission(this, new PermissionCallBack() {
 
             @Override
@@ -62,10 +72,11 @@ public class LoginActivity extends BaseActivity {
             public void onfail(String permission) {
 
             }
-        }, Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
     }
 
-    @OnClick({R.id.login_clear_btn, R.id.phone_login_btn, R.id.verfycode_login_btn, R.id.forget_pwd_tv, R.id.register_tv  ,R.id.title_back_iv})
+    @OnClick({R.id.login_clear_btn, R.id.phone_login_btn, R.id.verfycode_login_btn, R.id.forget_pwd_tv, R.id.register_tv, R.id.title_back_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_clear_btn:
@@ -80,10 +91,7 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.register_tv:
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-                break;
-            case R.id.title_back_iv:
-                finish();
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
         }
     }
@@ -91,5 +99,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

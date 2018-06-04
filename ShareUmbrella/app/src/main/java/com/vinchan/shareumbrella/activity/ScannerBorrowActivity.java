@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.util.CountDownUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.droidsonroids.gif.GifImageView;
 
@@ -34,12 +32,20 @@ public class ScannerBorrowActivity extends BaseActivity {
     @BindView(R.id.borrow_num_tv)
     TextView borrowNumTv;
     private CountDownUtil countDownUtil ;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner_borrow);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.scanner_borrow));
+    public int getLayoutId() {
+        return R.layout.activity_scanner_borrow;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.scanner_borrow);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         ownInfoIv.setVisibility(View.VISIBLE);
         countDownUtil = new CountDownUtil();
 
@@ -57,13 +63,9 @@ public class ScannerBorrowActivity extends BaseActivity {
         countDownUtil.startCountdown(10*60*1000, 1000, CountDownUtil.TYPE_GROUP_ON_FAIL);
     }
 
-
-    @OnClick({R.id.title_back_iv, R.id.own_info_iv})
+    @OnClick({ R.id.own_info_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_back_iv:
-                finish();
-                break;
             case R.id.own_info_iv:
                 ActivityUtils.startActivity(PersonCenterActivity.class);
                 break;

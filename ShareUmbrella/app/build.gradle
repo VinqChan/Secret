@@ -41,4 +41,5 @@ dependencies {
         exclude group: 'com.android.support'
     }
     compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.google.code.gson:gson:2.2.4'
 }

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="transparent">#e0000000</color>
-    <color name="main_color">#fd5d1f</color>
+    <color name="main_color">#FC5B1F</color>
     <color name="white_color">#fff</color>
     <color name="gray_color">#666</color>
     <color name="picker_line_color">#C7C7C7</color>
@@ -15,6 +15,6 @@
     <color name="yellow_color">#EADE32</color>
 
     <color name="bg_button_pressed_normal">#999999</color>
-    <color name="bg_login_button_pressed_color">#fd5d1f</color>
+    <color name="bg_login_button_pressed_color">#FC5B1F</color>
     <color name="login_hint_text_color">#fff0f0f0</color>
 </resources>

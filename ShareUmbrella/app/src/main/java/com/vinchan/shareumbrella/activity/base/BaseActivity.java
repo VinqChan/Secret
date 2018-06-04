@@ -14,32 +14,35 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.dangong.oksan.R;
 
-
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /***************************************
- * 
+ *
  * @author lwli
  * @date 2014-8-15
  * @modify zhengjb
  * @date 2015-3-25
  * @time 上午9:21:35 类说明: 基础Activity类 对广播、加载进度显示、overridePendingTransition、网络状态变化等
  *       进行了处理
- * 
- * 
+ *
+ *
  **************************************/
 public abstract class BaseActivity extends Activity
 {
     public static final String TAG = BaseActivity.class.getName();
-
-    private ProgressBar loadingBar;
 
     /** 使用者定义并使用的广播 */
     private BroadcastReceiver broadcastReceiver;
@@ -52,40 +55,29 @@ public abstract class BaseActivity extends Activity
     private boolean connetionChangeEnable = true;
     /** 标志网络是否连接着 */
     private boolean isNetConnected = true;
-
+    @BindView(R.id.title_back_iv)
+    ImageView titleBackIv;
+    @BindView(R.id.title_tv)
+    TextView titleTv;
+    @BindView(R.id.loading_progress_bar)
+    ProgressBar loadingBar;
     private long onCreateTime;
 
     /**
-     * 
+     *
      * @param savedInstanceState
-     * @param layoutResId
-     * @param layoutActionBar
      * @return
-     * 
+     *
      */
     @SuppressLint("NewApi")
-    protected void onCreate(Bundle savedInstanceState, int layoutResId, int layoutActionBar)
+    protected void onCreate(Bundle savedInstanceState)
     {
         onCreateTime = new Date().getTime();
-        // LogUtils.d(BaseActivity.TAG, "onCreate");
-        if (layoutActionBar != 0)
-        {
-            requestWindowFeature(Window.FEATURE_CUSTOM_TITLE) ;
-        }
-
         super.onCreate(savedInstanceState);
-
-            setContentView(layoutResId);
-
-        if (layoutActionBar != 0)
-        {
-            getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, layoutActionBar);
-        }
-
-        loadingBar = (ProgressBar) findViewById(R.id.pb_loading);
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
 
         init();
-
     }
 
     /** @return 是否第一次加载数据，如果是则会在title上显示圆形进度视图，加载完后设置该数据为false */
@@ -102,7 +94,7 @@ public abstract class BaseActivity extends Activity
 
     /**
      * 默认不开启注册广播，设置广播的过滤同时开启广播
-     * 
+     *
      * @param intentFilter 此activity中的广播过滤器
      */
     public void setIntentFilter(IntentFilter intentFilter)
@@ -148,7 +140,7 @@ public abstract class BaseActivity extends Activity
 
     /**
      * 当接受到广播后的处理
-     * 
+     *
      * @param context 接受广播的上下文
      * @param intent 该广播的意图
      * */
@@ -173,7 +165,7 @@ public abstract class BaseActivity extends Activity
     }
     /**
      * 拥有默认动作的启动activity方法
-     * 
+     *
      * @param intent 要启动activity的意图
      * @param isFinish 是否关闭当前activity
      * */
@@ -190,7 +182,7 @@ public abstract class BaseActivity extends Activity
 
     /**
      * 拥有默认动作的启动activity方法
-     * 
+     *
      * @param intent 要启动activity的意图
      * @param reqCode 请求码
      * @param isFinish 是否关闭当前activity
@@ -213,7 +205,7 @@ public abstract class BaseActivity extends Activity
         LogUtils.d(TAG, "create view used time:" + (new Date().getTime() - onCreateTime) + "ms");
         onCreateTime = new Date().getTime();
 
-   
+
     }
 
     /** 运行在onCreate中，实现视图和数据的初始化 */
@@ -319,6 +311,13 @@ public abstract class BaseActivity extends Activity
     /** 初始化视图 */
     public void initView()
     {
+        titleTv.setText(setTitle());
+        titleBackIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     /** 加载数据，初次加载显示title的loading */
@@ -408,4 +407,8 @@ public abstract class BaseActivity extends Activity
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
+    public abstract int getLayoutId();
+    public abstract String setTitle();
+
 }

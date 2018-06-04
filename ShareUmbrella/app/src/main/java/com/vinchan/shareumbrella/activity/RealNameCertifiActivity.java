@@ -2,7 +2,6 @@ package com.vinchan.shareumbrella.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import com.vinchan.shareumbrella.view.pictureTaker.PictureTakeDialog;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTaker;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RealNameCertifiActivity extends BaseActivity {
@@ -34,15 +32,23 @@ public class RealNameCertifiActivity extends BaseActivity {
     private PictureTaker pictureTaker;//图片选择器
     private PictureTakeDialog pictureTakeDialog;//图片选择弹窗
     private boolean isUploadHandle = false;//是否上传手持
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_real_name);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.main_title));
-        initPictureTaker();
+    public String setTitle() {
+        return getString(R.string.main_title);
     }
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_real_name;
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        initPictureTaker();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

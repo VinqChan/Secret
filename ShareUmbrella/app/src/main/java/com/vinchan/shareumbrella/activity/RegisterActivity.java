@@ -1,8 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,17 +20,12 @@ import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
-import com.vinchan.shareumbrella.constants.Constants;
 import com.vinchan.shareumbrella.util.CountTimer;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.widget.WheelView;
-import okhttp3.Call;
 
 public class RegisterActivity extends BaseActivity implements CountTimer.OnBacllkCountTimer {
 
@@ -79,13 +72,21 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     //申明对象
     CityPickerView mPicker = new CityPickerView();
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.register);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         mPicker.init(this);
-        setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.register));
         initCityPicker();
     }
 
@@ -131,12 +132,9 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
         super.onDestroy();
     }
 
-    @OnClick({R.id.title_back_iv, R.id.get_verfy_code_tv, R.id.selete_role_rl, R.id.selete_address_rl, R.id.register_btn, R.id.service_tv})
+    @OnClick({ R.id.get_verfy_code_tv, R.id.selete_role_rl, R.id.selete_address_rl, R.id.register_btn, R.id.service_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_back_iv:
-                finish();
-                break;
             case R.id.get_verfy_code_tv:
                 String phoneNum = phoneNumEt.getText().toString().trim();
                 if (StringUtils.isEmpty(phoneNum)) {

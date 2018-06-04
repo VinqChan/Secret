@@ -15,7 +15,7 @@ import com.mylhyl.zxing.scanner.decode.QRDecode;
 /**
  * 单击解析图片
  */
-public class DeCodeActivity extends BasicScannerActivity {
+public abstract class DeCodeActivity extends BasicScannerActivity {
     @Override
     void onResultActivity(Result result, ParsedResultType type, Bundle bundle) {
         switch (type) {

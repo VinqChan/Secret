@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RankingListActivity extends BaseActivity {
@@ -55,11 +53,18 @@ public class RankingListActivity extends BaseActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ranking_list);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.ranking));
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.ranking);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         getData();
     }
 

@@ -2,7 +2,6 @@ package com.vinchan.shareumbrella.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -11,13 +10,11 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
-import com.vinchan.shareumbrella.adapter.RankingListAdapter;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTakeDialog;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTaker;
 import com.vinchan.shareumbrella.view.roundImage.RoundedImageView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PersonCenterActivity extends BaseActivity {
@@ -104,12 +101,20 @@ public class PersonCenterActivity extends BaseActivity {
     private PictureTaker pictureTaker;//图片选择器
     private PictureTakeDialog pictureTakeDialog;//图片选择弹窗
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_center);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.person_center));
+    public int getLayoutId() {
+        return R.layout.activity_person_center;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.person_center);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         initPictureTaker();
     }
 
@@ -147,12 +152,9 @@ public class PersonCenterActivity extends BaseActivity {
         }
         pictureTakeDialog.show();
     }
-    @OnClick({R.id.title_back_iv, R.id.custom_header_view, R.id.wallet_rl, R.id.history_rl, R.id.ranking_rl, R.id.invitation_rl, R.id.gift_shop_rl, R.id.help_rl, R.id.guide_rl, R.id.setting_rl, R.id.wechat_rl})
+    @OnClick({ R.id.custom_header_view, R.id.wallet_rl, R.id.history_rl, R.id.ranking_rl, R.id.invitation_rl, R.id.gift_shop_rl, R.id.help_rl, R.id.guide_rl, R.id.setting_rl, R.id.wechat_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_back_iv:
-                finish();
-                break;
             case R.id.custom_header_view:
                 showPicturePckDialog();
                 break;

@@ -12,11 +12,6 @@
         android:layout_height="fill_parent"
         android:clickable="true" />
 
-    <include
-        android:id="@+id/title"
-        layout="@layout/common_title"></include>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,4 +56,13 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_dy_fjwd" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle"
+        />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
 </RelativeLayout>

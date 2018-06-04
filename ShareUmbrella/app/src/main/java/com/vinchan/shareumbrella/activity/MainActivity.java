@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +23,6 @@ import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -59,11 +57,18 @@ public class MainActivity extends BaseActivity {
     private MyLocationData locData;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.main_title));
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public String setTitle() {
+        return getString(R.string.main_title);
+    }
+
+    @Override
+    public void init() {
+        super.init();
         ownInfoIv.setVisibility(View.VISIBLE);
         initLocation();
     }
@@ -147,12 +152,9 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.title_back_iv, R.id.own_info_iv, R.id.my_location_iv, R.id.scanner_btn, R.id.address_list_iv})
+    @OnClick({ R.id.own_info_iv, R.id.my_location_iv, R.id.scanner_btn, R.id.address_list_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.title_back_iv:
-                finish();
-                break;
             case R.id.own_info_iv:
                 ActivityUtils.startActivity(PersonCenterActivity.class);
                 break;
@@ -171,4 +173,5 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
 }

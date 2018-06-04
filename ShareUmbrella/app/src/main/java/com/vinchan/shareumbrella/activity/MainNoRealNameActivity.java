@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,7 +10,6 @@ import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainNoRealNameActivity extends BaseActivity {
@@ -36,14 +34,21 @@ public class MainNoRealNameActivity extends BaseActivity {
     @BindView(R.id.wechat_rl)
     RelativeLayout wechatRl;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_no_real_name);
-        ButterKnife.bind(this);
-        titleTv.setText(getString(R.string.main_title));
+    public int getLayoutId() {
+        return R.layout.activity_main_no_real_name;
     }
 
+    @Override
+    public String setTitle() {
+        return getString(R.string.main_title);
+    }
+
+    @Override
+    public void init() {
+        super.init();
+    }
 
     @Override
     protected void onDestroy() {
@@ -51,7 +56,7 @@ public class MainNoRealNameActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.supplementaryInfo_btn, R.id.scanner_btn, R.id.invitation_rl, R.id.guide_rl, R.id.title_back_iv,R.id.wechat_rl})
+    @OnClick({R.id.supplementaryInfo_btn, R.id.scanner_btn, R.id.invitation_rl, R.id.guide_rl,R.id.wechat_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.supplementaryInfo_btn:
@@ -64,9 +69,7 @@ public class MainNoRealNameActivity extends BaseActivity {
                 break;
             case R.id.wechat_rl:
                 break;
-            case R.id.title_back_iv:
-                finish();
-                break;
+
         }
     }
 
