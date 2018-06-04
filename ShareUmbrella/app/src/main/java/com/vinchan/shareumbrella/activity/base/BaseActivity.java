@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import crossoverone.statuslib.StatusUtil;
 
 /***************************************
  *
@@ -40,20 +42,27 @@ import butterknife.OnClick;
  *
  *
  **************************************/
-public abstract class BaseActivity extends Activity
-{
+public abstract class BaseActivity extends Activity {
     public static final String TAG = BaseActivity.class.getName();
 
-    /** 使用者定义并使用的广播 */
+    /**
+     * 使用者定义并使用的广播
+     */
     private BroadcastReceiver broadcastReceiver;
-    /** 网络状态转变的广播 */
+    /**
+     * 网络状态转变的广播
+     */
     private BroadcastReceiver connectionChangeReceiver;
-    /** 使用者定义的广播意图过滤器 */
+    /**
+     * 使用者定义的广播意图过滤器
+     */
     private IntentFilter intentFilter = new IntentFilter();
 
     private boolean isFirstLoading = true;
     private boolean connetionChangeEnable = true;
-    /** 标志网络是否连接着 */
+    /**
+     * 标志网络是否连接着
+     */
     private boolean isNetConnected = true;
     @BindView(R.id.title_back_iv)
     ImageView titleBackIv;
@@ -64,31 +73,41 @@ public abstract class BaseActivity extends Activity
     private long onCreateTime;
 
     /**
-     *
      * @param savedInstanceState
      * @return
-     *
      */
     @SuppressLint("NewApi")
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         onCreateTime = new Date().getTime();
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
 
+        setStatusColor();
+        setSystemInvadeBlack();
         init();
     }
 
-    /** @return 是否第一次加载数据，如果是则会在title上显示圆形进度视图，加载完后设置该数据为false */
-    public boolean isFirstLoading()
-    {
+    protected void setStatusColor() {
+        StatusUtil.setUseStatusBarColor(this, Color.parseColor("#FC5B1F"));
+    }
+
+    protected void setSystemInvadeBlack() { // 第二个参数是是否沉浸,第三个参数是状态栏字体是否为黑色。
+        StatusUtil.setSystemStatus(this, true, false);
+    }
+
+
+    /**
+     * @return 是否第一次加载数据，如果是则会在title上显示圆形进度视图，加载完后设置该数据为false
+     */
+    public boolean isFirstLoading() {
         return isFirstLoading;
     }
 
-    /** @param isFirstLoading 是否是第一次进入页面加载数据，如果是显示loadingBar，否则不显示 */
-    public void setFirstLoading(boolean isFirstLoading)
-    {
+    /**
+     * @param isFirstLoading 是否是第一次进入页面加载数据，如果是显示loadingBar，否则不显示
+     */
+    public void setFirstLoading(boolean isFirstLoading) {
         this.isFirstLoading = isFirstLoading;
     }
 
@@ -97,39 +116,35 @@ public abstract class BaseActivity extends Activity
      *
      * @param intentFilter 此activity中的广播过滤器
      */
-    public void setIntentFilter(IntentFilter intentFilter)
-    {
+    public void setIntentFilter(IntentFilter intentFilter) {
         // LogUtils.d("TAG", "setIntentFilter:" + intentFilter.getAction(0));
         this.intentFilter = intentFilter;
         registerBroadCast();
     }
 
-    /** 在activity被销毁时，注销广播 */
-    private void unRegisterBroadCast()
-    {
-        if (broadcastReceiver != null)
-        {
+    /**
+     * 在activity被销毁时，注销广播
+     */
+    private void unRegisterBroadCast() {
+        if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
             broadcastReceiver = null;
         }
 
-        if (connectionChangeReceiver != null)
-        {
+        if (connectionChangeReceiver != null) {
             unregisterReceiver(connectionChangeReceiver);
             connectionChangeReceiver = null;
         }
     }
 
-    /** 为activity准备的广播接收器，主要为了实现activity在需要刷新的时候刷新，也可以有其他用途 */
-    public void registerBroadCast()
-    {
-        if (broadcastReceiver == null)
-        {
-            broadcastReceiver = new BroadcastReceiver()
-            {
+    /**
+     * 为activity准备的广播接收器，主要为了实现activity在需要刷新的时候刷新，也可以有其他用途
+     */
+    public void registerBroadCast() {
+        if (broadcastReceiver == null) {
+            broadcastReceiver = new BroadcastReceiver() {
                 @Override
-                public void onReceive(Context context, Intent intent)
-                {
+                public void onReceive(Context context, Intent intent) {
                     onReceiveBroadCast(context, intent);
                 }
             };
@@ -142,15 +157,15 @@ public abstract class BaseActivity extends Activity
      * 当接受到广播后的处理
      *
      * @param context 接受广播的上下文
-     * @param intent 该广播的意图
-     * */
-    public void onReceiveBroadCast(Context context, Intent intent)
-    {
+     * @param intent  该广播的意图
+     */
+    public void onReceiveBroadCast(Context context, Intent intent) {
 
     }
 
     /**
      * //设置字体大小不随手机设置而改变
+     *
      * @return
      */
 
@@ -159,22 +174,21 @@ public abstract class BaseActivity extends Activity
         Resources res = super.getResources();
         Configuration config = new Configuration();
         config.setToDefaults();
-        res.updateConfiguration(config,res.getDisplayMetrics());
+        res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
 
     }
+
     /**
      * 拥有默认动作的启动activity方法
      *
-     * @param intent 要启动activity的意图
+     * @param intent   要启动activity的意图
      * @param isFinish 是否关闭当前activity
-     * */
-    public void startActivity(Intent intent, boolean isFinish)
-    {
+     */
+    public void startActivity(Intent intent, boolean isFinish) {
         super.startActivity(intent);
 
-        if (isFinish)
-        {
+        if (isFinish) {
             finish();
         }
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -183,24 +197,21 @@ public abstract class BaseActivity extends Activity
     /**
      * 拥有默认动作的启动activity方法
      *
-     * @param intent 要启动activity的意图
-     * @param reqCode 请求码
+     * @param intent   要启动activity的意图
+     * @param reqCode  请求码
      * @param isFinish 是否关闭当前activity
-     * */
-    public void startActivityForResult(Intent intent, int reqCode, boolean isFinish)
-    {
+     */
+    public void startActivityForResult(Intent intent, int reqCode, boolean isFinish) {
         super.startActivityForResult(intent, reqCode);
 
-        if (isFinish)
-        {
+        if (isFinish) {
             finish();
         }
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         LogUtils.d(TAG, "create view used time:" + (new Date().getTime() - onCreateTime) + "ms");
         onCreateTime = new Date().getTime();
@@ -208,56 +219,53 @@ public abstract class BaseActivity extends Activity
 
     }
 
-    /** 运行在onCreate中，实现视图和数据的初始化 */
-    public void init()
-    {
+    /**
+     * 运行在onCreate中，实现视图和数据的初始化
+     */
+    public void init() {
         initView();
         initData();
         registerConnectionChange();
     }
 
-    /** @return 是否注册网络状态变化的广播，如果否请在initData之前或之中设置 */
-    public boolean isConnetionChangeEnable()
-    {
+    /**
+     * @return 是否注册网络状态变化的广播，如果否请在initData之前或之中设置
+     */
+    public boolean isConnetionChangeEnable() {
         return connetionChangeEnable;
     }
 
-    /** @param connetionChangeEnable 是否注册网络状态变化的广播，如果否请在initData之前或之中设置 */
-    public void setConnetionChangeEnable(boolean connetionChangeEnable)
-    {
+    /**
+     * @param connetionChangeEnable 是否注册网络状态变化的广播，如果否请在initData之前或之中设置
+     */
+    public void setConnetionChangeEnable(boolean connetionChangeEnable) {
         this.connetionChangeEnable = connetionChangeEnable;
     }
 
-    /** 注册网络状态变更的广播 */
-    private void registerConnectionChange()
-    {
+    /**
+     * 注册网络状态变更的广播
+     */
+    private void registerConnectionChange() {
         LogUtils.i(TAG, "registerConnectionChange");
-        if (connetionChangeEnable && connectionChangeReceiver == null)
-        {
-            connectionChangeReceiver = new BroadcastReceiver()
-            {
+        if (connetionChangeEnable && connectionChangeReceiver == null) {
+            connectionChangeReceiver = new BroadcastReceiver() {
                 @Override
-                public void onReceive(Context context, Intent intent)
-                {
+                public void onReceive(Context context, Intent intent) {
                     LogUtils.i(TAG, "on connection change");
                     ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-                    if(connectivityManager != null){
+                    if (connectivityManager != null) {
                         NetworkInfo wifiNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                         NetworkInfo mobileNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
                         // wifi、移动网络都没有连接
                         boolean hasNet = (wifiNetInfo != null && wifiNetInfo.isConnected()) || (mobileNetInfo != null && mobileNetInfo.isConnected());
 
-                        if (!hasNet)
-                        {
+                        if (!hasNet) {
                             isNetConnected = false;
                             onNetBreakUp();
-                        }
-                        else
-                        {
-                            if (!isNetConnected)
-                            {// 重新连接的状态
+                        } else {
+                            if (!isNetConnected) {// 重新连接的状态
                                 isNetConnected = true;
                                 onNetReConnected();
                             }
@@ -271,46 +279,50 @@ public abstract class BaseActivity extends Activity
         }
     }
 
-    /** 当网络中断时的处理 */
-    public void onNetBreakUp()
-    {
+    /**
+     * 当网络中断时的处理
+     */
+    public void onNetBreakUp() {
         LogUtils.i(TAG, "net break up");
     }
 
-    /** 当网络重新连接上时的处理 */
-    public void onNetReConnected()
-    {
+    /**
+     * 当网络重新连接上时的处理
+     */
+    public void onNetReConnected() {
         LogUtils.i(TAG, "net re-connected");
     }
 
-    /** 显示title的加载视图 */
-    public void startLoading()
-    {
-        if (loadingBar != null && loadingBar.getVisibility() == View.GONE)
-        {
+    /**
+     * 显示title的加载视图
+     */
+    public void startLoading() {
+        if (loadingBar != null && loadingBar.getVisibility() == View.GONE) {
             loadingBar.setVisibility(View.VISIBLE);
         }
     }
 
-    /** 隐藏title的加载视图 */
-    public void stopLoading()
-    {
-        if (loadingBar != null && loadingBar.getVisibility() == View.VISIBLE)
-        {
+    /**
+     * 隐藏title的加载视图
+     */
+    public void stopLoading() {
+        if (loadingBar != null && loadingBar.getVisibility() == View.VISIBLE) {
             loadingBar.setVisibility(View.GONE);
         }
     }
 
-    /** 使用默认动作关闭 */
-    public void finishAnimation()
-    {
+    /**
+     * 使用默认动作关闭
+     */
+    public void finishAnimation() {
         finish();
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
-    /** 初始化视图 */
-    public void initView()
-    {
+    /**
+     * 初始化视图
+     */
+    public void initView() {
         titleTv.setText(setTitle());
         titleBackIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,15 +332,17 @@ public abstract class BaseActivity extends Activity
         });
     }
 
-    /** 加载数据，初次加载显示title的loading */
-    public void initData()
-    {
-        if (isFirstLoading)
-        {
-            startLoading();
+    /**
+     * 加载数据，初次加载显示title的loading
+     */
+    public void initData() {
+        if (isFirstLoading) {
+            //startLoading();
             isFirstLoading = false;
         }
-    };
+    }
+
+    ;
 
     @Override
     protected void onPause() {
@@ -338,14 +352,12 @@ public abstract class BaseActivity extends Activity
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         finishAnimation();
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         unRegisterBroadCast();
 
@@ -371,9 +383,9 @@ public abstract class BaseActivity extends Activity
         return onTouchEvent(ev);
     }
 
-    public  boolean isShouldHideInput(View v, MotionEvent event) {
+    public boolean isShouldHideInput(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {
-            int[] leftTop = { 0, 0 };
+            int[] leftTop = {0, 0};
             //获取输入框当前的location位置
             v.getLocationInWindow(leftTop);
             int left = leftTop[0];
@@ -392,23 +404,24 @@ public abstract class BaseActivity extends Activity
 
     PermissionResultListener permissionResultListener;
 
-    public interface  PermissionResultListener{
+    public interface PermissionResultListener {
         void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
     }
 
-    public void setPermissionResultListener(PermissionResultListener permissionResultListener){
+    public void setPermissionResultListener(PermissionResultListener permissionResultListener) {
         this.permissionResultListener = permissionResultListener;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(permissionResultListener != null){
+        if (permissionResultListener != null) {
             permissionResultListener.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public abstract int getLayoutId();
+
     public abstract String setTitle();
 
 }

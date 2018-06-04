@@ -54,7 +54,7 @@ public class RankingListActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_ranking_list;
     }
 
     @Override

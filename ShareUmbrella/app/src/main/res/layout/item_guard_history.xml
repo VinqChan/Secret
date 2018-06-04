@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:background="@color/white_color"
+    android:layout_marginTop="10dp"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="2018-04-09 16:12:33"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/common_text_size" />
+
+    <TextView
+        android:id="@+id/status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="使用中"
+        android:textColor="@color/main_color"
+        android:textSize="@dimen/common_text_size"
+        android:background="@drawable/bg_guard_history_in_use_button"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        />
+</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_lsdgjl_ddh"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="订单号:"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/common_text_size" />
+        <TextView
+            android:id="@+id/order_id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="435435345"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_below="@+id/status_tv"
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_lsdgjl_zjsc"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="租借时长:"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/common_text_size" />
+        <TextView
+            android:id="@+id/hour_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="4小时"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size"
+            android:layout_marginLeft="5dp"
+            />
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_lsdgjl_zsfc"
+            android:layout_marginLeft="40dp"
+            ></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="租伞分成:"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/common_text_size" />
+        <TextView
+            android:id="@+id/fencheng_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="100元"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size"
+            android:layout_marginLeft="5dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_lsdgjl_dd"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="租借地点:"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/common_text_size" />
+        <TextView
+            android:id="@+id/borrow_address_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="厦门市湖里区"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_lsdgjl_dd"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="归还地点:"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/common_text_size" />
+        <TextView
+            android:id="@+id/return_address_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="厦门市湖里区"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

@@ -11,6 +11,7 @@
     <string name="scanner_borrow">扫码借伞</string>
     <string name="my_wallet">我的钱包</string>
     <string name="ranking">全国月排行榜</string>
+    <string name="guard_history">历史导购记录</string>
     <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
     <string name="account_password_hint">请输入密码</string>

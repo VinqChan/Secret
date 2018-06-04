@@ -162,6 +162,7 @@ public class PersonCenterActivity extends BaseActivity {
                 ActivityUtils.startActivity(WalletActivity.class);
                 break;
             case R.id.history_rl:
+                ActivityUtils.startActivity(GuardHistoryActivity.class);
                 break;
             case R.id.ranking_rl:
                 ActivityUtils.startActivity(RankingListActivity.class);
