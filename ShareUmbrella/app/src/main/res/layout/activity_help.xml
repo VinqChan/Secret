@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Common_Layout_Style"
+    android:background="@color/backgroud_color"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+    <com.vinchan.shareumbrella.view.PagerSlidingTabStrip
+        android:id="@+id/activity_help_tabstrip"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@id/title"
+        android:background="@color/white"
+        ptr:pstsCurrentTextColor="@color/main_color"
+        ptr:pstsIndicatorColor="@color/main_color"
+        ptr:pstsUnderlineColor="@color/white_color" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activity_help_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_help_tabstrip"
+        android:overScrollMode="never" />
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle" />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+</RelativeLayout>

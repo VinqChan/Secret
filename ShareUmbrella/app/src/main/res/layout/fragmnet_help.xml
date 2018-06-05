@@ -8,20 +8,11 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/guard_history_recyclerview"
+        android:id="@+id/help_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         >
 
     </android.support.v7.widget.RecyclerView>
-    <ProgressBar
-        android:id="@+id/loading_progress_bar"
-        style="@style/LoadingProgressBarStyle" />
-
-    <include
-        android:id="@+id/title"
-        layout="@layout/common_title"></include>
 </RelativeLayout>

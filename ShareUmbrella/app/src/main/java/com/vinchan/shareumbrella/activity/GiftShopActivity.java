@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.GiftShopListAdapter;
-import com.vinchan.shareumbrella.adapter.GuardHistoryListAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
 
 import java.util.ArrayList;

@@ -3,6 +3,7 @@
     <!--Title-->
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="logout">退出登录</string>
     <string name="realnamecerfi">实名认证</string>
     <string name="submit_audits">提交审核</string>
     <string name="main_title">oksan共享雨伞</string>
@@ -15,8 +16,11 @@
     <string name="invatation_reward">邀请导游有奖</string>
     <string name="reward_detail">奖励明细</string>
     <string name="gift_shop">礼品商城</string>
+    <string name="setting">设置</string>
+    <string name="help">帮助中心</string>
     <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
+    <string name="address_hint">请输入收获地址</string>
     <string name="account_password_hint">请输入密码</string>
     <string name="account_login_button_text">登录</string>
     <string name="register_text">新用户注册</string>

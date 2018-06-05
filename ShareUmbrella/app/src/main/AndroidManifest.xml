@@ -119,6 +119,15 @@
         <activity
             android:name="com.vinchan.shareumbrella.activity.GiftShopActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.GiftExchangeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.SettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.HelpActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

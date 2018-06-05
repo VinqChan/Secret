@@ -1,6 +1,7 @@
 package com.vinchan.shareumbrella.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
+import com.vinchan.shareumbrella.activity.GiftExchangeActivity;
 import com.vinchan.shareumbrella.model.OrderDetail;
 
 import java.util.ArrayList;
@@ -45,6 +48,13 @@ public class GiftShopListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final OrderDetail.OrderDetailItem order = listData.get(position);
         ((GiftShopHolder) holder).expressFeeTv.setText("运费：100");
+        ((GiftShopHolder) holder).orginPriceTv.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
+        ((GiftShopHolder) holder).exchangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityUtils.startActivity(GiftExchangeActivity.class);
+            }
+        });
     }
 
     @Override

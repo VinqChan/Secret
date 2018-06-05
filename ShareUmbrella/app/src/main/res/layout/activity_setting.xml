@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Common_Layout_Style"
+    android:background="@color/white"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:id="@+id/selete_image_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView1"
+                android:layout_toRightOf="@+id/imageView1"
+                android:gravity="center"
+                android:text="头像"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <com.vinchan.shareumbrella.view.roundImage.RoundedImageView
+                android:id="@+id/header_iv"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_toLeftOf="@+id/arrow_1"
+                android:layout_toStartOf="@+id/arrow_1"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_default_customer" />
+
+            <ImageView
+                android:id="@+id/arrow_1"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+
+        <View style="@style/CommonLine" />
+        <RelativeLayout
+            android:id="@+id/guard_code_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/guard_code_tv"
+                android:layout_alignBottom="@+id/guard_code_tv"
+                android:layout_toEndOf="@+id/imageView2"
+                android:layout_toRightOf="@+id/imageView2"
+                android:gravity="center"
+                android:text="导游工号"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/guard_code_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView2"
+                android:layout_toRightOf="@+id/textView2"
+                android:gravity="right|center_vertical"
+                android:hint="4352fdgh"
+                android:layout_marginRight="15dp"
+                android:textSize="@dimen/common_text_size" />
+
+        </RelativeLayout>
+
+
+        <View style="@style/CommonLine" />
+        <RelativeLayout
+            android:id="@+id/selete_phone_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView"
+                android:layout_toRightOf="@+id/imageView"
+                android:gravity="center"
+                android:text="手机号码"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/phone_num_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView3"
+                android:layout_toLeftOf="@+id/arrow_3"
+                android:layout_toRightOf="@+id/textView3"
+                android:layout_toStartOf="@+id/arrow_3"
+                android:gravity="right|center_vertical"
+                android:hint="13545565456"
+                android:textSize="@dimen/common_text_size" />
+
+            <ImageView
+                android:id="@+id/arrow_3"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+
+        <View style="@style/CommonLine" />
+
+        <RelativeLayout
+            android:id="@+id/selete_certificates_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toRightOf="@+id/imageView4"
+                android:gravity="center"
+                android:text="证件"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/certificates_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView4"
+                android:layout_toLeftOf="@+id/arrow_4"
+                android:layout_toRightOf="@+id/textView4"
+                android:layout_toStartOf="@+id/arrow_4"
+                android:gravity="right|center_vertical"
+                android:hint=""
+                android:textSize="@dimen/common_text_size" />
+
+            <ImageView
+                android:id="@+id/arrow_4"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+
+        <View style="@style/CommonLine" />
+        <RelativeLayout
+            android:id="@+id/selete_address_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView5"
+                android:layout_toRightOf="@+id/imageView5"
+                android:gravity="center"
+                android:text="收获地址"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView5"
+                android:layout_toLeftOf="@+id/arrow_5"
+                android:layout_toRightOf="@+id/textView5"
+                android:layout_toStartOf="@+id/arrow_5"
+                android:gravity="right|center_vertical"
+                android:hint="请填写收获地址"
+                android:textSize="@dimen/common_text_size" />
+
+            <ImageView
+                android:id="@+id/arrow_5"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+        <View style="@style/CommonLine" />
+        <RelativeLayout
+            android:id="@+id/selete_workplace_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView8"
+                android:layout_toRightOf="@+id/imageView8"
+                android:gravity="center"
+                android:text="工作地区"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/workplace_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView8"
+                android:layout_toLeftOf="@+id/arrow_8"
+                android:layout_toRightOf="@+id/textView8"
+                android:layout_toStartOf="@+id/arrow_8"
+                android:gravity="right|center_vertical"
+                android:hint="选择地区"
+                android:textSize="@dimen/common_text_size" />
+
+            <ImageView
+                android:id="@+id/arrow_8"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+        <View style="@style/CommonLine" />
+        <RelativeLayout
+            android:id="@+id/modify_phone_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView6"
+                android:layout_toRightOf="@+id/imageView6"
+                android:gravity="center"
+                android:text="修改手机号码"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/modify_phone_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView6"
+                android:layout_toLeftOf="@+id/arrow_6"
+                android:layout_toRightOf="@+id/textView6"
+                android:layout_toStartOf="@+id/arrow_6"
+                android:gravity="right|center_vertical"
+                android:hint=""
+                android:textSize="@dimen/common_text_size" />
+
+            <ImageView
+                android:id="@+id/arrow_6"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+
+        <View style="@style/CommonLine" />
+        <RelativeLayout
+            android:id="@+id/modify_password_rl"
+            style="@style/LinerLaoutClickStyle">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                style="@style/CommonIconStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_ndjs"
+                android:visibility="gone"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/imageView7"
+                android:layout_toRightOf="@+id/imageView7"
+                android:gravity="center"
+                android:text="修改登录密码"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:id="@+id/modify_password_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_toEndOf="@+id/textView7"
+                android:layout_toLeftOf="@+id/arrow_7"
+                android:layout_toRightOf="@+id/textView7"
+                android:layout_toStartOf="@+id/arrow_7"
+                android:gravity="right|center_vertical"
+                android:hint=""
+                android:textSize="@dimen/common_text_size" />
+
+            <ImageView
+                android:id="@+id/arrow_7"
+                android:layout_width="@dimen/common_icon_size"
+                android:layout_height="@dimen/common_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow"></ImageView>
+        </RelativeLayout>
+
+
+        <View style="@style/CommonLine" />
+        <Button
+            android:id="@+id/logout_btn"
+            style="@style/CommonButtonBackgroud"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/logout" />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle" />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+</RelativeLayout>
+
+

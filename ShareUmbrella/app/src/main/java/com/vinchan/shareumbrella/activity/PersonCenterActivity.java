@@ -174,10 +174,12 @@ public class PersonCenterActivity extends BaseActivity {
                 ActivityUtils.startActivity(GiftShopActivity.class);
                 break;
             case R.id.help_rl:
+                ActivityUtils.startActivity(HelpActivity.class);
                 break;
             case R.id.guide_rl:
                 break;
             case R.id.setting_rl:
+                ActivityUtils.startActivity(SettingActivity.class);
                 break;
             case R.id.wechat_rl:
                 break;
