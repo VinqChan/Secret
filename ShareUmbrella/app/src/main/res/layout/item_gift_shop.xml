@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/backgroud_color" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/shop_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_lpsc_img" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/shop_iv"
+            android:layout_toEndOf="@+id/shop_iv"
+            android:layout_toRightOf="@+id/shop_iv"
+            android:text="Oksan共享伞这遮阳伞"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/secondary_title_text_size" />
+
+        <TextView
+            android:id="@+id/price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_tv"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/shop_iv"
+            android:text="¥16"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/common_button_text_size" />
+
+        <TextView
+            android:id="@+id/orgin_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/price_tv"
+            android:layout_below="@+id/title_tv"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/price_tv"
+            android:gravity="bottom"
+            android:text="¥30"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size" />
+
+        <TextView
+            android:id="@+id/express_fee_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/shop_iv"
+            android:layout_alignLeft="@+id/price_tv"
+            android:layout_alignStart="@+id/price_tv"
+            android:text="快递费：免运费"
+            android:textColor="@color/gray_text_color"
+            android:textSize="@dimen/common_text_size" />
+
+        <Button
+            android:id="@+id/exchange_btn"
+            style="@style/CommonButtonBackgroud"
+            android:layout_width="70dp"
+            android:layout_height="28dp"
+            android:layout_alignBottom="@+id/express_fee_tv"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:text="兑换"
+            android:textSize="@dimen/common_text_size" />
+    </RelativeLayout>
+</LinearLayout>

@@ -2,9 +2,12 @@ package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.adapter.GiftShopListAdapter;
 import com.vinchan.shareumbrella.adapter.GuardHistoryListAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
 
@@ -14,26 +17,29 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class GuardHistoryActivity extends BaseActivity {
+public class GiftShopActivity extends BaseActivity {
 
 
-    @BindView(R.id.guard_history_recyclerview)
-    RecyclerView guardHistoryRecyclerview;
-    private GuardHistoryListAdapter mAdapter;
+    @BindView(R.id.gift_shop_recyclerview)
+    RecyclerView giftShopRecyclerview;
+    @BindView(R.id.own_info_iv)
+    ImageView ownInfoIv;
+    private GiftShopListAdapter mAdapter;
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_guard_history;
+        return R.layout.activity_gift_shop;
     }
 
     @Override
     public String setTitle() {
-        return getString(R.string.guard_history);
+        return getString(R.string.gift_shop);
     }
 
     @Override
     public void init() {
         super.init();
+        ownInfoIv.setVisibility(View.VISIBLE);
         getData();
     }
 
@@ -48,15 +54,13 @@ public class GuardHistoryActivity extends BaseActivity {
             item.setProjectCycle("1");
             list.add(item);
         }
-        mAdapter = new GuardHistoryListAdapter(list, GuardHistoryActivity.this);
-        guardHistoryRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        guardHistoryRecyclerview.setAdapter(mAdapter);
+        mAdapter = new GiftShopListAdapter(list, GiftShopActivity.this);
+        giftShopRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+        giftShopRecyclerview.setAdapter(mAdapter);
     }
 
-
-    @OnClick(R.id.title_back_iv)
+    @OnClick(R.id.own_info_iv)
     public void onViewClicked() {
-        finish();
+
     }
 }
-

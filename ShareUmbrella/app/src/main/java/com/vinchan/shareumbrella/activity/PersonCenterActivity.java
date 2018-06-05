@@ -168,8 +168,10 @@ public class PersonCenterActivity extends BaseActivity {
                 ActivityUtils.startActivity(RankingListActivity.class);
                 break;
             case R.id.invitation_rl:
+                ActivityUtils.startActivity(InvatationRewardActivity.class);
                 break;
             case R.id.gift_shop_rl:
+                ActivityUtils.startActivity(GiftShopActivity.class);
                 break;
             case R.id.help_rl:
                 break;

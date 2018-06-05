@@ -151,4 +151,32 @@ public class ApiUtils {
                     }
                 });
     }
+
+    public static void pswlogin(String phone, String password, final ApiCallBack callBack) {
+
+        OkHttpUtils
+                .post()
+                .addParams("phone", phone)
+                .addParams("password", password)
+                .url(Constants.SERVICE_BASE_URL + "/appuser/psdlogin")
+                .build()
+                .execute(new LoginResultCallBack() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.d("[oksan] {logincode}" + e.getMessage());
+                        ToastUtils.showShort("服务异常，请稍后再试！");
+                    }
+
+                    @Override
+                    public void onResponse(LoginResult response, int id) {
+                        LogUtils.d("[oksan] {logincode}" + response.getMessage());
+                        if (response.isSuccess()) {
+                            callBack.success(response);
+                        } else {
+                            callBack.fail();
+                            ToastUtils.showShort("服务异常，请稍后再试！");
+                        }
+                    }
+                });
+    }
 }

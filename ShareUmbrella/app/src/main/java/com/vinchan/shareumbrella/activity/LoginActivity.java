@@ -3,6 +3,7 @@ package com.vinchan.shareumbrella.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.api.ApiUtils;
+import com.vinchan.shareumbrella.callback.ApiCallBack;
 import com.vinchan.shareumbrella.util.permission.PermissionCallBack;
 import com.vinchan.shareumbrella.util.permission.PermissionCenter;
 
@@ -83,6 +88,7 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.phone_login_btn:
+               // login();
                 ActivityUtils.startActivity(MainActivity.class);
                 break;
             case R.id.verfycode_login_btn:
@@ -96,8 +102,40 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    private void login() {
+        startLoading();
+         String phoneNum = loginPhoneNumTv.getText().toString().trim();
+         String password = loginPwdTv.getText().toString().trim();
+        if (TextUtils.isEmpty(phoneNum)) {
+            ToastUtils.showShort("请输入手机号码！");
+            return;
+        }
+        if(!RegexUtils.isMobileExact(phoneNum)){
+            ToastUtils.showShort("请输入正确的手机号码！");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.showShort("请输入密码！");
+            return;
+        }
+        ApiUtils.pswlogin(phoneNum, password, new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                stopLoading();
+                ToastUtils.showShort("登录成功！");
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
+    }
+
     @Override
-    protected void onDestroy() {
+    protected void onDestroy(
+
+    ) {
         super.onDestroy();
     }
 
