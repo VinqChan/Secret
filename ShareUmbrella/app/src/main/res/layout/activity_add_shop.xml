@@ -8,6 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_button_layout"
         android:scrollbars="none">
 
         <LinearLayout
@@ -15,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:gravity="center"
+            android:layout_marginTop="3dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -43,7 +45,7 @@
                 <EditText
                     android:id="@+id/shop_name_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -59,7 +61,7 @@
 
             <RelativeLayout
                 android:id="@+id/selete_shop_type_rl"
-                style="@style/LinerLaoutClickStyle">
+                style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -70,7 +72,7 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignBaseline="@+id/role_et"
                     android:layout_alignBottom="@+id/role_et"
                     android:layout_toEndOf="@+id/imageView"
@@ -83,7 +85,7 @@
                 <TextView
                     android:id="@+id/shop_type_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/textView2"
                     android:layout_toLeftOf="@+id/imageView2"
                     android:layout_toRightOf="@+id/textView2"
@@ -107,7 +109,7 @@
 
             <RelativeLayout
                 android:id="@+id/selete_address_rl"
-                style="@style/LinerLaoutClickStyle">
+                style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -118,7 +120,7 @@
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignBaseline="@+id/role_et"
                     android:layout_alignBottom="@+id/role_et"
                     android:layout_toEndOf="@+id/imageView3"
@@ -131,7 +133,7 @@
                 <TextView
                     android:id="@+id/address_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/textView3"
                     android:layout_toLeftOf="@+id/arrow3"
                     android:layout_toRightOf="@+id/textView3"
@@ -155,7 +157,7 @@
 
             <RelativeLayout
 
-                style="@style/LinerLaoutClickStyle">
+                style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView4"
@@ -165,7 +167,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView4"
                     android:layout_toRightOf="@+id/imageView4"
                     android:gravity="center"
@@ -176,7 +178,7 @@
                 <EditText
                     android:id="@+id/address_detail_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -190,7 +192,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -201,7 +203,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView5"
                     android:layout_toRightOf="@+id/imageView5"
                     android:gravity="center"
@@ -212,7 +214,7 @@
                 <EditText
                     android:id="@+id/put_location_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -227,7 +229,7 @@
 
             <RelativeLayout
                 android:id="@+id/selete_time_rl"
-                style="@style/LinerLaoutClickStyle">
+                style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -238,7 +240,7 @@
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignBaseline="@+id/role_et"
                     android:layout_alignBottom="@+id/role_et"
                     android:layout_toEndOf="@+id/imageView6"
@@ -251,7 +253,7 @@
                 <TextView
                     android:id="@+id/time_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/textView5"
                     android:layout_toLeftOf="@+id/arrow5"
                     android:layout_toRightOf="@+id/textView5"
@@ -273,7 +275,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -284,7 +286,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView7"
                     android:layout_toRightOf="@+id/imageView7"
                     android:gravity="center"
@@ -295,7 +297,7 @@
                 <EditText
                     android:id="@+id/charge_name_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -308,7 +310,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -319,7 +321,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView8"
                     android:layout_toRightOf="@+id/imageView8"
                     android:gravity="center"
@@ -330,7 +332,7 @@
                 <EditText
                     android:id="@+id/charge_phone_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -343,7 +345,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -354,7 +356,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView9"
                     android:layout_toRightOf="@+id/imageView9"
                     android:gravity="center"
@@ -365,7 +367,7 @@
                 <EditText
                     android:id="@+id/manager_code_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -378,7 +380,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView10"
@@ -389,7 +391,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView10"
                     android:layout_toRightOf="@+id/imageView10"
                     android:gravity="center"
@@ -400,7 +402,7 @@
                 <EditText
                     android:id="@+id/manager_name_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -413,7 +415,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView11"
@@ -424,7 +426,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView11"
                     android:layout_toRightOf="@+id/imageView11"
                     android:gravity="center"
@@ -435,7 +437,7 @@
                 <EditText
                     android:id="@+id/work_telephone_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -448,7 +450,7 @@
 
             <View style="@style/CommonLine" />
 
-            <RelativeLayout style="@style/LinerLaoutClickStyle">
+            <RelativeLayout style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView12"
@@ -459,7 +461,7 @@
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/imageView12"
                     android:layout_toRightOf="@+id/imageView12"
                     android:gravity="center"
@@ -470,7 +472,7 @@
                 <EditText
                     android:id="@+id/manager_telephone_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_login_input"
@@ -485,7 +487,7 @@
 
             <RelativeLayout
                 android:id="@+id/selete_state_rl"
-                style="@style/LinerLaoutClickStyle">
+                style="@style/AddShopLaoutClickStyle">
 
                 <ImageView
                     android:id="@+id/imageView13"
@@ -496,7 +498,7 @@
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_alignBaseline="@+id/role_et"
                     android:layout_alignBottom="@+id/role_et"
                     android:layout_toEndOf="@+id/imageView13"
@@ -509,7 +511,7 @@
                 <TextView
                     android:id="@+id/state_et"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
+                    android:layout_height="@dimen/add_shop_layout_height"
                     android:layout_toEndOf="@+id/textView12"
                     android:layout_toLeftOf="@+id/arrow12"
                     android:layout_toRightOf="@+id/textView12"
@@ -534,12 +536,16 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/bottom_button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:background="@color/white_color"
         >
         <Button

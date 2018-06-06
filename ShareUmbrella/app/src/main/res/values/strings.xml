@@ -24,6 +24,8 @@
     <string name="maintain_manager">维护人员管理系统</string>
     <string name="maintain_project">维护项目</string>
     <string name="fault_handle">故障处理说明</string>
+    <string name="add_shop">新增店铺</string>
+    <string name="site_report">站点进货汇报</string>
     <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
     <string name="address_hint">请输入收获地址</string>

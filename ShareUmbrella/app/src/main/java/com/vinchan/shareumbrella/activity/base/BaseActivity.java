@@ -21,8 +21,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.dangong.oksan.R;
+import com.vinchan.shareumbrella.activity.PersonCenterActivity;
 
 import java.util.Date;
 
@@ -71,7 +73,9 @@ public abstract class BaseActivity extends Activity {
     @BindView(R.id.loading_progress_bar)
     ProgressBar loadingBar;
     private long onCreateTime;
-
+    @BindView(R.id.own_info_iv)
+    protected
+    ImageView ownInfoIv;
     /**
      * @param savedInstanceState
      * @return
@@ -328,6 +332,12 @@ public abstract class BaseActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        ownInfoIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityUtils.startActivity(PersonCenterActivity.class);
             }
         });
     }

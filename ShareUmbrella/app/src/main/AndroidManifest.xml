@@ -146,6 +146,12 @@
         <activity
             android:name="com.vinchan.shareumbrella.activity.ForgetPasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.AddShopActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.SiteReportActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

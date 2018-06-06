@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Common_Layout_Style"
+    android:background="@color/backgroud_color"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+    <RelativeLayout
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_grzx_bg" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="86dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_whry_sk" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="货车"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/middle_small_text_size" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="86dp"
+                android:layout_height="68dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:paddingBottom="20dp"
+                android:src="@drawable/ic_whry_jt" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="86dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_whry_ys" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="伞仓"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/middle_small_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_view"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/CommonIconStyle"
+                    android:src="@drawable/ic_whry_xqm"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="上期末站点"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/common_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="长短伞（"
+                        android:textColor="@color/gray_color"
+                        android:textSize="@dimen/common_text_size" />
+
+                    <TextView
+                        android:id="@+id/last_cds_num_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/common_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="）把"
+                        android:textColor="@color/gray_color"
+                        android:textSize="@dimen/common_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="登山杖（"
+                        android:textColor="@color/gray_color"
+                        android:textSize="@dimen/common_text_size" />
+
+                    <TextView
+                        android:id="@+id/last_dsz_num_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/common_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="）把"
+                        android:textColor="@color/gray_color"
+                        android:textSize="@dimen/common_text_size" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@color/white_color"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/CommonIconStyle"
+                    android:src="@drawable/ic_whry_sqm"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="本次进店减货"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/common_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bcz_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="补  长  伞"
+                    android:textColor="@color/gray_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/cs_goods_num_add_iv"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/ic_jian" />
+
+                <TextView
+                    android:id="@+id/cs_edit_goods_num_tv"
+                    android:layout_width="70dp"
+                    android:layout_height="37dp"
+                    android:background="@drawable/bg_num_button_shape"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/main_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/cs_goods_num_cut_iv"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/ic_jia" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="把"
+                    android:textColor="@color/gray_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bdz_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="补  短  伞"
+                    android:textColor="@color/gray_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/ds_goods_num_add_iv"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/ic_jian" />
+
+                <TextView
+                    android:id="@+id/ds_edit_goods_num_tv"
+                    android:layout_width="70dp"
+                    android:layout_height="37dp"
+                    android:background="@drawable/bg_num_button_shape"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/main_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/ds_goods_num_cut_iv"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/ic_jia" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="把"
+                    android:textColor="@color/gray_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bdsz_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="补登山伞"
+                    android:textColor="@color/gray_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/dss_goods_num_add_iv"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/ic_jian" />
+
+                <TextView
+                    android:id="@+id/dss_edit_goods_num_tv"
+                    android:layout_width="70dp"
+                    android:layout_height="37dp"
+                    android:background="@drawable/bg_num_button_shape"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/main_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/dss_goods_num_cut_iv"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/ic_jia" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="把"
+                    android:textColor="@color/gray_color"
+                    android:textSize="@dimen/secondary_title_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/top_view"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/CommonIconStyle"
+                        android:src="@drawable/ic_whry_beq"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="本期末站点"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/common_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="长短伞（"
+                            android:textColor="@color/gray_color"
+                            android:textSize="@dimen/common_text_size" />
+
+                        <TextView
+                            android:id="@+id/this_cds_num_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textColor="@color/main_color"
+                            android:textSize="@dimen/common_text_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="）把"
+                            android:textColor="@color/gray_color"
+                            android:textSize="@dimen/common_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="90dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="登山杖（"
+                            android:textColor="@color/gray_color"
+                            android:textSize="@dimen/common_text_size" />
+
+                        <TextView
+                            android:id="@+id/this_dsz_num_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textColor="@color/main_color"
+                            android:textSize="@dimen/common_text_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="）把"
+                            android:textColor="@color/gray_color"
+                            android:textSize="@dimen/common_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            style="@style/CommonButtonBackgroud"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:text="提交" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle" />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+</RelativeLayout>

@@ -87,11 +87,11 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.phone_login_btn:
-               // login();
+                // login();
                 ActivityUtils.startActivity(MainActivity.class);
                 break;
             case R.id.verfycode_login_btn:
-                ActivityUtils.startActivity(MaintainMainActivity.class);
+                ActivityUtils.startActivity(SiteReportActivity.class);
                 break;
             case R.id.forget_pwd_tv:
                 ActivityUtils.startActivity(ForgetPasswordActivity.class);
@@ -104,13 +104,13 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         startLoading();
-         String phoneNum = loginPhoneNumTv.getText().toString().trim();
-         String password = loginPwdTv.getText().toString().trim();
+        String phoneNum = loginPhoneNumTv.getText().toString().trim();
+        String password = loginPwdTv.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtils.showShort("请输入手机号码！");
             return;
         }
-        if(!RegexUtils.isMobileExact(phoneNum)){
+        if (!RegexUtils.isMobileExact(phoneNum)) {
             ToastUtils.showShort("请输入正确的手机号码！");
             return;
         }
@@ -139,11 +139,4 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
