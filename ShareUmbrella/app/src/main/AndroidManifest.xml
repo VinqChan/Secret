@@ -128,6 +128,24 @@
         <activity
             android:name="com.vinchan.shareumbrella.activity.HelpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.ManagerAndMaintainMainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.FaultHandleActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.MaintainMainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.EnterMaintainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.WorkHistoryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.ForgetPasswordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

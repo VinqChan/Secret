@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Common_Layout_Style"
+    android:background="@color/backgroud_color"
+    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/logo_iv2"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_whry_logo" />
+
+    <ImageView
+        android:id="@+id/logo_iv1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/logo_iv2"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_nor_logo2"
+        />
+
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_iv1"
+        android:layout_centerHorizontal="true"
+        android:text="维护人员管理系统"
+        android:textColor="@color/black_color"
+        android:textSize="26sp" />
+    <Button
+        android:layout_below="@+id/text1"
+        android:id="@+id/start_maintain_btn"
+        style="@style/CommonButtonBackgroud"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="进入维护" />
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle"
+        />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+</RelativeLayout>

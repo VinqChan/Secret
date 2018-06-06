@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.WallteAdapter;
+import com.vinchan.shareumbrella.adapter.WallteManagerAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class WalletActivity extends BaseActivity {
     @BindView(R.id.wallet_recyclerview)
     RecyclerView walletRecyclerview;
     WallteAdapter adapter;
+    WallteManagerAdapter mManagerAdapter;
 
 
     @Override
@@ -68,7 +70,8 @@ public class WalletActivity extends BaseActivity {
 
         walletRecyclerview.setLayoutManager( new LinearLayoutManager(this));
         adapter = new WallteAdapter(list, WalletActivity.this);
-        walletRecyclerview.setAdapter(adapter);
+        mManagerAdapter = new WallteManagerAdapter(list, WalletActivity.this);
+        walletRecyclerview.setAdapter(mManagerAdapter);
     }
 
 

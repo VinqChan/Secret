@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +21,6 @@ import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
-import com.vinchan.shareumbrella.model.LoginResult;
-import com.vinchan.shareumbrella.model.ResponseModel;
 import com.vinchan.shareumbrella.util.CountTimer;
 
 import butterknife.BindView;

@@ -3,6 +3,7 @@
     <!--Title-->
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="forget_password">忘记密码</string>
     <string name="logout">退出登录</string>
     <string name="realnamecerfi">实名认证</string>
     <string name="submit_audits">提交审核</string>
@@ -16,8 +17,13 @@
     <string name="invatation_reward">邀请导游有奖</string>
     <string name="reward_detail">奖励明细</string>
     <string name="gift_shop">礼品商城</string>
+    <string name="work_history">历史工作记录</string>
     <string name="setting">设置</string>
     <string name="help">帮助中心</string>
+    <string name="site_manager">管理员站点管理</string>
+    <string name="maintain_manager">维护人员管理系统</string>
+    <string name="maintain_project">维护项目</string>
+    <string name="fault_handle">故障处理说明</string>
     <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
     <string name="address_hint">请输入收获地址</string>
