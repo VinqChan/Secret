@@ -108,7 +108,7 @@
                 <TextView
                     android:id="@+id/invation_code_tv"
                     android:layout_width="210dp"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/ic_yqyjleft"
                     android:text="我的邀请码工号：4354khe5"
                     android:textSize="@dimen/secondary_title_text_size"
@@ -118,7 +118,7 @@
                 <TextView
                     android:id="@+id/copy_invation_code_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/ic_yqyright"
                     android:text="复制邀请码"
                     android:textSize="@dimen/secondary_title_text_size"

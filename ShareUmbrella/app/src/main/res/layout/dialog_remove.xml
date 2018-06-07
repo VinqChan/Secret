@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_shape"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_whry_wxtx" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温馨提示"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/middle_small_text_size" />
+    </LinearLayout>
+
+    <View style="@style/CommonLine" />
+
+    <TextView
+        android:id="@+id/code_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="当前伞桩编码：a345342"
+        android:textColor="@color/gray_color"
+        android:textSize="@dimen/middle_small_text_size" />
+
+    <View style="@style/CommonLine" />
+
+    <TextView
+        android:id="@+id/shop_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="当前店铺名称：湖里万达店"
+        android:textColor="@color/gray_color"
+        android:textSize="@dimen/middle_small_text_size" />
+
+    <View style="@style/CommonLine" />
+
+    <TextView
+        android:id="@+id/site_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="当前商铺站点名称：蔡塘店"
+        android:textColor="@color/gray_color"
+        android:textSize="@dimen/middle_small_text_size" />
+
+    <View style="@style/CommonLine" />
+
+    <Button
+        android:id="@+id/confirm_btn"
+        style="@style/CommonButtonBackgroud"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="确定撤机"
+        android:layout_marginBottom="15dp"
+        />
+
+</LinearLayout>

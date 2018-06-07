@@ -152,6 +152,9 @@
         <activity
             android:name="com.vinchan.shareumbrella.activity.SiteReportActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.SiteStockReportActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

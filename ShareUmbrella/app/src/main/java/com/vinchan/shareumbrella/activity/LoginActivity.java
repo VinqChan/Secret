@@ -21,6 +21,9 @@ import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
 import com.vinchan.shareumbrella.util.permission.PermissionCallBack;
 import com.vinchan.shareumbrella.util.permission.PermissionCenter;
+import com.vinchan.shareumbrella.view.dialog.CommonDialog;
+import com.vinchan.shareumbrella.view.dialog.ConfirmOrTipDialog;
+import com.vinchan.shareumbrella.view.dialog.RemoveDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,8 +94,12 @@ public class LoginActivity extends BaseActivity {
                 ActivityUtils.startActivity(MainActivity.class);
                 break;
             case R.id.verfycode_login_btn:
-                ActivityUtils.startActivity(SiteReportActivity.class);
-                break;
+               // ActivityUtils.startActivity(SiteStockReportActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY,ManagerAndMaintainMainActivity.TYPE_MATAIN);
+                ActivityUtils.startActivity(bundle,ManagerAndMaintainMainActivity.class);
+
+               break;
             case R.id.forget_pwd_tv:
                 ActivityUtils.startActivity(ForgetPasswordActivity.class);
                 break;

@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.AccountBalanceListAdapter;
+import com.vinchan.shareumbrella.callback.PickerCallBack;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.util.PickerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,25 +99,17 @@ public class AccountBalanceActivity extends BaseActivity {
     }
 
     private void selectDate() {
-        DatePicker picker = new DatePicker(this, DatePicker.YEAR_MONTH);
-        picker.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
-        picker.setDividerColor(getResources().getColor(R.color.picker_line_color));
-        picker.setTextColor(getResources().getColor(R.color.gray_color));
-        picker.setRangeStart(2018, 01, 01);
-        picker.setTopLineColor(getResources().getColor(R.color.gray_color));
-        picker.setRangeEnd(2100, 11, 11);
-        picker.setSelectedItem(2018, 6);
-        picker.setOnDatePickListener(new DatePicker.OnYearMonthPickListener() {
+        PickerUtils.yearMonthPicker(this, new PickerCallBack() {
             @Override
-            public void onDatePicked(String year, String month) {
+            public void yearAndMonth(String year, String month) {
                 dateTv.setText(year+"年"+month+"月");
             }
+
+            @Override
+            public void yearMonthDay(String year, String month, String day) {
+
+            }
         });
-        picker.show();
-        picker.getCancelButton().setTextSize(16);
-        picker.getSubmitButton().setTextSize(16);
-        picker.getCancelButton().setTextColor(getResources().getColor(R.color.gray_color));
-        picker.getSubmitButton().setTextColor(getResources().getColor(R.color.main_color));
     }
 
 }

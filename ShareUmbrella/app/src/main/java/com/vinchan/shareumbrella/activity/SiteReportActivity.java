@@ -1,22 +1,29 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.view.dialog.CommonDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 进货/减货站点汇报
+ */
 public class SiteReportActivity extends BaseActivity {
 
+    public static final int TYPE_ADD = 1;//进货
+    public static final int TYPE_CUT = 2;//减货
+    public static final String TYPE_KEY = "report_type";
 
     @BindView(R.id.top_view)
     RelativeLayout topView;
@@ -56,6 +63,11 @@ public class SiteReportActivity extends BaseActivity {
     TextView bdzTitleTv;
     @BindView(R.id.bdsz_title_tv)
     TextView bdszTitleTv;
+    @BindView(R.id.add_top_view)
+    LinearLayout addTopView;
+    @BindView(R.id.cut_top_view)
+    LinearLayout cutTopView;
+    private int type;
 
     @Override
     public int getLayoutId() {
@@ -64,46 +76,82 @@ public class SiteReportActivity extends BaseActivity {
 
     @Override
     public String setTitle() {
-        return getString(R.string.site_report);
+        return "";
     }
 
     @Override
     public void init() {
         super.init();
+
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
         ownInfoIv.setVisibility(View.VISIBLE);
-    }
+        type = getIntent().getIntExtra(TYPE_KEY, TYPE_ADD);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if (type == TYPE_ADD) {
+            setTitle(getString(R.string.site_add_report));
+            addTopView.setVisibility(View.VISIBLE);
+            cutTopView.setVisibility(View.GONE);
+            bczTitleTv.setText("补  长  伞");
+            bdzTitleTv.setText("补  短  伞");
+            bdszTitleTv.setText("补登山伞");
 
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+        } else {
+            bczTitleTv.setText("减  长  伞");
+            bdzTitleTv.setText("减  短  伞");
+            bdszTitleTv.setText("减登山伞");
+            setTitle(getString(R.string.site_cut_report));
+            addTopView.setVisibility(View.GONE);
+            cutTopView.setVisibility(View.VISIBLE);
+        }
     }
 
     @OnClick({R.id.cs_goods_num_add_iv, R.id.cs_goods_num_cut_iv, R.id.ds_goods_num_add_iv, R.id.ds_goods_num_cut_iv, R.id.dss_goods_num_add_iv, R.id.dss_goods_num_cut_iv, R.id.submit_btn})
     public void onViewClicked(View view) {
+        int longNum = Integer.valueOf(csEditGoodsNumTv.getText().toString().trim());
+        int shortNum = Integer.valueOf(dsEditGoodsNumTv.getText().toString().trim());
+        int dssNum = Integer.valueOf(dssEditGoodsNumTv.getText().toString().trim());
         switch (view.getId()) {
             case R.id.cs_goods_num_add_iv:
+                handleNum(csEditGoodsNumTv,longNum,TYPE_ADD);
                 break;
             case R.id.cs_goods_num_cut_iv:
+                handleNum(csEditGoodsNumTv,longNum,TYPE_CUT);
                 break;
             case R.id.ds_goods_num_add_iv:
+                handleNum(dsEditGoodsNumTv,shortNum,TYPE_ADD);
                 break;
             case R.id.ds_goods_num_cut_iv:
+                handleNum(dsEditGoodsNumTv,shortNum,TYPE_CUT);
                 break;
             case R.id.dss_goods_num_add_iv:
+                handleNum(dssEditGoodsNumTv,dssNum,TYPE_ADD);
                 break;
             case R.id.dss_goods_num_cut_iv:
+                handleNum(dssEditGoodsNumTv,dssNum,TYPE_CUT);
                 break;
             case R.id.submit_btn:
+                CommonDialog mDialog = new CommonDialog(this, CommonDialog.EnumDialogType.CUT);
+                mDialog.show();
                 break;
         }
     }
+
+    public void handleNum(TextView view ,int num,int type){
+        if(type==TYPE_ADD){
+            num++;
+            view.setText(num+"");
+        }else {
+            if(num ==1){
+                num = 1;
+            }else {
+                num--;
+            }
+            view.setText(num+"");
+        }
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +11,11 @@ import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GiftExchangeActivity extends BaseActivity {
-
+    public static final int TYPE_ADD = 1;//
+    public static final int TYPE_CUT = 2;//
 
     @BindView(R.id.shop_iv)
     ImageView shopIv;
@@ -71,10 +70,13 @@ public class GiftExchangeActivity extends BaseActivity {
 
     @OnClick({R.id.iv_goods_num_add, R.id.iv_goods_num_cut, R.id.pay_btn, R.id.own_info_iv})
     public void onViewClicked(View view) {
+        int num = Integer.valueOf(tvEditGoodsNum.getText().toString().trim());
         switch (view.getId()) {
             case R.id.iv_goods_num_add:
+                handleNum(tvEditGoodsNum,num,TYPE_ADD);
                 break;
             case R.id.iv_goods_num_cut:
+                handleNum(tvEditGoodsNum,num,TYPE_CUT);
                 break;
             case R.id.pay_btn:
                 break;
@@ -82,11 +84,17 @@ public class GiftExchangeActivity extends BaseActivity {
                 break;
         }
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void handleNum(TextView view ,int num,int type){
+        if(type==TYPE_ADD){
+            num++;
+            view.setText(num+"");
+        }else {
+            if(num ==1){
+                num = 1;
+            }else {
+                num--;
+            }
+            view.setText(num+"");
+        }
     }
 }

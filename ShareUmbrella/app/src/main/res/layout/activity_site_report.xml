@@ -19,6 +19,7 @@
             android:src="@drawable/ic_grzx_bg" />
 
         <LinearLayout
+            android:id="@+id/add_top_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -68,6 +69,63 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="伞仓"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/middle_small_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/cut_top_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="86dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_whry_ys" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="伞仓"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/middle_small_text_size" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="86dp"
+                android:layout_height="68dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:paddingBottom="20dp"
+                android:src="@drawable/ic_whry_jt" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="86dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_whry_sk" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="货车"
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/middle_small_text_size" />
             </LinearLayout>
@@ -232,7 +290,7 @@
                     android:textSize="@dimen/secondary_title_text_size" />
 
                 <ImageView
-                    android:id="@+id/cs_goods_num_add_iv"
+                    android:id="@+id/cs_goods_num_cut_iv"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:src="@drawable/ic_jian" />
@@ -248,7 +306,7 @@
                     android:textSize="@dimen/secondary_title_text_size" />
 
                 <ImageView
-                    android:id="@+id/cs_goods_num_cut_iv"
+                    android:id="@+id/cs_goods_num_add_iv"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:src="@drawable/ic_jia" />
@@ -281,7 +339,7 @@
                     android:textSize="@dimen/secondary_title_text_size" />
 
                 <ImageView
-                    android:id="@+id/ds_goods_num_add_iv"
+                    android:id="@+id/ds_goods_num_cut_iv"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:src="@drawable/ic_jian" />
@@ -297,7 +355,7 @@
                     android:textSize="@dimen/secondary_title_text_size" />
 
                 <ImageView
-                    android:id="@+id/ds_goods_num_cut_iv"
+                    android:id="@+id/ds_goods_num_add_iv"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:src="@drawable/ic_jia" />
@@ -330,7 +388,7 @@
                     android:textSize="@dimen/secondary_title_text_size" />
 
                 <ImageView
-                    android:id="@+id/dss_goods_num_add_iv"
+                    android:id="@+id/dss_goods_num_cut_iv"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:src="@drawable/ic_jian" />
@@ -346,7 +404,7 @@
                     android:textSize="@dimen/secondary_title_text_size" />
 
                 <ImageView
-                    android:id="@+id/dss_goods_num_cut_iv"
+                    android:id="@+id/dss_goods_num_add_iv"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:src="@drawable/ic_jia" />

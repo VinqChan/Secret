@@ -342,6 +342,11 @@ public abstract class BaseActivity extends Activity {
         });
     }
 
+    public void setTitle(String title){
+        titleTv.setText(title);
+    }
+
+
     /**
      * 加载数据，初次加载显示title的loading
      */
