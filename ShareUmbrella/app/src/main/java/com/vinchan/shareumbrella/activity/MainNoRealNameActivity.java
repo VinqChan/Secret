@@ -6,6 +6,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
@@ -60,14 +62,19 @@ public class MainNoRealNameActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.supplementaryInfo_btn:
+                ActivityUtils.startActivity(RealNameCertifiActivity.class);
                 break;
             case R.id.scanner_btn:
+                ActivityUtils.startActivity(ScannerActivity.class);
                 break;
             case R.id.invitation_rl:
+                ActivityUtils.startActivity(InvatationRewardActivity.class);
                 break;
             case R.id.guide_rl:
+                ActivityUtils.startActivity(GuideWelfareActivity.class);
                 break;
             case R.id.wechat_rl:
+                PhoneUtils.call(getString(R.string.service_phone));
                 break;
 
         }

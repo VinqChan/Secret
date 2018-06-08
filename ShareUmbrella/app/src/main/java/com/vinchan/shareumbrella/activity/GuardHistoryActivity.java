@@ -23,7 +23,7 @@ public class GuardHistoryActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_guard_history;
+        return R.layout.activity_guide_history;
     }
 
     @Override

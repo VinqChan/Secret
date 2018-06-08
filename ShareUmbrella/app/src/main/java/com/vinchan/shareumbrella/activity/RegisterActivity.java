@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -163,7 +164,8 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
                 mPicker.showCityPicker();
                 break;
             case R.id.register_btn:
-                register();
+              //  register();
+                ActivityUtils.startActivity(MainNoRealNameActivity.class);
                 break;
             case R.id.service_tv:
                 break;

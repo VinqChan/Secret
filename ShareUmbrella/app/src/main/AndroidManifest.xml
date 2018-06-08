@@ -155,6 +155,15 @@
         <activity
             android:name="com.vinchan.shareumbrella.activity.SiteStockReportActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.GuideWelfareActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.AddShopMapActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:configChanges="orientation|keyboardHidden"
+            />
     </application>
 
 </manifest>

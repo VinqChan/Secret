@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.view.pictureTaker.PictureTakeDialog;
@@ -182,6 +183,7 @@ public class PersonCenterActivity extends BaseActivity {
                 ActivityUtils.startActivity(SettingActivity.class);
                 break;
             case R.id.wechat_rl:
+                PhoneUtils.call(getString(R.string.service_phone));
                 break;
         }
     }

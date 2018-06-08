@@ -91,13 +91,10 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.phone_login_btn:
                 // login();
-                ActivityUtils.startActivity(MainActivity.class);
+                ActivityUtils.startActivity(AddShopMapActivity.class);
                 break;
             case R.id.verfycode_login_btn:
                // ActivityUtils.startActivity(SiteStockReportActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY,ManagerAndMaintainMainActivity.TYPE_MATAIN);
-                ActivityUtils.startActivity(bundle,ManagerAndMaintainMainActivity.class);
 
                break;
             case R.id.forget_pwd_tv:

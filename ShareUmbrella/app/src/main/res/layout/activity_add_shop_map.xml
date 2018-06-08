@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Common_Layout_Style"
+    android:background="@color/white_color"
+    tools:context="com.vinchan.shareumbrella.activity.MainActivity">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_editview_search_shape"
+        android:orientation="horizontal"
+        android:paddingRight="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_whry_ss"
+            android:layout_marginLeft="10dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@color/white_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bottom_button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <Button
+                android:id="@+id/add_btn"
+                style="@style/CommonButtonBackgroud"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="新增商铺" />
+
+            <Button
+                android:id="@+id/maintain_btn"
+                style="@style/CommonButtonBackgroud"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="进入维护" />
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/location_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="@style/LoadingProgressBarStyle" />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title"></include>
+</RelativeLayout>

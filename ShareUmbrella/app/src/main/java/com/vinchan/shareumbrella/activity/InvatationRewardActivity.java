@@ -1,14 +1,19 @@
 package com.vinchan.shareumbrella.activity;
 
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class InvatationRewardActivity extends BaseActivity {
 
@@ -45,5 +50,11 @@ public class InvatationRewardActivity extends BaseActivity {
 
     }
 
-
+    @OnClick(R.id.copy_invation_code_tv)
+    public void onViewClicked() {
+        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        String invationCode = invationCodeTv.getText().toString().substring(8);
+        cm.setText(invationCode);
+        ToastUtils.showShort("复制成功！");
+    }
 }
