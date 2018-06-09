@@ -159,6 +159,12 @@
             android:name="com.vinchan.shareumbrella.activity.GuideWelfareActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name="com.vinchan.shareumbrella.activity.VerfyCodeLoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.vinchan.shareumbrella.activity.SiteManagerWelfareActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name="com.vinchan.shareumbrella.activity.AddShopMapActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"

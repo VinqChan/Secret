@@ -17,6 +17,12 @@ import okhttp3.Call;
  */
 
 public class ApiUtils {
+
+    /**
+     * 注册发送验证码接口
+     * @param phone
+     * @param callBack
+     */
     public static void getRegisterCode(String phone, final ApiCallBack callBack) {
 
         OkHttpUtils
@@ -29,21 +35,33 @@ public class ApiUtils {
                     public void onError(Call call, Exception e, int id) {
                         LogUtils.e("[oksan] {getRegisterCode}" + e.getMessage());
                         ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
                     }
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {getRegisterCode}" + response.getMessage());
+                        LogUtils.d("[oksan] {getRegisterCode}" + response.getResult());
                         if (response.isSuccess()) {
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort("服务异常，请稍后再试！");
+                            ToastUtils.showShort(response.getResult());
                         }
                     }
                 });
     }
 
+    /**
+     * 注册
+     * @param phone
+     * @param code
+     * @param password
+     * @param inviteCode
+     * @param roleId
+     * @param province
+     * @param city
+     * @param callBack
+     */
     public static void register(String phone, String code, String password, String inviteCode, String roleId, String province, String city, final ApiCallBack callBack) {
 
 //        //客户端接收到token
@@ -82,21 +100,27 @@ public class ApiUtils {
                     public void onError(Call call, Exception e, int id) {
                         LogUtils.d("[oksan] {register}" + e.getMessage());
                         ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
                     }
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {register}" + response.getMessage());
+                        LogUtils.d("[oksan] {register}" + response.getResult());
                         if (response.isSuccess()) {
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort("服务异常，请稍后再试！");
+                            ToastUtils.showShort(response.getResult());
                         }
                     }
                 });
     }
 
+    /**
+     * 登录发送验证码接口
+     * @param phone
+     * @param callBack
+     */
     public static void logincode(String phone, final ApiCallBack callBack) {
 
         OkHttpUtils
@@ -109,6 +133,77 @@ public class ApiUtils {
                     public void onError(Call call, Exception e, int id) {
                         LogUtils.d("[oksan] {logincode}" + e.getMessage());
                         ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
+                    }
+
+                    @Override
+                    public void onResponse(ResponseModel response, int id) {
+                        LogUtils.d("[oksan] {logincode}" + response.getResult());
+                        if (response.isSuccess()) {
+                            callBack.success(response);
+                        } else {
+                            callBack.fail();
+                            ToastUtils.showShort(response.getResult());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 修改密码发送验证码接口
+     * @param phone
+     * @param callBack
+     */
+    public static void modifycode(String phone, final ApiCallBack callBack) {
+
+        OkHttpUtils
+                .post()
+                .addParams("phone", phone)
+                .url(Constants.SERVICE_BASE_URL + "/msgcode/modifycode")
+                .build()
+                .execute(new ResultCallBack() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.d("[oksan] {logincode}" + e.getMessage());
+                        ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
+                    }
+
+                    @Override
+                    public void onResponse(ResponseModel response, int id) {
+                        LogUtils.d("[oksan] {logincode}" + response.getResult());
+                        if (response.isSuccess()) {
+                            callBack.success(response);
+                        } else {
+                            callBack.fail();
+                            ToastUtils.showShort(response.getResult());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 修改密码
+     * @param phone
+     * @param code
+     * @param password
+     * @param callBack
+     */
+    public static void psdmodify(String phone, String code,String password,final ApiCallBack callBack) {
+
+        OkHttpUtils
+                .post()
+                .addParams("phone", phone)
+                .addParams("code", code)
+                .addParams("password", password)
+                .url(Constants.SERVICE_BASE_URL + "/appuser/psdmodify")
+                .build()
+                .execute(new ResultCallBack() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.d("[oksan] {logincode}" + e.getMessage());
+                        ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
                     }
 
                     @Override
@@ -118,12 +213,18 @@ public class ApiUtils {
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort("服务异常，请稍后再试！");
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });
     }
 
+    /**
+     * 验证码登录
+     * @param phone
+     * @param code
+     * @param callBack
+     */
     public static void codelogin(String phone, String code, final ApiCallBack callBack) {
 
         OkHttpUtils
@@ -137,6 +238,7 @@ public class ApiUtils {
                     public void onError(Call call, Exception e, int id) {
                         LogUtils.d("[oksan] {logincode}" + e.getMessage());
                         ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
                     }
 
                     @Override
@@ -146,12 +248,18 @@ public class ApiUtils {
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort("服务异常，请稍后再试！");
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });
     }
 
+    /**
+     * 账号密码登录
+     * @param phone
+     * @param password
+     * @param callBack
+     */
     public static void pswlogin(String phone, String password, final ApiCallBack callBack) {
 
         OkHttpUtils
@@ -165,6 +273,7 @@ public class ApiUtils {
                     public void onError(Call call, Exception e, int id) {
                         LogUtils.d("[oksan] {logincode}" + e.getMessage());
                         ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
                     }
 
                     @Override
@@ -174,7 +283,7 @@ public class ApiUtils {
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort("服务异常，请稍后再试！");
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });

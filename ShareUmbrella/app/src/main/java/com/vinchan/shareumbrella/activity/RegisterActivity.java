@@ -164,8 +164,8 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
                 mPicker.showCityPicker();
                 break;
             case R.id.register_btn:
-              //  register();
-                ActivityUtils.startActivity(MainNoRealNameActivity.class);
+                register();
+               // ActivityUtils.startActivity(MainNoRealNameActivity.class);
                 break;
             case R.id.service_tv:
                 break;
@@ -219,16 +219,19 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
             ToastUtils.showShort("请选择常住区域！");
             return;
         }
-
+        startLoading();
         ApiUtils.register(phoneNum,code,password,invitationCode,"1",mProvince,mCity, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 ToastUtils.showShort("注册成功！");
-                finish();
+                stopLoading();
+                ActivityUtils.startActivity(LoginActivity.class);
+                RegisterActivity.this.finish();
             }
 
             @Override
             public void fail() {
+                stopLoading();
                 ToastUtils.showShort("注册失败！");
             }
         });

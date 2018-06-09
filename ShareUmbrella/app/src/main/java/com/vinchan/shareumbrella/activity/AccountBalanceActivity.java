@@ -2,7 +2,6 @@ package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,7 +11,8 @@ import android.widget.TextView;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.AccountBalanceListAdapter;
-import com.vinchan.shareumbrella.callback.PickerCallBack;
+import com.vinchan.shareumbrella.callback.YearMonthDayPickerCallBack;
+import com.vinchan.shareumbrella.callback.YearMonthPickerCallBack;
 import com.vinchan.shareumbrella.model.OrderDetail;
 import com.vinchan.shareumbrella.util.PickerUtils;
 
@@ -22,7 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.qqtheme.framework.picker.DatePicker;
 
 public class AccountBalanceActivity extends BaseActivity {
 
@@ -99,15 +98,10 @@ public class AccountBalanceActivity extends BaseActivity {
     }
 
     private void selectDate() {
-        PickerUtils.yearMonthPicker(this, new PickerCallBack() {
+        PickerUtils.yearMonthPicker(this, new YearMonthPickerCallBack() {
             @Override
             public void yearAndMonth(String year, String month) {
                 dateTv.setText(year+"年"+month+"月");
-            }
-
-            @Override
-            public void yearMonthDay(String year, String month, String day) {
-
             }
         });
     }

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.callback.BussinessTimePickerCallBack;
+import com.vinchan.shareumbrella.util.PickerUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,6 +103,12 @@ public class AddShopActivity extends BaseActivity {
             case R.id.selete_address_rl:
                 break;
             case R.id.selete_time_rl:
+                PickerUtils.onBusinessTimePicker(this, new BussinessTimePickerCallBack() {
+                    @Override
+                    public void time(String beginhour, String beginminute, String endhour, String endminute) {
+                      timeEt.setText(beginhour+":"+beginminute+"~"+endhour+":"+endminute);
+                    }
+                });
                 break;
             case R.id.selete_state_rl:
                 break;

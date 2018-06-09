@@ -5,6 +5,7 @@
     <string name="service_phone">18859599189</string>
     <!--Title-->
     <string name="login">登录</string>
+    <string name="code_login">验证码登录</string>
     <string name="register">注册</string>
     <string name="forget_password">忘记密码</string>
     <string name="logout">退出登录</string>
@@ -33,10 +34,12 @@
     <string name="site_cut_report">站点减货汇报</string>
     <string name="site_stock_report">站点存货汇报</string>
     <string name="guide_welfare">导游福利</string>
+    <string name="site_manager_welfare">站点管理员福利</string>
     <!--注册-->
     <string name="phone_number_hint">请输入手机号</string>
     <string name="address_hint">请输入收获地址</string>
     <string name="account_password_hint">请输入密码</string>
+    <string name="account_verfy_code_hint">请输入验证码</string>
     <string name="account_login_button_text">登录</string>
     <string name="register_text">新用户注册</string>
     <string name="identify_code_login_button_text">短信验证码登录</string>
@@ -59,10 +62,15 @@
     <!-- api -->
     <string name="service_error">服务异常，请稍后再试！</string>
 
-    <!-- guide_welfare01 -->
+    <!-- guide_welfare -->
     <string name="guide_welfare01">引导游客租借共享伞即可获得10-50元/组奖励金</string>
     <string name="guide_welfare02">推荐一导游好友注册并成功出单即可获得20元/人奖励金</string>
     <string name="guide_welfare03">终身免费用伞</string>
     <string name="guide_welfare04">奖励金可以在商城直接兑换超值礼品</string>
 
+    <!-- site_manager_welfare -->
+    <string name="site_manager_welfare01">每完成一笔成功借出（超出10分钟）的订单、可获得0.3/把奖励金</string>
+    <string name="site_manager_welfare02">每年在我司规定的时间内对站点的存货进行汇报。每次汇报均可获得3元奖励金。</string>
+    <string name="site_manager_welfare03">终身免费用伞</string>
+    <string name="site_manager_welfare04">奖励金可以在商城直接兑换超值礼品</string>
 </resources>

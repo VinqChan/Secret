@@ -65,7 +65,8 @@ public class ForgetPasswordActivity extends BaseActivity implements CountTimer.O
     }
 
 
-    private void register() {
+    private void modify() {
+        startLoading();
         String phoneNum = phoneNumEt.getText().toString().trim();
         String code = verfyCodeEt.getText().toString().trim();
         String password = inputPwdEt.getText().toString().trim();
@@ -105,24 +106,26 @@ public class ForgetPasswordActivity extends BaseActivity implements CountTimer.O
         }
 
 
-//        ApiUtils.register(phoneNum, code, password, invitationCode, "1", mProvince, mCity, new ApiCallBack() {
-//            @Override
-//            public void success(Object response) {
-//                ToastUtils.showShort("注册成功！");
-//                finish();
-//            }
-//
-//            @Override
-//            public void fail() {
-//                ToastUtils.showShort("注册失败！");
-//            }
-//        });
+        ApiUtils.psdmodify(phoneNum, code,password ,new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                ToastUtils.showShort("修改成功！");
+                stopLoading();
+                finish();
+            }
+
+            @Override
+            public void fail() {
+                ToastUtils.showShort("修改失败！");
+                stopLoading();
+            }
+        });
     }
 
 
 
     private void getRegisterCode(String phoneNum) {
-        ApiUtils.getRegisterCode(phoneNum, new ApiCallBack() {
+        ApiUtils.modifycode(phoneNum, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 ToastUtils.showShort("验证码已发送！");
@@ -167,6 +170,7 @@ public class ForgetPasswordActivity extends BaseActivity implements CountTimer.O
                 getRegisterCode(phoneNum);
                 break;
             case R.id.modify_btn:
+                modify();
                 break;
         }
     }

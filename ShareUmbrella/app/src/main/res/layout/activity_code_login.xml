@@ -81,31 +81,54 @@
 
         <View style="@style/CommonLine" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:gravity="center"
+            android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imageView4"
                 style="@style/CommonIconStyle"
-                android:src="@drawable/icon_login_password"></ImageView>
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_bj_yzm"></ImageView>
 
             <EditText
-                android:id="@+id/login_pwd_tv"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:id="@+id/verfy_code_et"
+                android:layout_width="190dp"
+                android:layout_height="@dimen/input_height"
                 android:layout_marginLeft="7dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView4"
                 android:background="@drawable/bg_login_input"
-                android:ems="10"
-                android:hint="@string/account_password_hint"
-                android:inputType="textPassword"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:singleLine="true"
+                android:gravity="left|center_vertical"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="4"
                 android:textSize="@dimen/common_text_size" />
-        </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                style="@style/CommonVerticalLineStyle"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/get_verfy_code_tv" />
+
+            <TextView
+                android:id="@+id/get_verfy_code_tv"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/verfy_code_et"
+                android:layout_alignBottom="@+id/verfy_code_et"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="获取验证码"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/common_text_size" />
+        </RelativeLayout>
 
         <View style="@style/CommonLine" />
 
@@ -117,49 +140,8 @@
             android:layout_marginTop="50dp"
             android:text="@string/account_login_button_text" />
 
-        <Button
-            android:id="@+id/verfycode_login_btn"
-            style="@style/CommonVerfyCodeButtonBackgroud"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/identify_code_login_button_text" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/forget_pwd_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forget_pwd_text"
-            android:textColor="@color/gray_color"
-            android:textSize="@dimen/common_text_size" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@color/gray_line_color">
-
-        </View>
-
-        <TextView
-            android:id="@+id/register_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_text"
-            android:textColor="@color/gray_color"
-            android:textSize="@dimen/common_text_size" />
-
-    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/loading_progress_bar"

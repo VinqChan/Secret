@@ -1,7 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -9,11 +8,10 @@ import android.widget.TextView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
-import com.vinchan.shareumbrella.callback.PickerCallBack;
+import com.vinchan.shareumbrella.callback.YearMonthDayPickerCallBack;
 import com.vinchan.shareumbrella.util.PickerUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SiteStockReportActivity extends BaseActivity {
@@ -65,12 +63,7 @@ public class SiteStockReportActivity extends BaseActivity {
 
     @OnClick(R.id.select_date_rl)
     public void onViewClicked() {
-        PickerUtils.yearMonthDayPicker(this, new PickerCallBack() {
-            @Override
-            public void yearAndMonth(String year, String month) {
-
-            }
-
+        PickerUtils.yearMonthDayPicker(this, new YearMonthDayPickerCallBack() {
             @Override
             public void yearMonthDay(String year, String month, String day) {
                 dateTv.setText(year+"-"+month+"-"+day);

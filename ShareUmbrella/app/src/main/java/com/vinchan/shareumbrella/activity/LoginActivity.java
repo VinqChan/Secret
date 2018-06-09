@@ -1,8 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.Manifest;
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -14,24 +12,29 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
+import com.vinchan.shareumbrella.callback.BussinessTimePickerCallBack;
+import com.vinchan.shareumbrella.callback.TimePickerCallBack;
+import com.vinchan.shareumbrella.callback.YearMonthDayPickerCallBack;
+import com.vinchan.shareumbrella.util.PickerUtils;
 import com.vinchan.shareumbrella.util.permission.PermissionCallBack;
 import com.vinchan.shareumbrella.util.permission.PermissionCenter;
-import com.vinchan.shareumbrella.view.dialog.CommonDialog;
-import com.vinchan.shareumbrella.view.dialog.ConfirmOrTipDialog;
-import com.vinchan.shareumbrella.view.dialog.RemoveDialog;
+
+import java.util.logging.Handler;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
 
+    private static final String KEY_PHONE = "login_phone_num";
+    private static final String KEY_PASSWORD= "login_password";
     @BindView(R.id.login_phone_num_tv)
     EditText loginPhoneNumTv;
     @BindView(R.id.login_clear_btn)
@@ -65,6 +68,17 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    public void initView() {
+        super.initView();
+        String phone = SPUtils.getInstance().getString(KEY_PHONE);
+        String password = SPUtils.getInstance().getString(KEY_PASSWORD);
+        if(!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(password)){
+            loginPhoneNumTv.setText(phone);
+            loginPwdTv.setText(password);
+        }
+    }
+
+    @Override
     public void init() {
         super.init();
 
@@ -90,26 +104,24 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.phone_login_btn:
-                // login();
-                ActivityUtils.startActivity(AddShopMapActivity.class);
+                 login();
                 break;
             case R.id.verfycode_login_btn:
-               // ActivityUtils.startActivity(SiteStockReportActivity.class);
-
+               ActivityUtils.startActivity(VerfyCodeLoginActivity.class);
                break;
             case R.id.forget_pwd_tv:
                 ActivityUtils.startActivity(ForgetPasswordActivity.class);
                 break;
             case R.id.register_tv:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                ActivityUtils.startActivity(RegisterActivity.class);
                 break;
         }
     }
 
     private void login() {
-        startLoading();
-        String phoneNum = loginPhoneNumTv.getText().toString().trim();
-        String password = loginPwdTv.getText().toString().trim();
+
+        final String phoneNum = loginPhoneNumTv.getText().toString().trim();
+        final String password = loginPwdTv.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtils.showShort("请输入手机号码！");
             return;
@@ -122,16 +134,20 @@ public class LoginActivity extends BaseActivity {
             ToastUtils.showShort("请输入密码！");
             return;
         }
+        startLoading();
         ApiUtils.pswlogin(phoneNum, password, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 stopLoading();
                 ToastUtils.showShort("登录成功！");
+                ActivityUtils.startActivity(MainActivity.class);
+                SPUtils.getInstance().put(KEY_PHONE,phoneNum);
+                SPUtils.getInstance().put(KEY_PASSWORD,password);
             }
 
             @Override
             public void fail() {
-
+                stopLoading();
             }
         });
     }

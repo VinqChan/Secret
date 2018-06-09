@@ -149,6 +149,7 @@
                 android:background="@drawable/bg_login_input"
                 android:gravity="right|center_vertical"
                 android:hint="6-16位数字、字母"
+                android:inputType="textPassword"
                 android:textSize="@dimen/common_text_size" />
         </LinearLayout>
 
@@ -186,6 +187,7 @@
                 android:background="@drawable/bg_login_input"
                 android:gravity="right|center_vertical"
                 android:hint="6-16位数字、字母"
+                android:inputType="textPassword"
                 android:textSize="@dimen/common_text_size" />
         </LinearLayout>
 
