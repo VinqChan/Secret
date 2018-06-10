@@ -245,6 +245,8 @@ public class ApiUtils {
                     public void onResponse(LoginResult response, int id) {
                         LogUtils.d("[oksan] {logincode}" + response.getMessage());
                         if (response.isSuccess()) {
+                            Constants.RANDOM_KEY =response.getResult().getRandomKey();
+                            Constants.TOKEN =response.getResult().getToken();
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -280,6 +282,8 @@ public class ApiUtils {
                     public void onResponse(LoginResult response, int id) {
                         LogUtils.d("[oksan] {logincode}" + response.getMessage());
                         if (response.isSuccess()) {
+                            Constants.RANDOM_KEY =response.getResult().getRandomKey();
+                            Constants.TOKEN =response.getResult().getToken();
                             callBack.success(response);
                         } else {
                             callBack.fail();

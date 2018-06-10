@@ -11,16 +11,21 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -86,7 +91,7 @@ public class MainActivity extends BaseActivity {
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
-            LogUtils.d(mCurrentLat+ "  " +mCurrentLon);
+            LogUtils.d(mCurrentLat + "  " + mCurrentLon);
             mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
@@ -124,6 +129,11 @@ public class MainActivity extends BaseActivity {
         option.setScanSpan(1000);
         mLocClient.setLocOption(option);
         mLocClient.start();
+
+        LatLng point = new LatLng(118.193233, 24.495242);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
+        OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
+        mBaiduMap.addOverlay(option2);
     }
 
     @Override
@@ -152,7 +162,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({ R.id.own_info_iv, R.id.my_location_iv, R.id.scanner_btn, R.id.address_list_iv})
+    @OnClick({R.id.own_info_iv, R.id.my_location_iv, R.id.scanner_btn, R.id.address_list_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.own_info_iv:
