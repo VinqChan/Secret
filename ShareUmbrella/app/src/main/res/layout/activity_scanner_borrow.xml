@@ -110,7 +110,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
             <TextView
@@ -126,7 +128,132 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="任意伞桩扫码开锁、进入导购状态。"
+                android:text="@string/scanner_borrow_role_01"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ic_dy_gzsm"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/scanner_borrow_role_02"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ic_dy_gzsm"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/scanner_borrow_role_03"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ic_dy_gzsm"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/scanner_borrow_role_04"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ic_dy_gzsm"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/scanner_borrow_role_06"
+                android:textColor="@color/gray_text_color"
+                android:textSize="@dimen/common_text_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/ic_dy_gzsm"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/common_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/scanner_borrow_role_03"
                 android:textColor="@color/gray_text_color"
                 android:textSize="@dimen/common_text_size" />
         </LinearLayout>
@@ -139,4 +266,5 @@
     <include
         android:id="@+id/title"
         layout="@layout/common_title"></include>
+
 </RelativeLayout>

@@ -73,4 +73,12 @@
     <string name="site_manager_welfare02">每年在我司规定的时间内对站点的存货进行汇报。每次汇报均可获得3元奖励金。</string>
     <string name="site_manager_welfare03">终身免费用伞</string>
     <string name="site_manager_welfare04">奖励金可以在商城直接兑换超值礼品</string>
+
+    <!-- scanner brrow role -->
+    <string name="scanner_borrow_role_01">任意伞桩扫码开锁、进入导购状态。</string>
+    <string name="scanner_borrow_role_02">导游状态时间每次10分钟。</string>
+    <string name="scanner_borrow_role_03">导游还伞后，再扫描取伞，进入下一轮导购状态。</string>
+    <string name="scanner_borrow_role_04">游客第9天内未归伞则视为伞出售，导购得到租伞分组50/组。\n游客在第1-8天把伞归还，视为游客借伞，导游得到租伞分成10元/组。</string>
+    <string name="scanner_borrow_role_05">单位：1组=10把伞。</string>
+    <string name="scanner_borrow_role_06">每天订单每15天结算一次。款直接汇入您的余额，您可查看每把伞的借出情况及每天的钱包余额。</string>
 </resources>
