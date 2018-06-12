@@ -1,9 +1,7 @@
 package com.vinchan.shareumbrella.api;
 
 import android.util.Base64;
-import android.util.Log;
 
-import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
@@ -16,21 +14,21 @@ import com.vinchan.shareumbrella.model.LoginResult;
 import com.vinchan.shareumbrella.model.ResponseModel;
 import com.vinchan.shareumbrella.model.ScannerModel;
 import com.vinchan.shareumbrella.model.ScannerRequestModel;
+import com.vinchan.shareumbrella.model.ShopModel;
+import com.vinchan.shareumbrella.model.SiteIdRequestModel;
+import com.vinchan.shareumbrella.model.SiteModel;
+import com.vinchan.shareumbrella.model.StockModel;
 import com.vinchan.shareumbrella.util.MD5Util;
 import com.zhy.http.okhttp.OkHttpUtils;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
 /**
  * Created by Vinchan on 2018/6/3/003.
@@ -40,6 +38,7 @@ public class ApiUtils {
 
     /**
      * 注册发送验证码接口
+     *
      * @param phone
      * @param callBack
      */
@@ -73,6 +72,7 @@ public class ApiUtils {
 
     /**
      * 注册
+     *
      * @param phone
      * @param code
      * @param password
@@ -118,6 +118,7 @@ public class ApiUtils {
 
     /**
      * 登录发送验证码接口
+     *
      * @param phone
      * @param callBack
      */
@@ -151,6 +152,7 @@ public class ApiUtils {
 
     /**
      * 修改密码发送验证码接口
+     *
      * @param phone
      * @param callBack
      */
@@ -184,12 +186,13 @@ public class ApiUtils {
 
     /**
      * 修改密码
+     *
      * @param phone
      * @param code
      * @param password
      * @param callBack
      */
-    public static void psdmodify(String phone, String code,String password,final ApiCallBack callBack) {
+    public static void psdmodify(String phone, String code, String password, final ApiCallBack callBack) {
 
         OkHttpUtils
                 .post()
@@ -221,6 +224,7 @@ public class ApiUtils {
 
     /**
      * 验证码登录
+     *
      * @param phone
      * @param code
      * @param callBack
@@ -245,8 +249,8 @@ public class ApiUtils {
                     public void onResponse(LoginResult response, int id) {
                         LogUtils.d("[oksan] {logincode}" + response.getMessage());
                         if (response.isSuccess()) {
-                            Constants.RANDOM_KEY =response.getResult().getRandomKey();
-                            Constants.TOKEN =response.getResult().getToken();
+                            Constants.RANDOM_KEY = response.getResult().getRandomKey();
+                            Constants.TOKEN = response.getResult().getToken();
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -258,6 +262,7 @@ public class ApiUtils {
 
     /**
      * 账号密码登录
+     *
      * @param phone
      * @param password
      * @param callBack
@@ -282,8 +287,8 @@ public class ApiUtils {
                     public void onResponse(LoginResult response, int id) {
                         LogUtils.d("[oksan] {logincode}" + response.getMessage());
                         if (response.isSuccess()) {
-                            Constants.RANDOM_KEY =response.getResult().getRandomKey();
-                            Constants.TOKEN =response.getResult().getToken();
+                            Constants.RANDOM_KEY = response.getResult().getRandomKey();
+                            Constants.TOKEN = response.getResult().getToken();
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -293,28 +298,14 @@ public class ApiUtils {
                 });
     }
 
-    public static void scanner(String tdCode, final ApiCallBack callBack) {
-        String token =Constants.TOKEN;
-        String salt =Constants.RANDOM_KEY;
 
-        ScannerRequestModel model = new ScannerRequestModel();
-        model.setTdCode(tdCode);
+    /**
+     * 添加店铺
+     * @param callBack
+     */
+    public static void addShop(ShopModel model, final ApiCallBack callBack) {
 
-        String jsonString = new Gson().toJson( model);
-        String encode =  Base64.encodeToString(jsonString.getBytes(), Base64.DEFAULT).replace("\n","");
-        String md5 = MD5Util.encrypt(encode+salt);
-        BaseTransferEntity baseTransferEntity = new BaseTransferEntity();
-        baseTransferEntity.setObject(encode);
-        baseTransferEntity.setSign(md5);
-        String json = new Gson().toJson(baseTransferEntity);
-        LogUtils.d("-------json="+json);
-
-        final Request request = new Request.Builder()
-                .url(Constants.SERVICE_BASE_URL + "/site/scan")
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer "+token)
-                .post(RequestBody.create(MediaType.parse("application/json"),json))
-                .build();
+        final Request request = getRequest(model,"/add/shop");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -325,14 +316,150 @@ public class ApiUtils {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-              LogUtils.e(request.body().toString());
-                ScannerModel model=  new Gson().fromJson( response.body().string(), ScannerModel.class);
-                callBack.success(model);
-                if (model != null) {
-                    Constants.SITEID = model.getResult().getSiteId();
+                LogUtils.e(request.body().toString());
+
+                ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
+
+                if (model.isSuccess()) {
+                    callBack.success(model);
+                } else {
+                    callBack.fail();
                 }
+
             }
         });
 
+    }
+    /**
+     * 查看上期末站点数量
+     *
+     * @param callBack
+     */
+    public static void checkgoods(String siteId, final ApiCallBack callBack) {
+        SiteIdRequestModel model = new SiteIdRequestModel();
+        model.setSiteId(siteId);
+        final Request request = getRequest(model,"/site/checkgoods");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                SiteModel model = new Gson().fromJson(response.body().string(), SiteModel.class);
+
+                if (model.isSuccess()) {
+                    callBack.success(model);
+                } else {
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * 进货/减货/汇报表
+     * @param model
+     * @param type
+     * @param callBack
+     */
+    public static void stock(StockModel model,int type ,final ApiCallBack callBack) {
+        String url = "";
+        if(type ==0){
+            url = "/site/outstock";
+        }else if(type ==1){
+            url = "/site/stock";
+        }else {
+            url = "/site/report";
+        }
+        final Request request = getRequest(model,url);
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
+
+                if (model.isSuccess()) {
+                    callBack.success(model);
+                } else {
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * 扫码获取siteid
+     *
+     * @param tdCode
+     * @param callBack
+     */
+    public static void scanner(String tdCode, final ApiCallBack callBack) {
+        ScannerRequestModel model = new ScannerRequestModel();
+        model.setTdCode(tdCode);
+        final Request request = getRequest(model,"/add/shop");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                ScannerModel model = new Gson().fromJson(response.body().string(), ScannerModel.class);
+
+                if (model.isSuccess()) {
+                    if (model != null) {
+                        Constants.SITEID = model.getResult().getSiteId();
+                    }
+                    callBack.success(model);
+                } else {
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
+
+    public static BaseTransferEntity getBaseTransferEntity(Object object) {
+        String jsonString = new Gson().toJson(object);
+        String encode = Base64.encodeToString(jsonString.getBytes(), Base64.DEFAULT).replace("\n", "");
+        String md5 = MD5Util.encrypt(encode + Constants.RANDOM_KEY);
+        BaseTransferEntity baseTransferEntity = new BaseTransferEntity();
+        baseTransferEntity.setObject(encode);
+        baseTransferEntity.setSign(md5);
+        return baseTransferEntity;
+    }
+
+    private static Request getRequest(Object object,String url) {
+        String json = new Gson().toJson(getBaseTransferEntity(object));
+        return new Request.Builder()
+                .url(Constants.SERVICE_BASE_URL + url)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer " + Constants.TOKEN)
+                .post(RequestBody.create(MediaType.parse("application/json"), json))
+                .build();
     }
 }

@@ -14,6 +14,15 @@ public class ScannerModel {
 
     private int code;
     private Result result;
+    private boolean isSuccess;
+
+    public boolean isSuccess() {
+        return code == 200;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
+    }
 
     public int getCode() {
         return code;
