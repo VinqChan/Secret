@@ -22,8 +22,12 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.api.ApiUtils;
+import com.vinchan.shareumbrella.callback.ApiCallBack;
+import com.vinchan.shareumbrella.model.ScannerModel;
 
 import java.util.ArrayList;
 
@@ -76,6 +80,22 @@ public class MainActivity extends BaseActivity {
         super.init();
         ownInfoIv.setVisibility(View.VISIBLE);
         initLocation();
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        ApiUtils.scanner("02-TNCN1xjdhi10000w07J", new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                ToastUtils.showShort(((ScannerModel)response).getResult().getSiteId());
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
     }
 
     /**
