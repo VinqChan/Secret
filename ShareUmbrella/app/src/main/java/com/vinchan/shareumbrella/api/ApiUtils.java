@@ -18,6 +18,8 @@ import com.vinchan.shareumbrella.model.ShopModel;
 import com.vinchan.shareumbrella.model.SiteIdRequestModel;
 import com.vinchan.shareumbrella.model.SiteModel;
 import com.vinchan.shareumbrella.model.StockModel;
+import com.vinchan.shareumbrella.model.WorkHistoryModel;
+import com.vinchan.shareumbrella.model.WorkHistoryRequestModel;
 import com.vinchan.shareumbrella.util.MD5Util;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -311,6 +313,7 @@ public class ApiUtils {
             @Override
             public void onFailure(Call call, IOException e) {
                 LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
                 callBack.fail();
             }
 
@@ -323,6 +326,7 @@ public class ApiUtils {
                 if (model.isSuccess()) {
                     callBack.success(model);
                 } else {
+                    ToastUtils.showShort(model.getMessage());
                     callBack.fail();
                 }
 
@@ -344,6 +348,7 @@ public class ApiUtils {
             @Override
             public void onFailure(Call call, IOException e) {
                 LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
                 callBack.fail();
             }
 
@@ -356,6 +361,7 @@ public class ApiUtils {
                 if (model.isSuccess()) {
                     callBack.success(model);
                 } else {
+                    ToastUtils.showShort(model.getMessage());
                     callBack.fail();
                 }
 
@@ -363,7 +369,76 @@ public class ApiUtils {
         });
 
     }
+    /**
+     * 撤销站点
+     *
+     * @param callBack
+     */
+    public static void removeSite(String siteId, final ApiCallBack callBack) {
+        SiteIdRequestModel model = new SiteIdRequestModel();
+        model.setSiteId(siteId);
+        final Request request = getRequest(model,"/site/destory");
 
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
+
+                if (model.isSuccess()) {
+                    callBack.success(model);
+                } else {
+                    ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
+    /**
+     * 导游获取邀请码
+     *
+     * @param callBack
+     */
+    public static void getinvitecode(String siteId, final ApiCallBack callBack) {
+        SiteIdRequestModel model = new SiteIdRequestModel();
+        model.setSiteId(siteId);
+        final Request request = getRequest(model,"/appuser/getinvitecode");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
+
+                if (model.isSuccess()) {
+                    callBack.success(model);
+                } else {
+                    ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
     /**
      * 进货/减货/汇报表
      * @param model
@@ -385,6 +460,7 @@ public class ApiUtils {
             @Override
             public void onFailure(Call call, IOException e) {
                 LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
                 callBack.fail();
             }
 
@@ -397,6 +473,7 @@ public class ApiUtils {
                 if (model.isSuccess()) {
                     callBack.success(model);
                 } else {
+                    ToastUtils.showShort(model.getMessage());
                     callBack.fail();
                 }
 
@@ -414,12 +491,13 @@ public class ApiUtils {
     public static void scanner(String tdCode, final ApiCallBack callBack) {
         ScannerRequestModel model = new ScannerRequestModel();
         model.setTdCode(tdCode);
-        final Request request = getRequest(model,"/add/shop");
+        final Request request = getRequest(model,"/site/scan");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
                 callBack.fail();
             }
 
@@ -432,9 +510,11 @@ public class ApiUtils {
                 if (model.isSuccess()) {
                     if (model != null) {
                         Constants.SITEID = model.getResult().getSiteId();
+                        Constants.SNCODE = model.getResult().getSiteNum();
                     }
                     callBack.success(model);
                 } else {
+                    ToastUtils.showShort(model.getMessage());
                     callBack.fail();
                 }
 
@@ -443,9 +523,49 @@ public class ApiUtils {
 
     }
 
+    /**
+     * 查看工作历史记录
+     * @param limit
+     * @param offset
+     * @param callBack
+     */
+    public static void getWorkHistory(String limit , String offset , final ApiCallBack callBack) {
+        WorkHistoryRequestModel model = new WorkHistoryRequestModel();
+        model.setLimit(limit);
+        model.setOffset(offset);
+        final Request request = getRequest(model,"/site/logging");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                WorkHistoryModel model = new Gson().fromJson(response.body().string(), WorkHistoryModel.class);
+
+                if (model.isSuccess()) {
+                    callBack.success(model);
+                } else {
+                    ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
     public static BaseTransferEntity getBaseTransferEntity(Object object) {
         String jsonString = new Gson().toJson(object);
-        String encode = Base64.encodeToString(jsonString.getBytes(), Base64.DEFAULT).replace("\n", "");
+        String encode = (Base64.encodeToString(jsonString.getBytes(), Base64.DEFAULT));
+        if(encode.contains("\n")){
+            encode = encode.replace("\n", "");
+        }
         String md5 = MD5Util.encrypt(encode + Constants.RANDOM_KEY);
         BaseTransferEntity baseTransferEntity = new BaseTransferEntity();
         baseTransferEntity.setObject(encode);
@@ -455,6 +575,9 @@ public class ApiUtils {
 
     private static Request getRequest(Object object,String url) {
         String json = new Gson().toJson(getBaseTransferEntity(object));
+        if(json.contains("\\u003d")){
+            json = json.replace("\\u003d","=");
+        }
         return new Request.Builder()
                 .url(Constants.SERVICE_BASE_URL + url)
                 .addHeader("Content-Type", "application/json")

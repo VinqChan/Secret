@@ -12,4 +12,5 @@ public class Constants {
     public static  String RANDOM_KEY ="";
     public static  String TOKEN = "";
     public static  String SITEID = "";
+    public static  String SNCODE = "";
 }

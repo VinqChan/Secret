@@ -5,32 +5,32 @@ package com.vinchan.shareumbrella.model;
  */
 
 public class StockModel {
-    Integer longUmbrella; //长伞数目
-    Integer shorUmbrella;  //短伞数目
-    Integer alpenstock;    //登山杖数目
+    int longUmbrella; //长伞数目
+    int shorUmbrella;  //短伞数目
+    int alpenstock;    //登山杖数目
     String siteId;      //站点
 
-    public Integer getLongUmbrella() {
+    public int getLongUmbrella() {
         return longUmbrella;
     }
 
-    public void setLongUmbrella(Integer longUmbrella) {
+    public void setLongUmbrella(int longUmbrella) {
         this.longUmbrella = longUmbrella;
     }
 
-    public Integer getShorUmbrella() {
+    public int getShorUmbrella() {
         return shorUmbrella;
     }
 
-    public void setShorUmbrella(Integer shorUmbrella) {
+    public void setShorUmbrella(int shorUmbrella) {
         this.shorUmbrella = shorUmbrella;
     }
 
-    public Integer getAlpenstock() {
+    public int getAlpenstock() {
         return alpenstock;
     }
 
-    public void setAlpenstock(Integer alpenstock) {
+    public void setAlpenstock(int alpenstock) {
         this.alpenstock = alpenstock;
     }
 

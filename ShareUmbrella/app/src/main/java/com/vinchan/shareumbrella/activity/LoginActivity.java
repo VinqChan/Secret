@@ -140,7 +140,7 @@ public class LoginActivity extends BaseActivity {
             public void success(Object response) {
                 stopLoading();
                 ToastUtils.showShort("登录成功！");
-                ActivityUtils.startActivity(MainActivity.class);
+                ActivityUtils.startActivity(AddShopMapActivity.class);
                 SPUtils.getInstance().put(KEY_PHONE,phoneNum);
                 SPUtils.getInstance().put(KEY_PASSWORD,password);
             }

@@ -22,7 +22,9 @@ import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
+import com.vinchan.shareumbrella.callback.CustomerPickerCallBack;
 import com.vinchan.shareumbrella.util.CountTimer;
+import com.vinchan.shareumbrella.util.PickerUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -238,29 +240,13 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     }
 
     private void seleteRoleRl() {
-
-        OptionPicker picker = new OptionPicker(this, new String[]{
-                "维护人员", "站点管理员", "导购"
-        });
-        picker.setCanceledOnTouchOutside(true);
-        picker.setDividerRatio(WheelView.DividerConfig.FILL);
-        picker.setDividerColor(getResources().getColor(R.color.picker_line_color));
-        picker.setTextColor(getResources().getColor(R.color.gray_color));
-        picker.setTopLineColor(getResources().getColor(R.color.gray_color));
-        picker.setSelectedIndex(1);
-        picker.setCycleDisable(true);
-        picker.setTextSize(16);
-        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+        String [] str = new String[]{ "维护人员", "站点管理员", "导购"};
+        PickerUtils.customerPicker(this, str,new CustomerPickerCallBack() {
             @Override
-            public void onOptionPicked(int index, String item) {
-                roleEt.setText(item);
+            public void selecte(String selecteItem) {
+                roleEt.setText(selecteItem);
             }
         });
-        picker.show();
-        picker.getCancelButton().setTextSize(16);
-        picker.getSubmitButton().setTextSize(16);
-        picker.getCancelButton().setTextColor(getResources().getColor(R.color.gray_color));
-        picker.getSubmitButton().setTextColor(getResources().getColor(R.color.main_color));
     }
 
     private void getRegisterCode(String phoneNum) {

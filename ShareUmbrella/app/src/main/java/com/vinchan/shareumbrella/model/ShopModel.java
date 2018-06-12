@@ -8,7 +8,7 @@ public class ShopModel {
     String siteId; //站点id
     String snCode; //sn code
     String name; //商铺名称
-    Integer type; //商铺名称
+    int type; //商铺名称
     String province; //省
     String city;    //市
     String region;  //地区
@@ -50,11 +50,11 @@ public class ShopModel {
         this.name = name;
     }
 
-    public Integer getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(int type) {
         this.type = type;
     }
 

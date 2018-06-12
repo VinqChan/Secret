@@ -7,6 +7,7 @@ import android.view.View;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.callback.BussinessTimePickerCallBack;
+import com.vinchan.shareumbrella.callback.CustomerPickerCallBack;
 import com.vinchan.shareumbrella.callback.TimePickerCallBack;
 import com.vinchan.shareumbrella.callback.YearMonthDayPickerCallBack;
 import com.vinchan.shareumbrella.callback.YearMonthPickerCallBack;
@@ -17,8 +18,10 @@ import java.util.Calendar;
 
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.DoublePicker;
+import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.picker.TimePicker;
 import cn.qqtheme.framework.util.DateUtils;
+import cn.qqtheme.framework.widget.WheelView;
 
 /**
  * Created by Jian on 2018/6/7.
@@ -121,6 +124,7 @@ public class PickerUtils {
         picker.setTitleText("营业时间");
         picker.setContentPadding(10, 8);
        // picker.setUseWeight(true);
+        picker.setSelectedIndex(9,0,19,0);
         picker.setFirstLabel("", ":");
         picker.setSecondLabel("", "");
         picker.setOnPickListener(new FourPicker.OnPickListener() {
@@ -132,4 +136,27 @@ public class PickerUtils {
         picker.show();
     }
 
-}
+    public static void customerPicker(Activity context,String[] str,final CustomerPickerCallBack callBack){
+            OptionPicker picker = new OptionPicker(context, str);
+            picker.setCanceledOnTouchOutside(true);
+            picker.setDividerRatio(WheelView.DividerConfig.FILL);
+            picker.setDividerColor(context.getResources().getColor(R.color.picker_line_color));
+            picker.setTextColor(context.getResources().getColor(R.color.gray_color));
+            picker.setTopLineColor(context.getResources().getColor(R.color.gray_color));
+            picker.setSelectedIndex(1);
+            picker.setCycleDisable(true);
+            picker.setTextSize(16);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                   callBack.selecte(item);
+                }
+            });
+            picker.show();
+            picker.getCancelButton().setTextSize(16);
+            picker.getSubmitButton().setTextSize(16);
+            picker.getCancelButton().setTextColor(context.getResources().getColor(R.color.gray_color));
+            picker.getSubmitButton().setTextColor(context.getResources().getColor(R.color.main_color));
+        }
+    }
+

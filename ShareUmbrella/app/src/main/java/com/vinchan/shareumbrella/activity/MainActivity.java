@@ -85,17 +85,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        ApiUtils.scanner("02-TNCN1xjdhi10000w07J", new ApiCallBack() {
-            @Override
-            public void success(Object response) {
-                ToastUtils.showShort(((ScannerModel)response).getResult().getSiteId());
-            }
-
-            @Override
-            public void fail() {
-
-            }
-        });
     }
 
     /**
