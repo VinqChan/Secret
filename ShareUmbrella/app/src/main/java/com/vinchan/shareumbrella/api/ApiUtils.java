@@ -409,9 +409,9 @@ public class ApiUtils {
      *
      * @param callBack
      */
-    public static void getinvitecode(String siteId, final ApiCallBack callBack) {
+    public static void getinvitecode( final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
-        model.setSiteId(siteId);
+        model.setSiteId("");
         final Request request = getRequest(model,"/appuser/getinvitecode");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {

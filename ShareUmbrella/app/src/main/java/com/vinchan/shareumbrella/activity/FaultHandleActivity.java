@@ -2,12 +2,12 @@ package com.vinchan.shareumbrella.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.FaultHandleAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class FaultHandleActivity extends BaseActivity {
 
 
     @BindView(R.id.fault_handle_recyclerview)
-    RecyclerView faultHandleRecyclerview;
+    PullRereshRecycleView faultHandleRecyclerview;
     private FaultHandleAdapter mAdapter;
 
     @Override

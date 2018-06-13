@@ -2,13 +2,12 @@ package com.vinchan.shareumbrella.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
-import com.vinchan.shareumbrella.adapter.GiftShopListAdapter;
 import com.vinchan.shareumbrella.adapter.WorkHistoryListAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class WorkHistoryActivity extends BaseActivity {
 
 
     @BindView(R.id.work_history_recyclerview)
-    RecyclerView workHistoryRecyclerview;
+    PullRereshRecycleView workHistoryRecyclerview;
     private WorkHistoryListAdapter mAdapter;
 
     @Override

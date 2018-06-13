@@ -1,7 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +11,7 @@ import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.WallteAdapter;
 import com.vinchan.shareumbrella.adapter.WallteManagerAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class WalletActivity extends BaseActivity {
     @BindView(R.id.withdrawal_tv)
     TextView withdrawalTv;
     @BindView(R.id.wallet_recyclerview)
-    RecyclerView walletRecyclerview;
+    PullRereshRecycleView walletRecyclerview;
     WallteAdapter adapter;
     WallteManagerAdapter mManagerAdapter;
 

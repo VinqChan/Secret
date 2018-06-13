@@ -9,6 +9,8 @@
         <attr name="android:scaleType" />
     </declare-styleable>
 
+    <declare-styleable name="CircleLoadingView"><attr format="color" name="progress_color"/></declare-styleable>
+
     <declare-styleable name="PullToRefresh">
 
         <!-- A drawable to use as the background of the Refreshable View -->

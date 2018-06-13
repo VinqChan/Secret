@@ -1,7 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,10 +10,10 @@ import android.widget.TextView;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.AccountBalanceListAdapter;
-import com.vinchan.shareumbrella.callback.YearMonthDayPickerCallBack;
 import com.vinchan.shareumbrella.callback.YearMonthPickerCallBack;
 import com.vinchan.shareumbrella.model.OrderDetail;
 import com.vinchan.shareumbrella.util.PickerUtils;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class AccountBalanceActivity extends BaseActivity {
     @BindView(R.id.account_tv)
     TextView accountTv;
     @BindView(R.id.withdrawal_history_recyclerview)
-    RecyclerView withdrawalHistoryRecyclerview;
+    PullRereshRecycleView withdrawalHistoryRecyclerview;
     @BindView(R.id.withdrawal_rule_tv)
     TextView withdrawalRuleTv;
     @BindView(R.id.date_tv)

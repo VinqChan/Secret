@@ -1,12 +1,11 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.GuardHistoryListAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class GuardHistoryActivity extends BaseActivity {
 
 
     @BindView(R.id.guard_history_recyclerview)
-    RecyclerView guardHistoryRecyclerview;
+    PullRereshRecycleView guardHistoryRecyclerview;
     private GuardHistoryListAdapter mAdapter;
 
     @Override

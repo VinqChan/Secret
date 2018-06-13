@@ -6,14 +6,14 @@
     tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
 
 
-    <android.support.v7.widget.RecyclerView
+    <com.vinchan.shareumbrella.view.PullRereshRecycleView
         android:id="@+id/fault_handle_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title"
         >
 
-    </android.support.v7.widget.RecyclerView>
+    </com.vinchan.shareumbrella.view.PullRereshRecycleView>
     <ProgressBar
         android:id="@+id/loading_progress_bar"
         style="@style/LoadingProgressBarStyle" />

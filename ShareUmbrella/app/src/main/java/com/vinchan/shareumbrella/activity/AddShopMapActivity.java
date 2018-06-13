@@ -1,8 +1,8 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -24,12 +24,12 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
-import com.vinchan.shareumbrella.adapter.HelpListAdapter;
 import com.vinchan.shareumbrella.adapter.ShopLocationListAdapter;
 import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
 import com.vinchan.shareumbrella.model.OrderDetail;
-import com.vinchan.shareumbrella.model.ScannerModel;
+import com.vinchan.shareumbrella.model.ResponseModel;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class AddShopMapActivity extends BaseActivity {
     @BindView(R.id.bottom_button_layout)
     LinearLayout bottomButtonLayout;
     @BindView(R.id.location_recycler_view)
-    RecyclerView locationRecyclerView;
+    PullRereshRecycleView locationRecyclerView;
     private BaiduMap mBaiduMap;
     LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
@@ -64,7 +64,7 @@ public class AddShopMapActivity extends BaseActivity {
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
     private ShopLocationListAdapter mAdapter;
-
+    private List<OrderDetail.OrderDetailItem> list;
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_shop_map;
@@ -85,9 +85,16 @@ public class AddShopMapActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        ApiUtils.scanner("02-TNCN1xjdhi10000w07J", new ApiCallBack() {
+        //getInvitecode();
+        getWorkHistory();
+        getData();
+    }
+
+    private void getWorkHistory() {
+        ApiUtils.getWorkHistory("10","10",new ApiCallBack() {
             @Override
             public void success(Object response) {
+
             }
 
             @Override
@@ -95,10 +102,25 @@ public class AddShopMapActivity extends BaseActivity {
 
             }
         });
-        getData();
     }
+
+    private void getInvitecode() {
+        ApiUtils.getinvitecode(new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                String inviteCode = ((ResponseModel)response).getResult();
+                ToastUtils.showShort(inviteCode);
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
+    }
+
     private void getData() {
-        List<OrderDetail.OrderDetailItem> list = new ArrayList<>();
+        list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
             item.setDeviceId("1");
@@ -111,6 +133,47 @@ public class AddShopMapActivity extends BaseActivity {
         mAdapter = new ShopLocationListAdapter(list,this);
         locationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         locationRecyclerView.setAdapter(mAdapter);
+        // 监听刷新事件
+        locationRecyclerView.setRefreshAndLoadMoreListener(new PullRereshRecycleView.OnRefreshAndLoadMoreListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
+                        item.setDeviceId("1");
+                        item.setDeviceName("1");
+                        item.setDeviceTypeId("1");
+                        item.setInspectProjectId("1");
+                        item.setProjectCycle("1");
+                        mAdapter.notifyDataSetChanged();
+                        // 刷新数据结束时调用
+                        locationRecyclerView.setReFreshComplete();
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public void onLoadMore() {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        // 加载完成新数据显示
+                        OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
+                        item.setDeviceId("1");
+                        item.setDeviceName("1");
+                        item.setDeviceTypeId("1");
+                        item.setInspectProjectId("1");
+                        item.setProjectCycle("1");
+                        mAdapter.notifyDataSetChanged();
+                        list.add(item);
+                        mAdapter.notifyDataSetChanged();
+                        locationRecyclerView.setloadMoreComplete();
+                        if(list.size()>7){
+                            locationRecyclerView.setNoMoreData(true);
+                        }
+                    }
+                }, 1000);
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

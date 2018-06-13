@@ -1,7 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -9,6 +8,7 @@ import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.GiftShopListAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class GiftShopActivity extends BaseActivity {
 
 
     @BindView(R.id.gift_shop_recyclerview)
-    RecyclerView giftShopRecyclerview;
+    PullRereshRecycleView giftShopRecyclerview;
     @BindView(R.id.own_info_iv)
     ImageView ownInfoIv;
     private GiftShopListAdapter mAdapter;

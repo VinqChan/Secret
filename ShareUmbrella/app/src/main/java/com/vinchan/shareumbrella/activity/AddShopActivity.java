@@ -262,7 +262,7 @@ public class AddShopActivity extends BaseActivity {
         }
         startLoading();
         ShopModel model = new ShopModel();
-        model.setSiteId(Constants.SITEID);
+        model.setSiteId("02-TNCN1xjdhi10000w07J");
         model.setSnCode(Constants.SNCODE);
         model.setName(name);
         model.setType(0);

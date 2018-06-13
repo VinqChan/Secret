@@ -1,7 +1,6 @@
 package com.vinchan.shareumbrella.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,6 +8,7 @@ import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.RankingListAdapter;
 import com.vinchan.shareumbrella.model.OrderDetail;
+import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 import com.vinchan.shareumbrella.view.roundImage.RoundedImageView;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class RankingListActivity extends BaseActivity {
     @BindView(R.id.third_tv)
     TextView thirdTv;
     @BindView(R.id.raking_recyclerview)
-    RecyclerView rakingRecyclerview;
+    PullRereshRecycleView rakingRecyclerview;
 
     private RankingListAdapter mAdapter;
 

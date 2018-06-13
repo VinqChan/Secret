@@ -220,11 +220,11 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <com.vinchan.shareumbrella.view.PullRereshRecycleView
             android:id="@+id/raking_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="10dp"></com.vinchan.shareumbrella.view.PullRereshRecycleView>
     </LinearLayout>
 
     <ProgressBar
