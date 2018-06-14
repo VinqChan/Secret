@@ -1,6 +1,5 @@
 package com.vinchan.shareumbrella.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,14 +9,17 @@ import android.widget.TextView;
 
 import com.dangong.oksan.R;
 import com.vinchan.shareumbrella.activity.base.BaseActivity;
+import com.vinchan.shareumbrella.api.ApiUtils;
+import com.vinchan.shareumbrella.callback.ApiCallBack;
+import com.vinchan.shareumbrella.constants.Constants;
+import com.vinchan.shareumbrella.model.SiteModel;
 import com.vinchan.shareumbrella.view.dialog.CommonDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 进货/减货站点汇报
+ * 站点进货汇报/站点减货汇报
  */
 public class SiteReportActivity extends BaseActivity {
 
@@ -83,6 +85,37 @@ public class SiteReportActivity extends BaseActivity {
     public void init() {
         super.init();
 
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        startLoading();
+        ApiUtils.checkgoods(Constants.SITEID, new ApiCallBack() {
+            @Override
+            public void success(final Object response) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopLoading();
+                        SiteModel model = (SiteModel)response;
+                        lastCdsNumTv.setText((Integer.valueOf(model.getResult().getLongUmbrella())+Integer.valueOf(model.getResult().getShorUmbrella()))+"");
+                        lastDszNumTv.setText(model.getResult().getAlpenstock());
+                    }
+                });
+            }
+
+            @Override
+            public void fail() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopLoading();
+                    }
+                });
+            }
+        });
     }
 
     @Override

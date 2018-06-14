@@ -194,7 +194,7 @@
                         android:id="@+id/last_cds_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
+                        android:text="0"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/common_text_size" />
 
@@ -223,7 +223,7 @@
                         android:id="@+id/last_dsz_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
+                        android:text="0"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/common_text_size" />
 
@@ -481,7 +481,7 @@
                             android:id="@+id/this_cds_num_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
+                            android:text="0"
                             android:textColor="@color/main_color"
                             android:textSize="@dimen/common_text_size" />
 
@@ -510,7 +510,7 @@
                             android:id="@+id/this_dsz_num_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
+                            android:text="0"
                             android:textColor="@color/main_color"
                             android:textSize="@dimen/common_text_size" />
 
