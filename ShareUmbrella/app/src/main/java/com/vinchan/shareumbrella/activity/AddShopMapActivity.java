@@ -159,6 +159,8 @@ public class AddShopMapActivity extends BaseActivity {
         mAdapter = new ShopLocationListAdapter(list,this);
         locationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         locationRecyclerView.setAdapter(mAdapter);
+        locationRecyclerView.setReFreshEnabled(false);
+        locationRecyclerView.setLoadMoreEnabled(false);
         // 监听刷新事件
         locationRecyclerView.setRefreshAndLoadMoreListener(new PullRereshRecycleView.OnRefreshAndLoadMoreListener() {
             @Override

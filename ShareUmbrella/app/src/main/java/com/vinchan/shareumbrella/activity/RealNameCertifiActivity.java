@@ -18,7 +18,9 @@ import butterknife.OnClick;
 
 public class RealNameCertifiActivity extends BaseActivity {
 
-
+    public static final int TYPE_REAL_NAME = 1;//实名认证
+    public static final int TYPE_MODIFY = 2;//修改证件
+    public static final String TYPE_KEY = "real_name_type";
     @BindView(R.id.title_back_iv)
     ImageView titleBackIv;
     @BindView(R.id.title_tv)
@@ -32,11 +34,12 @@ public class RealNameCertifiActivity extends BaseActivity {
     private PictureTaker pictureTaker;//图片选择器
     private PictureTakeDialog pictureTakeDialog;//图片选择弹窗
     private boolean isUploadHandle = false;//是否上传手持
+    private int type = 0;
 
 
     @Override
     public String setTitle() {
-        return getString(R.string.main_title);
+        return getString(R.string.realnamecerfi);
     }
 
     @Override
@@ -48,6 +51,12 @@ public class RealNameCertifiActivity extends BaseActivity {
     public void init() {
         super.init();
         initPictureTaker();
+        type = getIntent().getIntExtra(TYPE_KEY,TYPE_REAL_NAME);
+        if(type == TYPE_MODIFY){
+            setTitle(getString(R.string.modify_cerfi));
+        }else {
+            setTitle(getString(R.string.realnamecerfi));
+        }
     }
 
     @Override

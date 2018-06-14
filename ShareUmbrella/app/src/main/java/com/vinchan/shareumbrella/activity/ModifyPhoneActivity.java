@@ -20,49 +20,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ForgetPasswordActivity extends BaseActivity implements CountTimer.OnBacllkCountTimer {
+public class ModifyPhoneActivity extends BaseActivity implements CountTimer.OnBacllkCountTimer {
 
 
-    public static final String KEY_PAGER_TYPE = "forget_type";
-    public static final int VALUES_PAGER_FORGERT = 1;
-    public static final int VALUES_PAGER_MODIFY = 2;
     @BindView(R.id.phone_num_et)
     EditText phoneNumEt;
     @BindView(R.id.verfy_code_et)
     EditText verfyCodeEt;
     @BindView(R.id.get_verfy_code_tv)
     TextView getVerfyCodeTv;
-    @BindView(R.id.input_pwd_et)
-    EditText inputPwdEt;
-    @BindView(R.id.input_sure_pwd_et)
-    EditText inputSurePwdEt;
     @BindView(R.id.modify_btn)
     Button modifyBtn;
     private CountTimer countTimer;
-    private int type;
     @Override
     public int getLayoutId() {
-        return R.layout.activity_forget_password;
+        return R.layout.activity_modify_phone;
     }
 
     @Override
     public String setTitle() {
-        return getString(R.string.forget_password);
+        return getString(R.string.modify_phone);
     }
 
     @Override
     public void init() {
         super.init();
 
-        type = getIntent().getIntExtra(KEY_PAGER_TYPE,VALUES_PAGER_FORGERT);
-        if(type == VALUES_PAGER_MODIFY){
-            setTitle(getString(R.string.modify_password));
-        }else {
-            setTitle(getString(R.string.forget_password));
-        }
         countTimer = new CountTimer(getVerfyCodeTv);// 短信发送倒计时
         countTimer.setBackgroundColor(false);
-        countTimer.setBacllkCountTimer(ForgetPasswordActivity.this);
+        countTimer.setBacllkCountTimer(ModifyPhoneActivity.this);
     }
 
 
@@ -79,11 +65,10 @@ public class ForgetPasswordActivity extends BaseActivity implements CountTimer.O
         startLoading();
         String phoneNum = phoneNumEt.getText().toString().trim();
         String code = verfyCodeEt.getText().toString().trim();
-        String password = inputPwdEt.getText().toString().trim();
-        String ensurePwd = inputSurePwdEt.getText().toString().trim();
+
 
         if (TextUtils.isEmpty(phoneNum)) {
-            ToastUtils.showShort("请输入手机号码！");
+            ToastUtils.showShort("请输入新手机号码！");
             return;
         }
         if (!RegexUtils.isMobileExact(phoneNum)) {
@@ -94,42 +79,7 @@ public class ForgetPasswordActivity extends BaseActivity implements CountTimer.O
             ToastUtils.showShort("请输入验证码！");
             return;
         }
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showShort("请输入密码！");
-            return;
-        }
-        if (password.length() < 6 || password.length() > 16) {
-            ToastUtils.showShort("请输入6-16位数字、字母！");
-            return;
-        }
-        if (TextUtils.isEmpty(ensurePwd)) {
-            ToastUtils.showShort("请输入确认密码！");
-            return;
-        }
-        if (ensurePwd.length() < 6 || ensurePwd.length() > 16) {
-            ToastUtils.showShort("请输入6-16位数字、字母！");
-            return;
-        }
-        if (!ensurePwd.equals(password)) {
-            ToastUtils.showShort("两次输入密码不一致！");
-            return;
-        }
 
-
-        ApiUtils.psdmodify(phoneNum, code,password ,new ApiCallBack() {
-            @Override
-            public void success(Object response) {
-                ToastUtils.showShort("修改成功！");
-                stopLoading();
-                finish();
-            }
-
-            @Override
-            public void fail() {
-                ToastUtils.showShort("修改失败！");
-                stopLoading();
-            }
-        });
     }
 
 
