@@ -1,5 +1,7 @@
 package com.vinchan.shareumbrella.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +15,16 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -27,8 +34,10 @@ import com.vinchan.shareumbrella.activity.base.BaseActivity;
 import com.vinchan.shareumbrella.adapter.ShopLocationListAdapter;
 import com.vinchan.shareumbrella.api.ApiUtils;
 import com.vinchan.shareumbrella.callback.ApiCallBack;
+import com.vinchan.shareumbrella.constants.Constants;
 import com.vinchan.shareumbrella.model.OrderDetail;
 import com.vinchan.shareumbrella.model.ResponseModel;
+import com.vinchan.shareumbrella.model.ScannerModel;
 import com.vinchan.shareumbrella.view.PullRereshRecycleView;
 
 import java.util.ArrayList;
@@ -86,8 +95,10 @@ public class AddShopMapActivity extends BaseActivity {
     public void initData() {
         super.initData();
         //getInvitecode();
-        getWorkHistory();
+        //getWorkHistory();
+        scanner();
         getData();
+
     }
 
     private void getWorkHistory() {
@@ -110,6 +121,21 @@ public class AddShopMapActivity extends BaseActivity {
             public void success(Object response) {
                 String inviteCode = ((ResponseModel)response).getResult();
                 ToastUtils.showShort(inviteCode);
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
+    }
+    private void scanner() {
+        ApiUtils.scanner("02-TNCN1xjdhi10000w07J",new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                ScannerModel model = ((ScannerModel)response);
+                Constants.SITEID = model.getResult().getSiteId();
+                Constants.SNCODE = model.getResult().getSiteNum();
             }
 
             @Override
@@ -209,7 +235,7 @@ public class AddShopMapActivity extends BaseActivity {
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
-            LogUtils.d(mCurrentLat + "  " + mCurrentLon);
+            LogUtils.d(TAG,"mylocation  "+mCurrentLat + "  " + mCurrentLon);
             mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
@@ -237,16 +263,43 @@ public class AddShopMapActivity extends BaseActivity {
         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
+      //  mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
         mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
+        //mLocClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
+        //option.setScanSpan(1000);
+
         mLocClient.setLocOption(option);
         mLocClient.start();
+
+
+        LatLng point = new LatLng( 24.494577,118.192556);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
+        OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
+        Marker marker = (Marker) mBaiduMap.addOverlay(option2);
+        //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
+        Bundle bundle = new Bundle();
+        //info必须实现序列化接口
+        bundle.putSerializable("info", point.latitude+" , "+point.longitude);
+        marker.setExtraInfo(bundle);
+
+        //将地图显示在最后一个marker的位置
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
+        mBaiduMap.setMapStatus(msu);
+
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+               Bundle info = marker.getExtraInfo();
+               ToastUtils.showShort((String)info.getSerializable("info"));
+                return false;
+            }
+        });
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(18));
+
     }
 
     @Override
