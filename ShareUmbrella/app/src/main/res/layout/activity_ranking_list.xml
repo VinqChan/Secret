@@ -4,7 +4,7 @@
     style="@style/Common_Layout_Style"
     android:background="@color/backgroud_color"
 
-    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
 
     <LinearLayout
@@ -74,7 +74,7 @@
                     android:layout_height="15dp"
                     android:src="@drawable/ic_phb_02" />
 
-                <com.vinchan.shareumbrella.view.roundImage.RoundedImageView
+                <com.dangong.oksan.view.roundImage.RoundedImageView
                     android:id="@+id/second_header_iv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -127,7 +127,7 @@
                     android:layout_height="16dp"
                     android:src="@drawable/ic_phb_01" />
 
-                <com.vinchan.shareumbrella.view.roundImage.RoundedImageView
+                <com.dangong.oksan.view.roundImage.RoundedImageView
                     android:id="@+id/first_header_iv"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
@@ -179,7 +179,7 @@
                     android:layout_height="15dp"
                     android:src="@drawable/ic_phb_03" />
 
-                <com.vinchan.shareumbrella.view.roundImage.RoundedImageView
+                <com.dangong.oksan.view.roundImage.RoundedImageView
                     android:id="@+id/third_header_iv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -220,11 +220,11 @@
 
         </LinearLayout>
 
-        <com.vinchan.shareumbrella.view.PullRereshRecycleView
+        <com.dangong.oksan.view.PullRereshRecycleView
             android:id="@+id/raking_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"></com.vinchan.shareumbrella.view.PullRereshRecycleView>
+            android:layout_marginTop="10dp"></com.dangong.oksan.view.PullRereshRecycleView>
     </LinearLayout>
 
     <ProgressBar

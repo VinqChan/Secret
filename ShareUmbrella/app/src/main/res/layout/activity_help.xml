@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Common_Layout_Style"
     android:background="@color/backgroud_color"
-    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
-    <com.vinchan.shareumbrella.view.PagerSlidingTabStrip
+    <com.dangong.oksan.view.PagerSlidingTabStrip
         android:id="@+id/activity_help_tabstrip"
         android:layout_width="match_parent"
         android:layout_height="44dp"

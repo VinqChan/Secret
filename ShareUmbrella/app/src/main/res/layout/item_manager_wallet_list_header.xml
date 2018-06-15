@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:background="#EAEAEA"
     android:layout_marginBottom="5dp"
-    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <TextView
         android:id="@+id/date_tv"

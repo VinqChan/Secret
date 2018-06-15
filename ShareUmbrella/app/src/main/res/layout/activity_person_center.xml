@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Common_Layout_Style"
     android:background="@color/white_color"
-    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.vinchan.shareumbrella.view.roundImage.RoundedImageView
+            <com.dangong.oksan.view.roundImage.RoundedImageView
                 android:id="@+id/custom_header_view"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

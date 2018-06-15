@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Common_Layout_Style"
     android:background="@color/backgroud_color"
-    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
 
     <LinearLayout
@@ -128,10 +128,10 @@
                 android:layout_marginTop="8dp" />
         </LinearLayout>
 
-        <com.vinchan.shareumbrella.view.PullRereshRecycleView
+        <com.dangong.oksan.view.PullRereshRecycleView
             android:id="@+id/withdrawal_history_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.vinchan.shareumbrella.view.PullRereshRecycleView>
+            android:layout_height="match_parent"></com.dangong.oksan.view.PullRereshRecycleView>
     </LinearLayout>
 
     <ProgressBar

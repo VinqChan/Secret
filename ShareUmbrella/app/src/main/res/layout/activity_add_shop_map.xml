@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Common_Layout_Style"
     android:background="@color/white_color"
-    tools:context="com.vinchan.shareumbrella.activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
@@ -73,13 +73,13 @@
 
         </LinearLayout>
 
-        <com.vinchan.shareumbrella.view.PullRereshRecycleView
+        <com.dangong.oksan.view.PullRereshRecycleView
             android:id="@+id/location_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white_color">
 
-        </com.vinchan.shareumbrella.view.PullRereshRecycleView>
+        </com.dangong.oksan.view.PullRereshRecycleView>
     </LinearLayout>
 
     <ProgressBar

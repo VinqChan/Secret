@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Common_Layout_Style"
     android:background="@color/white_color"
-    tools:context="com.vinchan.shareumbrella.activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
 
     <LinearLayout

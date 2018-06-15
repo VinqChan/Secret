@@ -54,7 +54,7 @@
 
 
     <application
-        android:name="com.vinchan.shareumbrella.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_dy_logo"
         android:label="@string/app_name"
@@ -71,7 +71,7 @@
             android:process=":remote" >
         </service>
         <activity
-            android:name="com.vinchan.shareumbrella.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
             <intent-filter>
@@ -81,101 +81,104 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.vinchan.shareumbrella.activity.RegisterActivity"
+            android:name=".activity.RegisterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.RealNameCertifiActivity"
+            android:name=".activity.RealNameCertifiActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.MainNoRealNameActivity"
+            android:name=".activity.MainNoRealNameActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.PersonCenterActivity"
+            android:name=".activity.PersonCenterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.ScannerBorrowActivity"
+            android:name=".activity.ScannerBorrowActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.ScannerActivity"
+            android:name=".activity.ScannerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.WalletActivity"
+            android:name=".activity.WalletActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.RankingListActivity"
+            android:name=".activity.RankingListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-        android:name="com.vinchan.shareumbrella.activity.AccountBalanceActivity"
+        android:name=".activity.AccountBalanceActivity"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.GuardHistoryActivity"
+            android:name=".activity.GuardHistoryActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.InvatationRewardActivity"
+            android:name=".activity.InvatationRewardActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.GiftShopActivity"
+            android:name=".activity.GiftShopActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.GiftExchangeActivity"
+            android:name=".activity.GiftExchangeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.SettingActivity"
+            android:name=".activity.SettingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.HelpActivity"
+            android:name=".activity.HelpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.ManagerAndMaintainMainActivity"
+            android:name=".activity.ManagerAndMaintainMainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.FaultHandleActivity"
+            android:name=".activity.FaultHandleActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.MaintainMainActivity"
+            android:name=".activity.MaintainMainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.EnterMaintainActivity"
+            android:name=".activity.EnterMaintainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.WorkHistoryActivity"
+            android:name=".activity.WorkHistoryActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.ForgetPasswordActivity"
+            android:name=".activity.ForgetPasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.AddShopActivity"
+            android:name=".activity.AddShopActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.SiteReportActivity"
+            android:name=".activity.SiteReportActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.SiteStockReportActivity"
+            android:name=".activity.SiteStockReportActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.GuideWelfareActivity"
+            android:name=".activity.GuideWelfareActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.VerfyCodeLoginActivity"
+            android:name=".activity.VerfyCodeLoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.SiteManagerWelfareActivity"
+            android:name=".activity.SiteManagerWelfareActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.ModifyPhoneActivity"
+            android:name=".activity.ModifyPhoneActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.UnlockActivity"
+            android:name=".activity.UnlockActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.vinchan.shareumbrella.activity.AddShopMapActivity"
+            android:name=".activity.AddShopMapActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:configChanges="orientation|keyboardHidden"
             />
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:launchMode="singleTop"
+            android:exported="true"/>   //注意这个属性一定是true,不然微信不能调用
     </application>
 
 </manifest>

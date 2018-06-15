@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Common_Layout_Style"
     android:background="@color/white"
-    tools:context="com.vinchan.shareumbrella.activity.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
 
     <LinearLayout
@@ -115,11 +115,11 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <com.vinchan.shareumbrella.view.PullRereshRecycleView
+        <com.dangong.oksan.view.PullRereshRecycleView
             android:id="@+id/wallet_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"></com.vinchan.shareumbrella.view.PullRereshRecycleView>
+            android:layout_margin="10dp"></com.dangong.oksan.view.PullRereshRecycleView>
     </LinearLayout>
 
     <ProgressBar
