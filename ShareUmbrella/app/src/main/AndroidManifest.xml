@@ -168,6 +168,9 @@
             android:name="com.vinchan.shareumbrella.activity.ModifyPhoneActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name="com.vinchan.shareumbrella.activity.UnlockActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name="com.vinchan.shareumbrella.activity.AddShopMapActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
