@@ -1,8 +1,12 @@
 package com.dangong.oksan.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -70,6 +74,10 @@ public class LoginActivity extends BaseActivity {
             loginPhoneNumTv.setText(phone);
             loginPwdTv.setText(password);
         }
+        WindowManager wm = (WindowManager) (getSystemService(Context.WINDOW_SERVICE));
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        Log.e(TAG, " height *  width: "+ dm.heightPixels  +" * "+dm.widthPixels);
     }
 
     @Override
