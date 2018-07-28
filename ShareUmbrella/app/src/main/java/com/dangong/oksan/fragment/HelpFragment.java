@@ -1,5 +1,6 @@
 package com.dangong.oksan.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ public class HelpFragment extends android.support.v4.app.Fragment {
         super();
     }
 
+    @SuppressLint("ValidFragment")
     public HelpFragment(int dateType) {
         this.dateType = dateType;
     }
