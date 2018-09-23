@@ -23,6 +23,7 @@ import com.dangong.oksan.activity.base.BaseActivity;
 import com.dangong.oksan.util.permission.PermissionCenter;
 import com.dangong.oksan.util.file.StorageFileManager;
 import com.dangong.oksan.util.permission.PermissionCallBack;
+import com.dangong.oksan.view.image.ImageCompressor;
 import com.dangong.oksan.view.image.ImageDetailHandler;
 import com.dangong.oksan.view.image.ImageIO;
 import com.dangong.oksan.view.image.ImageOperator;
@@ -93,7 +94,7 @@ public class PictureTaker
      * 图片采集者
      * 获取拍照、相册中的图片，同时可以进行裁剪等处理
      * 
-     * @param tempDir 临时的文件存放地址 例如：“LDY”
+     * @param tempDir 临时的文件存放地址
      * @param activity
      * */
     public PictureTaker(BaseActivity activity, String tempDir)
@@ -306,7 +307,7 @@ public class PictureTaker
         @Override
         public void onfail(String permission) {
             if (onTakePictureListener != null) {
-                onTakePictureListener.onPictureTaked(null);
+                onTakePictureListener.onPictureTaked(null,"");
             }
         }
     };
@@ -338,7 +339,7 @@ public class PictureTaker
             @Override
             public void onfail(String permission) {
                 if(onTakePictureListener != null){
-                    onTakePictureListener.onPictureTaked(null);
+                    onTakePictureListener.onPictureTaked(null,"");
                 }
             }
         },Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -390,7 +391,7 @@ public class PictureTaker
             }else{
                 if(onTakePictureListener != null){
 //                    LogUtils.d(tag, "" + origUri.getPath());
-                    onTakePictureListener.onPictureTaked(getScaleImage(origUri.getPath().replace("file://", "")));
+                    onTakePictureListener.onPictureTaked(getScaleImage(origUri.getPath().replace("file://", "")),scaledUri.getPath());
                 }
             }
         }else if(requestCode == REQUEST_CODE_GALLERY){
@@ -410,18 +411,18 @@ public class PictureTaker
                         }
 
                         if(!StringUtils.isEmpty(path)){
-                            onTakePictureListener.onPictureTaked(getScaleImage(path.replace("file://", "")));
+                            onTakePictureListener.onPictureTaked(getScaleImage(path.replace("file://", "")),path);
                         }else{
-                            onTakePictureListener.onPictureTaked(null);
+                            onTakePictureListener.onPictureTaked(null,"");
                         }
                     }
                 }
             }else{
-                onTakePictureListener.onPictureTaked(null);
+                onTakePictureListener.onPictureTaked(null,"");
             }
         }else if(requestCode == REQUEST_CODE_CROP){
             if(onTakePictureListener != null){
-                onTakePictureListener.onPictureTaked(onBitmapResult(data));
+                onTakePictureListener.onPictureTaked(onBitmapResult(data),cropUri.getPath());
             }
         }
     }
@@ -448,7 +449,7 @@ public class PictureTaker
     }
     
     public interface OnTakePictureListener{
-        void onPictureTaked(Bitmap bitmap);
+        void onPictureTaked(Bitmap bitmap,String url);
     }
     
 }

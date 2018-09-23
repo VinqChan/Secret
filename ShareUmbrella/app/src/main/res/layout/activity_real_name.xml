@@ -19,7 +19,7 @@
             android:layout_width="280dp"
             android:layout_height="185dp"
             android:layout_marginTop="30dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_dy_dyzj" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:id="@+id/upload_handle_card"
             android:layout_width="280dp"
             android:layout_height="185dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_dy_sczj" />
 
         <TextView
@@ -54,6 +54,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/submit_audits" />
     </LinearLayout>
 

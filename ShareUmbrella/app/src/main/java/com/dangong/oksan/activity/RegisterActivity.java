@@ -1,10 +1,12 @@
 package com.dangong.oksan.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,8 +16,10 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.api.ApiUtils;
 import com.dangong.oksan.callback.ApiCallBack;
 import com.dangong.oksan.callback.CustomerPickerCallBack;
+import com.dangong.oksan.util.CountTimer;
 import com.dangong.oksan.util.PickerUtils;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -23,10 +27,9 @@ import com.lljjcoder.bean.DistrictBean;
 import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
-import com.dangong.oksan.api.ApiUtils;
-import com.dangong.oksan.util.CountTimer;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity implements CountTimer.OnBacllkCountTimer {
@@ -73,6 +76,12 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     TextView serviceTv;
     //申明对象
     CityPickerView mPicker = new CityPickerView();
+    @BindView(R.id.name_et)
+    EditText nameEt;
+    @BindView(R.id.name_view)
+    LinearLayout nameView;
+    @BindView(R.id.name_line)
+    View nameLine;
     private String mProvince = "";
     private String mCity = "";
     private CountTimer countTimer;
@@ -140,12 +149,12 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(countTimer!=null){
+        if (countTimer != null) {
             countTimer.cancel();
         }
     }
 
-    @OnClick({ R.id.get_verfy_code_tv, R.id.selete_role_rl, R.id.selete_address_rl, R.id.register_btn, R.id.service_tv})
+    @OnClick({R.id.get_verfy_code_tv, R.id.selete_role_rl, R.id.selete_address_rl, R.id.register_btn, R.id.service_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.get_verfy_code_tv:
@@ -165,13 +174,14 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
                 break;
             case R.id.register_btn:
                 register();
-               // ActivityUtils.startActivity(MainNoRealNameActivity.class);
+                // ActivityUtils.startActivity(MainNoRealNameActivity.class);
                 break;
             case R.id.service_tv:
                 break;
         }
     }
-    private void register(){
+
+    private void register() {
         String phoneNum = phoneNumEt.getText().toString().trim();
         String code = verfyCodeEt.getText().toString().trim();
         String password = inputPwdEt.getText().toString().trim();
@@ -179,11 +189,12 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
         String invitationCode = invitationCodeEt.getText().toString().trim();
         String role = roleEt.getText().toString().trim();
         String address = adressEt.getText().toString().trim();
+        String name = nameEt.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtils.showShort("请输入手机号码！");
             return;
         }
-        if(!RegexUtils.isMobileExact(phoneNum)){
+        if (!RegexUtils.isMobileExact(phoneNum)) {
             ToastUtils.showShort("请输入正确的手机号码！");
             return;
         }
@@ -195,7 +206,7 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
             ToastUtils.showShort("请输入密码！");
             return;
         }
-        if (password.length()<6 || password.length()>16) {
+        if (password.length() < 6 || password.length() > 16) {
             ToastUtils.showShort("请输入6-16位数字、字母！");
             return;
         }
@@ -203,11 +214,11 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
             ToastUtils.showShort("请输入确认密码！");
             return;
         }
-        if (ensurePwd.length()<6 || ensurePwd.length()>16) {
+        if (ensurePwd.length() < 6 || ensurePwd.length() > 16) {
             ToastUtils.showShort("请输入6-16位数字、字母！");
             return;
         }
-        if(!ensurePwd.equals(password)){
+        if (!ensurePwd.equals(password)) {
             ToastUtils.showShort("两次输入密码不一致！");
             return;
         }
@@ -215,12 +226,18 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
             ToastUtils.showShort("请选择您的角色！");
             return;
         }
+        if (role.equals("导游") || role.equals("维护人员")) {
+            if (TextUtils.isEmpty(name)) {
+                ToastUtils.showShort("请输入你的名字！");
+                return;
+            }
+        }
         if (TextUtils.isEmpty(address)) {
             ToastUtils.showShort("请选择常住区域！");
             return;
         }
         startLoading();
-        ApiUtils.register(phoneNum,code,password,invitationCode,"1",mProvince,mCity, new ApiCallBack() {
+        ApiUtils.register(phoneNum, code, password, invitationCode, "1", mProvince, mCity, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 ToastUtils.showShort("注册成功！");
@@ -238,11 +255,18 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     }
 
     private void seleteRoleRl() {
-        String [] str = new String[]{ "维护人员", "站点管理员", "导购"};
-        PickerUtils.customerPicker(this, str,new CustomerPickerCallBack() {
+        String[] str = new String[]{"维护人员", "站点管理员", "导购"};
+        PickerUtils.customerPicker(this, str, new CustomerPickerCallBack() {
             @Override
             public void selecte(String selecteItem) {
                 roleEt.setText(selecteItem);
+                if (selecteItem.equals("导购") || selecteItem.equals("维护人员")) {
+                    nameView.setVisibility(View.VISIBLE);
+                    nameLine.setVisibility(View.VISIBLE);
+                } else {
+                    nameView.setVisibility(View.GONE);
+                    nameLine.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -251,8 +275,8 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
         ApiUtils.getRegisterCode(phoneNum, new ApiCallBack() {
             @Override
             public void success(Object response) {
-               ToastUtils.showShort("验证码已发送！");
-               countTimer.start();
+                ToastUtils.showShort("验证码已发送！");
+                countTimer.start();
             }
 
             @Override
@@ -272,5 +296,12 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
     public void endTimerTvColor() {
         getVerfyCodeTv.setEnabled(true);
         getVerfyCodeTv.setTextColor(getResources().getColor(R.color.main_color));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

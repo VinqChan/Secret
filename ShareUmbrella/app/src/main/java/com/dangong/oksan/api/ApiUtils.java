@@ -14,13 +14,13 @@ import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.model.ScannerModel;
 import com.dangong.oksan.model.ScannerRequestModel;
 import com.dangong.oksan.model.ShopModel;
+import com.dangong.oksan.model.SiteIdRequestModel;
 import com.dangong.oksan.model.SiteModel;
 import com.dangong.oksan.model.StockModel;
 import com.dangong.oksan.model.WorkHistoryModel;
 import com.dangong.oksan.model.WorkHistoryRequestModel;
-import com.google.gson.Gson;
-import com.dangong.oksan.model.SiteIdRequestModel;
 import com.dangong.oksan.util.MD5Util;
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
@@ -231,7 +231,7 @@ public class ApiUtils {
      * @param code
      * @param callBack
      */
-    public static void codelogin(String phone, String code, final ApiCallBack callBack) {
+    public static void codelogin(final String phone, String code, final ApiCallBack callBack) {
 
         OkHttpUtils
                 .post()
@@ -253,6 +253,7 @@ public class ApiUtils {
                         if (response.isSuccess()) {
                             Constants.RANDOM_KEY = response.getResult().getRandomKey();
                             Constants.TOKEN = response.getResult().getToken();
+                            Constants.PHONE = phone;
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -269,7 +270,7 @@ public class ApiUtils {
      * @param password
      * @param callBack
      */
-    public static void pswlogin(String phone, String password, final ApiCallBack callBack) {
+    public static void pswlogin(final String phone, String password, final ApiCallBack callBack) {
 
         OkHttpUtils
                 .post()
@@ -291,6 +292,7 @@ public class ApiUtils {
                         if (response.isSuccess()) {
                             Constants.RANDOM_KEY = response.getResult().getRandomKey();
                             Constants.TOKEN = response.getResult().getToken();
+                            Constants.PHONE = phone;
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -303,11 +305,12 @@ public class ApiUtils {
 
     /**
      * 添加店铺
+     *
      * @param callBack
      */
     public static void addShop(ShopModel model, final ApiCallBack callBack) {
 
-        final Request request = getRequest(model,"/add/shop");
+        final Request request = getRequest(model, "/add/shop");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -334,6 +337,7 @@ public class ApiUtils {
         });
 
     }
+
     /**
      * 查看上期末站点数量
      *
@@ -342,7 +346,7 @@ public class ApiUtils {
     public static void checkgoods(String siteId, final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
         model.setSiteId(siteId);
-        final Request request = getRequest(model,"/site/checkgoods");
+        final Request request = getRequest(model, "/site/checkgoods");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -369,6 +373,7 @@ public class ApiUtils {
         });
 
     }
+
     /**
      * 撤销站点
      *
@@ -377,7 +382,7 @@ public class ApiUtils {
     public static void removeSite(String siteId, final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
         model.setSiteId(siteId);
-        final Request request = getRequest(model,"/site/destory");
+        final Request request = getRequest(model, "/site/destory");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -404,15 +409,16 @@ public class ApiUtils {
         });
 
     }
+
     /**
      * 导游获取邀请码
      *
      * @param callBack
      */
-    public static void getinvitecode( final ApiCallBack callBack) {
+    public static void getinvitecode(final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
         model.setSiteId("");
-        final Request request = getRequest(model,"/appuser/getinvitecode");
+        final Request request = getRequest(model, "/appuser/getinvitecode");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -439,22 +445,24 @@ public class ApiUtils {
         });
 
     }
+
     /**
      * 进货/减货/汇报表
+     *
      * @param model
      * @param type
      * @param callBack
      */
-    public static void stock(StockModel model, int type , final ApiCallBack callBack) {
+    public static void stock(StockModel model, int type, final ApiCallBack callBack) {
         String url = "";
-        if(type ==0){
+        if (type == 0) {
             url = "/site/outstock";
-        }else if(type ==1){
+        } else if (type == 1) {
             url = "/site/stock";
-        }else {
+        } else {
             url = "/site/report";
         }
-        final Request request = getRequest(model,url);
+        final Request request = getRequest(model, url);
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -491,7 +499,7 @@ public class ApiUtils {
     public static void scanner(String tdCode, final ApiCallBack callBack) {
         ScannerRequestModel model = new ScannerRequestModel();
         model.setTdCode(tdCode);
-        final Request request = getRequest(model,"/site/scan");
+        final Request request = getRequest(model, "/site/scan");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -525,15 +533,16 @@ public class ApiUtils {
 
     /**
      * 查看工作历史记录
+     *
      * @param limit
      * @param offset
      * @param callBack
      */
-    public static void getWorkHistory(String limit , String offset , final ApiCallBack callBack) {
+    public static void getWorkHistory(String limit, String offset, final ApiCallBack callBack) {
         WorkHistoryRequestModel model = new WorkHistoryRequestModel();
         model.setLimit(limit);
         model.setOffset(offset);
-        final Request request = getRequest(model,"/site/logging");
+        final Request request = getRequest(model, "/site/logging");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -560,10 +569,11 @@ public class ApiUtils {
         });
 
     }
+
     public static BaseTransferEntity getBaseTransferEntity(Object object) {
         String jsonString = new Gson().toJson(object);
         String encode = (Base64.encodeToString(jsonString.getBytes(), Base64.DEFAULT));
-        if(encode.contains("\n")){
+        if (encode.contains("\n")) {
             encode = encode.replace("\n", "");
         }
         String md5 = MD5Util.encrypt(encode + Constants.RANDOM_KEY);
@@ -573,16 +583,17 @@ public class ApiUtils {
         return baseTransferEntity;
     }
 
-    private static Request getRequest(Object object,String url) {
+    private static Request getRequest(Object object, String url) {
         String json = new Gson().toJson(getBaseTransferEntity(object));
-        if(json.contains("\\u003d")){
-            json = json.replace("\\u003d","=");
+        if (json.contains("\\u003d")) {
+            json = json.replace("\\u003d", "=");
         }
         return new Request.Builder()
                 .url(Constants.SERVICE_BASE_URL + url)
-                .addHeader("Content-Type", "application/json")
+                .addHeader("Content-Type", "multipart/form-data")
                 .addHeader("Authorization", "Bearer " + Constants.TOKEN)
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
     }
+
 }

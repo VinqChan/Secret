@@ -131,7 +131,7 @@ public class PersonCenterActivity extends BaseActivity {
         pictureTaker.setEnableCrop(true);
         pictureTaker.setOnTakePictureListener(new PictureTaker.OnTakePictureListener() {
             @Override
-            public void onPictureTaked(Bitmap bitmap) {
+            public void onPictureTaked(Bitmap bitmap,String url) {
                 if (bitmap != null) {
                     customHeaderView.setImageBitmap(bitmap);
                 }

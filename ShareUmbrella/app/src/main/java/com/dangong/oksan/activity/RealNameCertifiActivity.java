@@ -2,19 +2,30 @@ package com.dangong.oksan.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.constants.Constants;
+import com.dangong.oksan.util.OKHttpUICallback;
+import com.dangong.oksan.util.OkHttpManger;
 import com.dangong.oksan.view.pictureTaker.PictureTakeDialog;
 import com.dangong.oksan.view.pictureTaker.PictureTaker;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class RealNameCertifiActivity extends BaseActivity {
 
@@ -31,10 +42,14 @@ public class RealNameCertifiActivity extends BaseActivity {
     ImageView uploadHandleCard;
     @BindView(R.id.submit_btn)
     Button submitBtn;
+    @BindView(R.id.loading_progress_bar)
+    ProgressBar loadingBar;
     private PictureTaker pictureTaker;//图片选择器
     private PictureTakeDialog pictureTakeDialog;//图片选择弹窗
     private boolean isUploadHandle = false;//是否上传手持
     private int type = 0;
+    private String path1 = "";
+    private String path2 = "";
 
 
     @Override
@@ -44,6 +59,7 @@ public class RealNameCertifiActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
+//        EventBus.getDefault().register(this);
         return R.layout.activity_real_name;
     }
 
@@ -51,10 +67,10 @@ public class RealNameCertifiActivity extends BaseActivity {
     public void init() {
         super.init();
         initPictureTaker();
-        type = getIntent().getIntExtra(TYPE_KEY,TYPE_REAL_NAME);
-        if(type == TYPE_MODIFY){
+        type = getIntent().getIntExtra(TYPE_KEY, TYPE_REAL_NAME);
+        if (type == TYPE_MODIFY) {
             setTitle(getString(R.string.modify_cerfi));
-        }else {
+        } else {
             setTitle(getString(R.string.realnamecerfi));
         }
     }
@@ -68,14 +84,21 @@ public class RealNameCertifiActivity extends BaseActivity {
     public void initPictureTaker() {
 
         pictureTaker = new PictureTaker(this, "/oksan");
-        pictureTaker.setEnableCrop(false);
+        pictureTaker.setAspectX(7);
+        pictureTaker.setAspectY(5);
+        pictureTaker.setOutputX(720);
+        pictureTaker.setOutputX(640);
+        pictureTaker.setEnableCrop(true);
         pictureTaker.setOnTakePictureListener(new PictureTaker.OnTakePictureListener() {
             @Override
-            public void onPictureTaked(Bitmap bitmap) {
+            public void onPictureTaked(Bitmap bitmap, String url) {
+                Log.e(TAG, "onPictureTaked: " + url);
                 if (bitmap != null) {
-                    if(isUploadHandle){
+                    if (isUploadHandle) {
+                        path2 = url;
                         uploadHandleCard.setImageBitmap(bitmap);
-                    }else {
+                    } else {
+                        path1 = url;
                         uploadCard.setImageBitmap(bitmap);
                     }
                 }
@@ -86,7 +109,9 @@ public class RealNameCertifiActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //  EventBus.getDefault().unregister(this);
     }
+
 
     @OnClick({R.id.title_back_iv, R.id.upload_card, R.id.upload_handle_card, R.id.submit_btn})
     public void onViewClicked(View view) {
@@ -103,10 +128,65 @@ public class RealNameCertifiActivity extends BaseActivity {
                 showPicturePckDialog();
                 break;
             case R.id.submit_btn:
-                ActivityUtils.startActivity(MainNoRealNameActivity.class);
+                //ActivityUtils.startActivity(MainNoRealNameActivity.class);
+
+                if (path1.equals("")) {
+                    ToastUtils.showShort("请上传导游相关证据");
+                    return;
+                }
+                if (path2.equals("")) {
+                    ToastUtils.showShort("请上传手持导游相关证据");
+                    return;
+                }
+                loadingBar.setVisibility(View.VISIBLE);
+
+                HashMap<String, String> map = new HashMap<>();
+                map.put("phone", Constants.PHONE);
+                HashMap<String, String> hearder = new HashMap<>();
+                hearder.put("Content-Type", "application/octet-stream");
+                hearder.put("Authorization", "Bearer " + Constants.TOKEN);
+                File[] files = new File[2];
+                String[] keys = new String[2];
+                OkHttpManger.Param[] params = new OkHttpManger.Param[1];
+                params[0] = new OkHttpManger.Param("phone", Constants.PHONE);
+
+                keys[0] = "file";
+                keys[1] = "file";
+                files[0] = new File(path1);
+                files[1] = new File(path2);
+                try {
+                    OkHttpManger.getInstance().uploadAsync(Constants.SERVICE_BASE_URL + "/batch/upload", files, keys, new OKHttpUICallback.ProgressCallback() {
+                        @Override
+                        public void onSuccess(Call call, Response response, String path) {
+                            Log.e(TAG, "onSuccess: " + response);
+                            loadingBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onProgress(long byteReadOrWrite, long contentLength, boolean done) {
+                            Log.e(TAG, "onProgress: " + byteReadOrWrite + " " + contentLength + "  " + done);
+                            if(done){
+                                ToastUtils.showLong("上传成功！");
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Call call, IOException e) {
+                            Log.e(TAG, "onError: " + e.getMessage());
+                            ToastUtils.showLong("上传失败！");
+                            loadingBar.setVisibility(View.GONE);
+                        }
+                    }, params);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 break;
         }
     }
+
+
     /**
      * 修改头像的弹窗
      */
