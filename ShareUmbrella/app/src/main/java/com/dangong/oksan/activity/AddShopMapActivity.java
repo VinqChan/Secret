@@ -170,6 +170,25 @@ public class AddShopMapActivity extends BaseActivity {
             public void onLoadMore() {
             }
         });
+
+        for (int i = 0; i < list.size(); i++) {
+            LatLng point = new LatLng( list.get(i).getLatitude(),list.get(i).getLongitude());
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
+            OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
+            Marker marker = (Marker) mBaiduMap.addOverlay(option2);
+            //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
+            Bundle bundle = new Bundle();
+            //info必须实现序列化接口
+            bundle.putSerializable("info", point.latitude+" , "+point.longitude);
+            marker.setExtraInfo(bundle);
+
+
+        }
+        //将地图显示在最后一个marker的位置
+            LatLng point = new LatLng( 24.487216,118.156801);
+            MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
+            mBaiduMap.setMapStatus(msu);
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,19 +266,19 @@ public class AddShopMapActivity extends BaseActivity {
         mLocClient.start();
 
 
-        LatLng point = new LatLng( 24.494577,118.192556);
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
-        OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
-        Marker marker = (Marker) mBaiduMap.addOverlay(option2);
-        //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
-        Bundle bundle = new Bundle();
-        //info必须实现序列化接口
-        bundle.putSerializable("info", point.latitude+" , "+point.longitude);
-        marker.setExtraInfo(bundle);
-
-        //将地图显示在最后一个marker的位置
-        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
-        mBaiduMap.setMapStatus(msu);
+//        LatLng point = new LatLng( 24.494577,118.192556);
+//        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
+//        OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
+//        Marker marker = (Marker) mBaiduMap.addOverlay(option2);
+//        //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
+//        Bundle bundle = new Bundle();
+//        //info必须实现序列化接口
+//        bundle.putSerializable("info", point.latitude+" , "+point.longitude);
+//        marker.setExtraInfo(bundle);
+//
+//        //将地图显示在最后一个marker的位置
+//        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
+//        mBaiduMap.setMapStatus(msu);
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
@@ -269,7 +288,7 @@ public class AddShopMapActivity extends BaseActivity {
                 return false;
             }
         });
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(18));
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(14));
 
     }
 
