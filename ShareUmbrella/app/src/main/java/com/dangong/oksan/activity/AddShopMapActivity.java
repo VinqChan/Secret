@@ -3,6 +3,7 @@ package com.dangong.oksan.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
 import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.model.NearShopModel;
 import com.dangong.oksan.model.OrderDetail;
 import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.adapter.ShopLocationListAdapter;
@@ -71,7 +73,7 @@ public class AddShopMapActivity extends BaseActivity {
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
     private ShopLocationListAdapter mAdapter;
-    private List<OrderDetail.OrderDetailItem> list;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_shop_map;
@@ -94,9 +96,24 @@ public class AddShopMapActivity extends BaseActivity {
         super.initData();
         //getInvitecode();
         //getWorkHistory();
-        scanner();
-        getData();
 
+        getNearShop();
+    }
+
+    private void getNearShop() {
+        ApiUtils.getNearShop(116.4111328125, 39.6733703918, 2000, "", new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                NearShopModel nearShopModel = (NearShopModel) response;
+                setLayout(nearShopModel.getResult());
+                Log.e(TAG, "success: "+nearShopModel.getResult().size() );
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
     }
 
     private void getWorkHistory() {
@@ -127,33 +144,10 @@ public class AddShopMapActivity extends BaseActivity {
             }
         });
     }
-    private void scanner() {
-        ApiUtils.scanner("02-TNCN1xjdhi10000w07J",new ApiCallBack() {
-            @Override
-            public void success(Object response) {
-                ScannerModel model = ((ScannerModel)response);
-                Constants.SITEID = model.getResult().getSiteId();
-                Constants.SNCODE = model.getResult().getSiteNum();
-            }
 
-            @Override
-            public void fail() {
+    private void setLayout(List<NearShopModel.ResultBean> list) {
 
-            }
-        });
-    }
 
-    private void getData() {
-        list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
-            item.setDeviceId("1");
-            item.setDeviceName("1");
-            item.setDeviceTypeId("1");
-            item.setInspectProjectId("1");
-            item.setProjectCycle("1");
-            list.add(item);
-        }
         mAdapter = new ShopLocationListAdapter(list,this);
         locationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         locationRecyclerView.setAdapter(mAdapter);
@@ -165,12 +159,6 @@ public class AddShopMapActivity extends BaseActivity {
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                        OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
-                        item.setDeviceId("1");
-                        item.setDeviceName("1");
-                        item.setDeviceTypeId("1");
-                        item.setInspectProjectId("1");
-                        item.setProjectCycle("1");
                         mAdapter.notifyDataSetChanged();
                         // 刷新数据结束时调用
                         locationRecyclerView.setReFreshComplete();
@@ -180,24 +168,6 @@ public class AddShopMapActivity extends BaseActivity {
 
             @Override
             public void onLoadMore() {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        // 加载完成新数据显示
-                        OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
-                        item.setDeviceId("1");
-                        item.setDeviceName("1");
-                        item.setDeviceTypeId("1");
-                        item.setInspectProjectId("1");
-                        item.setProjectCycle("1");
-                        mAdapter.notifyDataSetChanged();
-                        list.add(item);
-                        mAdapter.notifyDataSetChanged();
-                        locationRecyclerView.setloadMoreComplete();
-                        if(list.size()>7){
-                            locationRecyclerView.setNoMoreData(true);
-                        }
-                    }
-                }, 1000);
             }
         });
     }
@@ -212,7 +182,8 @@ public class AddShopMapActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_btn:
-                ActivityUtils.startActivity(AddShopActivity.class);
+                ActivityUtils.startActivity(ScannerActivity.class);
+                //ActivityUtils.startActivity(AddShopActivity.class);
                 break;
             case R.id.maintain_btn:
                 Bundle bundle = new Bundle();

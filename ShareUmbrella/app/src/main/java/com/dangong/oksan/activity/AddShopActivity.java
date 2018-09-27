@@ -13,8 +13,12 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.api.ApiUtils;
 import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.callback.BussinessTimePickerCallBack;
 import com.dangong.oksan.callback.CustomerPickerCallBack;
+import com.dangong.oksan.constants.Constants;
+import com.dangong.oksan.model.ShopModel;
 import com.dangong.oksan.util.PickerUtils;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -22,10 +26,6 @@ import com.lljjcoder.bean.DistrictBean;
 import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
-import com.dangong.oksan.api.ApiUtils;
-import com.dangong.oksan.constants.Constants;
-import com.dangong.oksan.callback.BussinessTimePickerCallBack;
-import com.dangong.oksan.model.ShopModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,6 +85,9 @@ public class AddShopActivity extends BaseActivity {
     String longitude; //维度
     //申明对象
     CityPickerView mPicker = new CityPickerView();
+    @BindView(R.id.agent_telephone_et)
+    EditText agentTelephoneEt;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_shop;
@@ -102,6 +105,7 @@ public class AddShopActivity extends BaseActivity {
         mPicker.init(this);
         initCityPicker();
     }
+
     private void initCityPicker() {
         //添加默认的配置，不需要自己定义
         CityConfig cityConfig = new CityConfig.Builder().build();
@@ -140,6 +144,7 @@ public class AddShopActivity extends BaseActivity {
         //显示
         //  mPicker.showCityPicker( );
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -159,8 +164,8 @@ public class AddShopActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.selete_shop_type_rl:
-                String [] str1 = new String[]{ "酒店", "景区内", "餐饮铺","小区", "单位"};
-                PickerUtils.customerPicker(this, str1,new CustomerPickerCallBack() {
+                String[] str1 = new String[]{"酒店", "景区内", "餐饮铺", "小区", "单位"};
+                PickerUtils.customerPicker(this, str1, new CustomerPickerCallBack() {
                     @Override
                     public void selecte(String selecteItem) {
                         shopTypeEt.setText(selecteItem);
@@ -168,21 +173,21 @@ public class AddShopActivity extends BaseActivity {
                 });
                 break;
             case R.id.selete_address_rl:
-                mPicker.showCityPicker( );
+                mPicker.showCityPicker();
                 break;
             case R.id.selete_time_rl:
                 PickerUtils.onBusinessTimePicker(this, new BussinessTimePickerCallBack() {
                     @Override
                     public void time(String beginhour, String beginminute, String endhour, String endminute) {
-                      timeEt.setText(beginhour+":"+beginminute+"~"+endhour+":"+endminute);
-                      beginTime = beginhour+":"+beginminute;
-                      endTime = endhour+":"+endminute;
+                        timeEt.setText(beginhour + ":" + beginminute + "~" + endhour + ":" + endminute);
+                        beginTime = beginhour + ":" + beginminute;
+                        endTime = endhour + ":" + endminute;
                     }
                 });
                 break;
             case R.id.selete_state_rl:
-                String [] str = new String[]{ "景区场景", "低价场景"};
-                PickerUtils.customerPicker(this, str,new CustomerPickerCallBack() {
+                String[] str = new String[]{"景区场景", "低价场景"};
+                PickerUtils.customerPicker(this, str, new CustomerPickerCallBack() {
                     @Override
                     public void selecte(String selecteItem) {
                         stateEt.setText(selecteItem);
@@ -203,66 +208,70 @@ public class AddShopActivity extends BaseActivity {
         String address = addressDetailEt.getText().toString().trim();
         String putPosition = putLocationEt.getText().toString().trim();
         String time = timeEt.getText().toString().trim();
-        String chargeName= chargeNameEt.getText().toString().trim();  //主管姓名
-        String chargePhone= chargePhoneEt.getText().toString().trim();   //主管电话
-        String managerName= managerNameEt.getText().toString().trim();  //管理员姓名
-        String managerPhone= managerTelephoneEt.getText().toString().trim(); //管理员电话
-        String managerId= managerCodeEt.getText().toString().trim();    //管理员工号
-        String unitPhone= workTelephoneEt.getText().toString().trim();    //单位电话
-        String pStatus= stateEt.getText().toString().trim(); //配置状态
-        type = "酒店";
-        pStatus = "景区场景";
-        if(StringUtils.isEmpty(name)){
+        String agentPhone = agentTelephoneEt.getText().toString().trim();//代理商手机
+        String chargeName = chargeNameEt.getText().toString().trim();  //主管姓名
+        String chargePhone = chargePhoneEt.getText().toString().trim();   //主管电话
+        String managerName = managerNameEt.getText().toString().trim();  //管理员姓名
+        String managerPhone = managerTelephoneEt.getText().toString().trim(); //管理员电话
+        String managerId = managerCodeEt.getText().toString().trim();    //管理员工号
+        String unitPhone = workTelephoneEt.getText().toString().trim();    //单位电话
+        String pStatus = stateEt.getText().toString().trim(); //配置状态
+
+        if (StringUtils.isEmpty(name)) {
             ToastUtils.showShort("请输入店铺名称！");
             return;
         }
-        if(StringUtils.isEmpty(type)){
+        if (StringUtils.isEmpty(type)) {
             ToastUtils.showShort("请选择店铺类型！");
             return;
         }
-        if(StringUtils.isEmpty(address)){
+        if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort("请选择省市区！");
             return;
         }
-        if(StringUtils.isEmpty(putPosition)){
+        if (StringUtils.isEmpty(putPosition)) {
             ToastUtils.showShort("请输入伞桩的具体摆放位置！");
             return;
         }
-        if(StringUtils.isEmpty(time)){
+        if (StringUtils.isEmpty(time)) {
             ToastUtils.showShort("请选择营业时间！");
             return;
         }
-        if(StringUtils.isEmpty(chargeName)){
-            ToastUtils.showShort("请输入主管名字！");
+//        if (StringUtils.isEmpty(chargeName)) {
+//            ToastUtils.showShort("请输入主管名字！");
+//            return;
+//        }
+//        if (StringUtils.isEmpty(chargePhone)) {
+//            ToastUtils.showShort("请输入主管手机！");
+//            return;
+//        }
+//        if (StringUtils.isEmpty(managerPhone)) {
+//            ToastUtils.showShort("请输入站点管理员手机号码！");
+//            return;
+//        }
+//        if (StringUtils.isEmpty(managerName)) {
+//            ToastUtils.showShort("请输入站点管理员姓名！");
+//            return;
+//        }
+        if (StringUtils.isEmpty(agentPhone)) {
+            ToastUtils.showShort("请输入代理商手机号码！");
             return;
         }
-        if(StringUtils.isEmpty(chargePhone)){
-            ToastUtils.showShort("请输入主管手机！");
-            return;
-        }
-        if(StringUtils.isEmpty(managerPhone)){
-            ToastUtils.showShort("请输入站点管理员手机号码！");
-            return;
-        }
-        if(StringUtils.isEmpty(managerName)){
-            ToastUtils.showShort("请输入站点管理员姓名！");
-            return;
-        }
-        if(StringUtils.isEmpty(managerId)){
+        if (StringUtils.isEmpty(managerId)) {
             ToastUtils.showShort("请输入站点管理员工号！");
             return;
         }
-        if(StringUtils.isEmpty(unitPhone)){
+        if (StringUtils.isEmpty(unitPhone)) {
             ToastUtils.showShort("请输入座机号！");
             return;
         }
-        if(StringUtils.isEmpty(pStatus)){
+        if (StringUtils.isEmpty(pStatus)) {
             ToastUtils.showShort("请选择配置状态！");
             return;
         }
         startLoading();
         ShopModel model = new ShopModel();
-        model.setSiteId("02-TNCN1xjdhi10000w07J");
+        model.setSiteId("0001");
         model.setSnCode(Constants.SNCODE);
         model.setName(name);
         model.setType(0);

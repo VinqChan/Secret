@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dangong.oksan.R;
+import com.dangong.oksan.model.NearShopModel;
 import com.dangong.oksan.model.OrderDetail;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ public class ShopLocationListAdapter extends RecyclerView.Adapter {
 
 
 
-    private List<OrderDetail.OrderDetailItem> listData = new ArrayList<>();
+    private List<NearShopModel.ResultBean> listData = new ArrayList<>();
     private Context mContext;
 
 
-    public ShopLocationListAdapter(List<OrderDetail.OrderDetailItem> listData, Context mContext) {
+    public ShopLocationListAdapter(List<NearShopModel.ResultBean> listData, Context mContext) {
         this.listData = listData;
         this.mContext = mContext;
     }
@@ -41,8 +42,8 @@ public class ShopLocationListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final OrderDetail.OrderDetailItem order = listData.get(position);
-         ((LocationHolder) holder).addressTv.setText("黄山5号景区");
+        final NearShopModel.ResultBean mode = listData.get(position);
+         ((LocationHolder) holder).addressTv.setText(mode.getAddress());
     }
 
     @Override

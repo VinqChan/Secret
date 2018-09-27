@@ -6,10 +6,13 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.callback.ApiCallBack;
 import com.dangong.oksan.callback.LoginResultCallBack;
+import com.dangong.oksan.callback.NearShopResultCallBack;
 import com.dangong.oksan.callback.ResultCallBack;
 import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.BaseTransferEntity;
+import com.dangong.oksan.model.GetNearShopRequestModel;
 import com.dangong.oksan.model.LoginResult;
+import com.dangong.oksan.model.NearShopModel;
 import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.model.ScannerModel;
 import com.dangong.oksan.model.ScannerRequestModel;
@@ -24,6 +27,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -569,6 +573,72 @@ public class ApiUtils {
         });
 
     }
+
+    public static void getNearShop(double longitude, double latitude, int range,String city,final ApiCallBack callBack) {
+        HashMap<String, String> hearder = new HashMap<>();
+        hearder.put("Content-Type", "application/form-data");
+        hearder.put("Authorization", "Bearer " + Constants.TOKEN);
+        OkHttpUtils
+                .post()
+                .headers(hearder)
+                .addParams("longitude",longitude+"")
+                .addParams("latitude", latitude+"")
+                .addParams("range", range+"")
+                .addParams("city", city)
+                .url(Constants.SERVICE_BASE_URL + "/shop/getNearShop")
+                .build()
+                .execute(new NearShopResultCallBack() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.d("[oksan] {getNearShop}" + e.getMessage());
+                        ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
+                    }
+
+                    @Override
+                    public void onResponse(NearShopModel response, int id) {
+                        LogUtils.d("[oksan] {getNearShop}" + response.getResult());
+                        if (response.isSuccess()) {
+                            callBack.success(response);
+                        } else {
+                            callBack.fail();
+                            ToastUtils.showShort(response.getMessage());
+                        }
+                    }
+                });
+//        GetNearShopRequestModel model = new GetNearShopRequestModel();
+//        model.setCity(city);
+//        model.setLatitude(latitude);
+//        model.setLongitude(longitude);
+//        model.setRange(range);
+//        final Request request = getRequest(model, "shop/getNearShop");
+//
+//        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                LogUtils.e(e.toString());
+//                ToastUtils.showShort("服务异常，请稍后再试！");
+//                callBack.fail();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                LogUtils.e(request.body());
+//
+//                NearShopModel model = new Gson().fromJson(response.body().string(), NearShopModel.class);
+//
+//                if (model.isSuccess()) {
+//                    callBack.success(model);
+//                } else {
+//                    ToastUtils.showShort(model.getMessage());
+//                    callBack.fail();
+//                }
+//
+//            }
+//        });
+
+    }
+
 
     public static BaseTransferEntity getBaseTransferEntity(Object object) {
         String jsonString = new Gson().toJson(object);

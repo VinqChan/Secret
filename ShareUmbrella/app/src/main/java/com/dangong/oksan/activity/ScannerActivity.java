@@ -11,10 +11,15 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
+import com.dangong.oksan.api.ApiUtils;
+import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.constants.Constants;
+import com.dangong.oksan.model.ScannerModel;
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResultType;
 import com.mylhyl.zxing.scanner.ScannerView;
 import com.mylhyl.zxing.scanner.common.Scanner;
+import com.mylhyl.zxing.scanner.result.URIResult;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -161,9 +166,30 @@ public class ScannerActivity extends DeCodeActivity {
         super.onResultActivity(result, type, bundle);
         switch (type){
             case TEXT:
+
                 ToastUtils.showShort(bundle.getString(Scanner.Scan.RESULT));
                 break;
+            case URI:
+                URIResult uriResult = (URIResult) bundle.getSerializable(Scanner.Scan.RESULT);
+                //scanner(uriResult.getUri());
+                //ToastUtils.showShort(uriResult.getUri());
+                break;
         }
+    }
+    private void scanner(String url) {
+        ApiUtils.scanner(url,new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                ScannerModel model = ((ScannerModel)response);
+                Constants.SITEID = model.getResult().getSiteId();
+                Constants.SNCODE = model.getResult().getSiteNum();
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
     }
 
     @OnClick(R.id.title_back_iv)

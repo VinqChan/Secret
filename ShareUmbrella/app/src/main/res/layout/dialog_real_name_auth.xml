@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_shape"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        >
+
+        <ImageView
+            style="@style/CommonIconStyle"
+            android:src="@drawable/ic_whry_wxtx" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温馨提示"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/middle_small_text_size" />
+    </LinearLayout>
+
+    <View style="@style/CommonLine" />
+
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_color"
+        android:textSize="@dimen/secondary_title_text_size"
+        android:layout_margin="15dp"
+        android:text="请先进行实名认证！"
+        />
+
+    <LinearLayout
+        android:id="@+id/bottom_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="20dp"
+        >
+        <Button
+            android:id="@+id/cancle_btn"
+            style="@style/CommonVerfyCodeButtonBackgroud"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:text="取消" />
+        <Button
+            android:id="@+id/confirm_btn"
+            style="@style/CommonButtonBackgroud"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:text="确认" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -84,7 +84,12 @@ public class ConfirmOrCancleDialog extends BaseDialog {
 
     }
 
-
+    public void setCancleBtnVisible(boolean isVisible){
+        cancleBtn.setVisibility(isVisible?View.VISIBLE:View.GONE);
+    }
+    public void setSureBtnText(String text){
+        confirmBtn.setText(text);
+    }
     /**
      * 设置提示内容
      */
@@ -119,9 +124,15 @@ public class ConfirmOrCancleDialog extends BaseDialog {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm_btn:
+                if (listener != null) {
+                    listener.sure();
+                }
                 dismiss();
                 break;
             case R.id.cancle_btn:
+                if (listener != null) {
+                    listener.cancle();
+                }
                 dismiss();
                 break;
         }
