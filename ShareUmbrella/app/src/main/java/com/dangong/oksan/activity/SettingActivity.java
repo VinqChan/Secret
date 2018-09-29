@@ -11,16 +11,17 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.constants.Constants;
+import com.dangong.oksan.view.dialog.ConfirmOrCancleDialog;
+import com.dangong.oksan.view.pictureTaker.PictureTakeDialog;
+import com.dangong.oksan.view.pictureTaker.PictureTaker;
+import com.dangong.oksan.view.roundImage.RoundedImageView;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
 import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
-import com.dangong.oksan.view.dialog.ConfirmOrCancleDialog;
-import com.dangong.oksan.view.pictureTaker.PictureTakeDialog;
-import com.dangong.oksan.view.pictureTaker.PictureTaker;
-import com.dangong.oksan.view.roundImage.RoundedImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +60,8 @@ public class SettingActivity extends BaseActivity {
     RelativeLayout modifyPasswordRl;
     @BindView(R.id.logout_btn)
     Button logoutBtn;
+    @BindView(R.id.role_tv)
+    TextView roleTv;
     private PictureTaker pictureTaker;//图片选择器
     private PictureTakeDialog pictureTakeDialog;//图片选择弹窗
     CityPickerView mPicker = new CityPickerView();
@@ -82,7 +85,15 @@ public class SettingActivity extends BaseActivity {
         initPictureTaker();
         mPicker.init(this);
         initCityPicker();
+        if (Constants.loginInfo.getRoleId().equals(Constants.ROLEID_GUIDE)) {//导游
+            roleTv.setText("导游工号");
+        } else if (Constants.loginInfo.getRoleId().equals(Constants.ROLEID_MANAGER)) {//管理人员
+            roleTv.setText("站点管理员工号");
+        } else if (Constants.loginInfo.getRoleId().equals(Constants.ROLEID_STAFF)) {//维护人员
+            roleTv.setText("维护人员工号");
+        }
     }
+
     private void initCityPicker() {
         //添加默认的配置，不需要自己定义
         CityConfig cityConfig = new CityConfig.Builder().build();
@@ -109,9 +120,9 @@ public class SettingActivity extends BaseActivity {
                 if (district != null) {
                     stringBuilder.append(district);
                 }
-                if(isAddressSelect){
+                if (isAddressSelect) {
                     addressTv.setText(stringBuilder.toString());
-                }else {
+                } else {
                     workplaceTv.setText(stringBuilder.toString());
                 }
 
@@ -126,19 +137,21 @@ public class SettingActivity extends BaseActivity {
         //显示
         //  mPicker.showCityPicker( );
     }
+
     public void initPictureTaker() {
 
         pictureTaker = new PictureTaker(this, "/oksan");
         pictureTaker.setEnableCrop(true);
         pictureTaker.setOnTakePictureListener(new PictureTaker.OnTakePictureListener() {
             @Override
-            public void onPictureTaked(Bitmap bitmap,String url) {
+            public void onPictureTaked(Bitmap bitmap, String url) {
                 if (bitmap != null) {
                     headerIv.setImageBitmap(bitmap);
                 }
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,6 +167,7 @@ public class SettingActivity extends BaseActivity {
         }
         pictureTakeDialog.show();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,21 +186,21 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.selete_certificates_rl:
                 Bundle bundle2 = new Bundle();
-                bundle2.putInt(RealNameCertifiActivity.TYPE_KEY,RealNameCertifiActivity.TYPE_MODIFY);
-                ActivityUtils.startActivity(bundle2,RealNameCertifiActivity.class);
+                bundle2.putInt(RealNameCertifiActivity.TYPE_KEY, RealNameCertifiActivity.TYPE_MODIFY);
+                ActivityUtils.startActivity(bundle2, RealNameCertifiActivity.class);
                 break;
             case R.id.selete_address_rl:
                 isAddressSelect = true;
-                mPicker.showCityPicker( );
+                mPicker.showCityPicker();
                 break;
             case R.id.selete_workplace_rl:
                 isAddressSelect = false;
-                mPicker.showCityPicker( );
+                mPicker.showCityPicker();
                 break;
             case R.id.modify_password_rl:
                 Bundle bundle = new Bundle();
-                bundle.putInt(ForgetPasswordActivity.KEY_PAGER_TYPE,ForgetPasswordActivity.VALUES_PAGER_MODIFY);
-                ActivityUtils.startActivity(bundle,ForgetPasswordActivity.class);
+                bundle.putInt(ForgetPasswordActivity.KEY_PAGER_TYPE, ForgetPasswordActivity.VALUES_PAGER_MODIFY);
+                ActivityUtils.startActivity(bundle, ForgetPasswordActivity.class);
                 break;
             case R.id.logout_btn:
                 ConfirmOrCancleDialog dialog = new ConfirmOrCancleDialog(SettingActivity.this);

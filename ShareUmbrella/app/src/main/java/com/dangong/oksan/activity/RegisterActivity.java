@@ -232,12 +232,19 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
                 return;
             }
         }
+        if (role.equals("导游") ) {
+            role = "19";
+        }else if(role.equals("维护人员")){
+            role = "18";
+        }else {
+            role = "17";
+        }
         if (TextUtils.isEmpty(address)) {
             ToastUtils.showShort("请选择常住区域！");
             return;
         }
         startLoading();
-        ApiUtils.register(phoneNum, code, password, invitationCode, "1", mProvince, mCity, new ApiCallBack() {
+        ApiUtils.register(phoneNum, code, password, invitationCode, role, mProvince, mCity, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 ToastUtils.showShort("注册成功！");

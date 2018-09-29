@@ -96,6 +96,12 @@
             android:name=".activity.PersonCenterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".activity.MaintainPersonCenterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ManagerPersonCenterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".activity.ScannerBorrowActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

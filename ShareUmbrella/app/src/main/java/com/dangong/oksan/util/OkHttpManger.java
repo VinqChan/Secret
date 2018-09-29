@@ -128,7 +128,7 @@ public final class OkHttpManger {
         final RequestBody requestBody = buildMultipartFormRequestBody(files, fileKeys, params);
         final Request request = new Request.Builder().url(url).post(requestBody)
                 .addHeader("Content-Type", "multipart/form-data")
-                .addHeader("Authorization", "Bearer " + Constants.TOKEN).build();
+                .addHeader("Authorization", "Bearer " + Constants.loginInfo.getToken()).build();
         return mOkHttpClient.newCall(request).execute();
     }
 

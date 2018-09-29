@@ -33,6 +33,10 @@ public class ScannerActivity extends DeCodeActivity {
     public static final int EXTRA_LASER_LINE_MODE_0 = 0;
     public static final int EXTRA_LASER_LINE_MODE_1 = 1;
     public static final int EXTRA_LASER_LINE_MODE_2 = 2;
+    public static final String SCANNER_KEY = "SCANNER_KEY";
+    public static final int TYPE_OPEN = 1;//开伞仓锁
+    public static final int TYPE_REMOVE = 2;//撤机
+
 
     public static final int APPLY_READ_EXTERNAL_STORAGE = 0x111;
     @BindView(R.id.scanner_view)
@@ -45,6 +49,7 @@ public class ScannerActivity extends DeCodeActivity {
     ImageView ownInfoIv;
 
     private Result mLastResult;
+    private int scannerType = 0;
 
 
     @Override
@@ -60,6 +65,7 @@ public class ScannerActivity extends DeCodeActivity {
     @Override
     public void init() {
         super.init();
+        scannerType = getIntent().getIntExtra(SCANNER_KEY, 0);
         initScannerView();
     }
 
@@ -70,7 +76,7 @@ public class ScannerActivity extends DeCodeActivity {
         showThumbnail = false;
         mScannerView.setMediaResId(R.raw.beep);//设置扫描成功的声音
         mScannerView.setDrawText("将二维码放入框内，即可自动扫描", true);
-        mScannerView.setDrawTextColor(Color.WHITE );
+        mScannerView.setDrawTextColor(Color.WHITE);
         mScannerView.setLaserColor(getResources().getColor(R.color.main_color));
         mScannerView.setLaserFrameBoundColor(getResources().getColor(R.color.main_color));
 
@@ -164,30 +170,37 @@ public class ScannerActivity extends DeCodeActivity {
     @Override
     public void onResultActivity(Result result, ParsedResultType type, Bundle bundle) {
         super.onResultActivity(result, type, bundle);
-        switch (type){
+        switch (type) {
             case TEXT:
 
                 ToastUtils.showShort(bundle.getString(Scanner.Scan.RESULT));
                 break;
             case URI:
                 URIResult uriResult = (URIResult) bundle.getSerializable(Scanner.Scan.RESULT);
-                //scanner(uriResult.getUri());
-                //ToastUtils.showShort(uriResult.getUri());
+                String[] split = uriResult.getUri().split("/");
+                if (split.length != 0) {
+                    scanner(split[split.length - 1]);
+                } else {
+                    ToastUtils.showShort("扫码失败！");
+                }
+
                 break;
         }
     }
+
     private void scanner(String url) {
-        ApiUtils.scanner(url,new ApiCallBack() {
+        ApiUtils.scanner(url, new ApiCallBack() {
             @Override
             public void success(Object response) {
-                ScannerModel model = ((ScannerModel)response);
+                ScannerModel model = ((ScannerModel) response);
                 Constants.SITEID = model.getResult().getSiteId();
                 Constants.SNCODE = model.getResult().getSiteNum();
+                finish();
             }
 
             @Override
             public void fail() {
-
+                finish();
             }
         });
     }

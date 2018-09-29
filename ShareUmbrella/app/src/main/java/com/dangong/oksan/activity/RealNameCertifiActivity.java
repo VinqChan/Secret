@@ -141,14 +141,14 @@ public class RealNameCertifiActivity extends BaseActivity {
                 loadingBar.setVisibility(View.VISIBLE);
 
                 HashMap<String, String> map = new HashMap<>();
-                map.put("phone", Constants.PHONE);
+                map.put("phone", Constants.loginInfo.getPhone());
                 HashMap<String, String> hearder = new HashMap<>();
                 hearder.put("Content-Type", "application/octet-stream");
-                hearder.put("Authorization", "Bearer " + Constants.TOKEN);
+                hearder.put("Authorization", "Bearer " + Constants.loginInfo.getToken());
                 File[] files = new File[2];
                 String[] keys = new String[2];
                 OkHttpManger.Param[] params = new OkHttpManger.Param[1];
-                params[0] = new OkHttpManger.Param("phone", Constants.PHONE);
+                params[0] = new OkHttpManger.Param("phone", Constants.loginInfo.getPhone());
 
                 keys[0] = "file";
                 keys[1] = "file";
@@ -160,15 +160,13 @@ public class RealNameCertifiActivity extends BaseActivity {
                         public void onSuccess(Call call, Response response, String path) {
                             Log.e(TAG, "onSuccess: " + response);
                             loadingBar.setVisibility(View.GONE);
+                            ToastUtils.showLong("上传成功！");
+                            finish();
                         }
 
                         @Override
                         public void onProgress(long byteReadOrWrite, long contentLength, boolean done) {
                             Log.e(TAG, "onProgress: " + byteReadOrWrite + " " + contentLength + "  " + done);
-                            if(done){
-                                ToastUtils.showLong("上传成功！");
-                                finish();
-                            }
                         }
 
                         @Override

@@ -17,7 +17,7 @@
             android:id="@+id/logo_iv1"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/ic_nor_logo2" />
 
         <ProgressBar
@@ -38,7 +38,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:text="开伞仓锁" />
 
         <Button
@@ -48,7 +48,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="开伞槽锁—取伞回仓" />
 
         <LinearLayout

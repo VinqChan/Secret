@@ -3,9 +3,9 @@ package com.dangong.oksan.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.baidu.location.BDLocation;
@@ -30,22 +30,22 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
-import com.dangong.oksan.callback.ApiCallBack;
-import com.dangong.oksan.model.NearShopModel;
-import com.dangong.oksan.model.OrderDetail;
-import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.adapter.ShopLocationListAdapter;
 import com.dangong.oksan.api.ApiUtils;
-import com.dangong.oksan.constants.Constants;
-import com.dangong.oksan.model.ScannerModel;
+import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.model.NearShopModel;
+import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.view.PullRereshRecycleView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.dangong.oksan.activity.ScannerActivity.SCANNER_KEY;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_OPEN;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_REMOVE;
 
 public class AddShopMapActivity extends BaseActivity {
 
@@ -60,6 +60,8 @@ public class AddShopMapActivity extends BaseActivity {
     LinearLayout bottomButtonLayout;
     @BindView(R.id.location_recycler_view)
     PullRereshRecycleView locationRecyclerView;
+    @BindView(R.id.own_info_iv)
+    ImageView ownInfoIv;
     private BaiduMap mBaiduMap;
     LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
@@ -94,19 +96,20 @@ public class AddShopMapActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        //getInvitecode();
-        //getWorkHistory();
-
         getNearShop();
     }
 
     private void getNearShop() {
-        ApiUtils.getNearShop(116.4111328125, 39.6733703918, 2000, "", new ApiCallBack() {
+        ApiUtils.getNearShop(116.4111328125, 39.6733703918, 2000.0, "", new ApiCallBack() {
             @Override
             public void success(Object response) {
-                NearShopModel nearShopModel = (NearShopModel) response;
-                setLayout(nearShopModel.getResult());
-                Log.e(TAG, "success: "+nearShopModel.getResult().size() );
+                final NearShopModel nearShopModel = (NearShopModel) response;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setLayout(nearShopModel.getResult());
+                    }
+                });
             }
 
             @Override
@@ -117,7 +120,7 @@ public class AddShopMapActivity extends BaseActivity {
     }
 
     private void getWorkHistory() {
-        ApiUtils.getWorkHistory("10","10",new ApiCallBack() {
+        ApiUtils.getWorkHistory("10", "10", new ApiCallBack() {
             @Override
             public void success(Object response) {
 
@@ -134,7 +137,7 @@ public class AddShopMapActivity extends BaseActivity {
         ApiUtils.getinvitecode(new ApiCallBack() {
             @Override
             public void success(Object response) {
-                String inviteCode = ((ResponseModel)response).getResult();
+                String inviteCode = ((ResponseModel) response).getResult();
                 ToastUtils.showShort(inviteCode);
             }
 
@@ -148,7 +151,7 @@ public class AddShopMapActivity extends BaseActivity {
     private void setLayout(List<NearShopModel.ResultBean> list) {
 
 
-        mAdapter = new ShopLocationListAdapter(list,this);
+        mAdapter = new ShopLocationListAdapter(list, this);
         locationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         locationRecyclerView.setAdapter(mAdapter);
         locationRecyclerView.setReFreshEnabled(false);
@@ -172,24 +175,25 @@ public class AddShopMapActivity extends BaseActivity {
         });
 
         for (int i = 0; i < list.size(); i++) {
-            LatLng point = new LatLng( list.get(i).getLatitude(),list.get(i).getLongitude());
+            LatLng point = new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude());
             BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
             OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
             Marker marker = (Marker) mBaiduMap.addOverlay(option2);
             //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
             Bundle bundle = new Bundle();
             //info必须实现序列化接口
-            bundle.putSerializable("info", point.latitude+" , "+point.longitude);
+            bundle.putSerializable("info", point.latitude + " , " + point.longitude);
             marker.setExtraInfo(bundle);
 
 
         }
         //将地图显示在最后一个marker的位置
-            LatLng point = new LatLng( 24.487216,118.156801);
-            MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
-            mBaiduMap.setMapStatus(msu);
+        LatLng point = new LatLng(24.487216, 118.156801);
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
+        mBaiduMap.setMapStatus(msu);
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,17 +201,21 @@ public class AddShopMapActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.add_btn, R.id.maintain_btn})
+    @OnClick({R.id.add_btn, R.id.maintain_btn,R.id.own_info_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_btn:
-                ActivityUtils.startActivity(ScannerActivity.class);
-                //ActivityUtils.startActivity(AddShopActivity.class);
+                Bundle bundle2 = new Bundle();
+                bundle2.putInt(SCANNER_KEY, TYPE_OPEN);
+                ActivityUtils.startActivity(bundle2,ScannerActivity.class);
                 break;
             case R.id.maintain_btn:
                 Bundle bundle = new Bundle();
-                bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY,ManagerAndMaintainMainActivity.TYPE_MATAIN);
-                ActivityUtils.startActivity(bundle,ManagerAndMaintainMainActivity.class);
+                bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY, ManagerAndMaintainMainActivity.TYPE_MATAIN);
+                ActivityUtils.startActivity(bundle, ManagerAndMaintainMainActivity.class);
+                break;
+            case R.id.own_info_iv:
+                ActivityUtils.startActivity(MaintainPersonCenterActivity.class);
                 break;
         }
     }
@@ -225,7 +233,7 @@ public class AddShopMapActivity extends BaseActivity {
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
-            LogUtils.d(TAG,"mylocation  "+mCurrentLat + "  " + mCurrentLon);
+            LogUtils.d(TAG, "mylocation  " + mCurrentLat + "  " + mCurrentLon);
             mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
@@ -253,7 +261,7 @@ public class AddShopMapActivity extends BaseActivity {
         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
-      //  mBaiduMap.setMyLocationEnabled(true);
+        //  mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
         mLocClient = new LocationClient(this);
         //mLocClient.registerLocationListener(myListener);
@@ -283,8 +291,8 @@ public class AddShopMapActivity extends BaseActivity {
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-               Bundle info = marker.getExtraInfo();
-               ToastUtils.showShort((String)info.getSerializable("info"));
+                Bundle info = marker.getExtraInfo();
+                ToastUtils.showShort((String) info.getSerializable("info"));
                 return false;
             }
         });

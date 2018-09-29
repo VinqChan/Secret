@@ -54,6 +54,33 @@ public class LoginResult implements Serializable {
         private String province;
         private String city;
         private String status;
+        private String roleId;//17-景点管理员 18-维护人员 19-导游
+        private String checkState; // 0-待审核 1-审核通过 2-审核不通过 3-未提交审核
+        private String workNo;
+
+        public String getWorkNo() {
+            return workNo;
+        }
+
+        public void setWorkNo(String workNo) {
+            this.workNo = workNo;
+        }
+
+        public String getRoleId() {
+            return roleId;
+        }
+
+        public void setRoleId(String roleId) {
+            this.roleId = roleId;
+        }
+
+        public String getCheckState() {
+            return checkState;
+        }
+
+        public void setCheckState(String checkState) {
+            this.checkState = checkState;
+        }
 
         public String getRandomKey() {
             return randomKey;

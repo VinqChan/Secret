@@ -13,7 +13,9 @@ import com.dangong.oksan.callback.ApiCallBack;
 import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.SiteModel;
 import com.dangong.oksan.api.ApiUtils;
+import com.dangong.oksan.model.StockRequest;
 import com.dangong.oksan.view.dialog.CommonDialog;
+import com.lljjcoder.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -70,7 +72,10 @@ public class SiteReportActivity extends BaseActivity {
     @BindView(R.id.cut_top_view)
     LinearLayout cutTopView;
     private int type;
-
+    private int mLongNum=0;
+    private int mShortNum=0;
+    private int mDssNum=0;
+    CommonDialog mDialog =null;
     @Override
     public int getLayoutId() {
         return R.layout.activity_site_report;
@@ -167,8 +172,48 @@ public class SiteReportActivity extends BaseActivity {
                 handleNum(dssEditGoodsNumTv,dssNum,TYPE_CUT);
                 break;
             case R.id.submit_btn:
-                CommonDialog mDialog = new CommonDialog(this, CommonDialog.EnumDialogType.CUT);
+                 mLongNum = Integer.valueOf(csEditGoodsNumTv.getText().toString().trim());
+                 mShortNum = Integer.valueOf(dsEditGoodsNumTv.getText().toString().trim());
+                 mDssNum = Integer.valueOf(dssEditGoodsNumTv.getText().toString().trim());
+                 if(type ==TYPE_CUT){
+                     mDialog = new CommonDialog(this, CommonDialog.EnumDialogType.CUT);
+                 }else {
+                     mDialog = new CommonDialog(this, CommonDialog.EnumDialogType.ADD);
+                 }
+
+                mDialog.setLongNum(longNum+"");
+                mDialog.setShortNum(shortNum+"");
+                mDialog.setMountainNum(dssNum+"");
+                mDialog.setnumOfBqmcds(lastCdsNumTv.getText().toString()+"");
+                mDialog.setnumOfBqmdds(lastDszNumTv.getText().toString()+"");
                 mDialog.show();
+                mDialog.setListener(new CommonDialog.Listener() {
+                    @Override
+                    public void sure() {
+                        StockRequest stockRequest = new StockRequest();
+                        stockRequest.setAlpenstock(mLongNum);
+                        stockRequest.setLongUmbrella(mShortNum);
+                        stockRequest.setAlpenstock(mDssNum);
+                        stockRequest.setPhone(Constants.loginInfo.getPhone());
+                        stockRequest.setSiteId(Constants.SITEID);
+                        ApiUtils.stock(stockRequest,type, new ApiCallBack() {
+                         @Override
+                         public void success(Object response) {
+                                finish();
+                         }
+
+                         @Override
+                         public void fail() {
+
+                         }
+                     });
+                    }
+
+                    @Override
+                    public void cancle() {
+
+                    }
+                });
                 break;
         }
     }
@@ -178,8 +223,8 @@ public class SiteReportActivity extends BaseActivity {
             num++;
             view.setText(num+"");
         }else {
-            if(num ==1){
-                num = 1;
+            if(num ==0){
+                num = 0;
             }else {
                 num--;
             }

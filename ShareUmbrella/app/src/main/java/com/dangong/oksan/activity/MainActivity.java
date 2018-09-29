@@ -1,5 +1,6 @@
 package com.dangong.oksan.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +28,9 @@ import com.dangong.oksan.activity.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.dangong.oksan.activity.ScannerActivity.SCANNER_KEY;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_REMOVE;
 
 public class MainActivity extends BaseActivity {
 
@@ -180,7 +184,9 @@ public class MainActivity extends BaseActivity {
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                 break;
             case R.id.scanner_btn:
-                ActivityUtils.startActivity(ScannerActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(SCANNER_KEY, TYPE_REMOVE);
+                ActivityUtils.startActivity(bundle,ScannerActivity.class);
                 break;
             case R.id.address_list_iv:
                 break;

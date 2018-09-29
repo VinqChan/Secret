@@ -7,7 +7,7 @@ package com.dangong.oksan.model;
 public class GetNearShopRequestModel {
     private double longitude;
     private double latitude;
-    private int range;
+    private double range;
     private String city;
 
     public double getLongitude() {
@@ -26,11 +26,11 @@ public class GetNearShopRequestModel {
         this.latitude = latitude;
     }
 
-    public int getRange() {
+    public double getRange() {
         return range;
     }
 
-    public void setRange(int range) {
+    public void setRange(double range) {
         this.range = range;
     }
 

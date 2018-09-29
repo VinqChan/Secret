@@ -24,7 +24,14 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.dangong.oksan.R;
+import com.dangong.oksan.activity.AddShopMapActivity;
+import com.dangong.oksan.activity.MainActivity;
+import com.dangong.oksan.activity.MaintainMainActivity;
+import com.dangong.oksan.activity.MaintainPersonCenterActivity;
+import com.dangong.oksan.activity.ManagerAndMaintainMainActivity;
+import com.dangong.oksan.activity.ManagerPersonCenterActivity;
 import com.dangong.oksan.activity.PersonCenterActivity;
+import com.dangong.oksan.constants.Constants;
 
 import java.util.Date;
 
@@ -336,7 +343,13 @@ public abstract class BaseActivity extends Activity {
         ownInfoIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityUtils.startActivity(PersonCenterActivity.class);
+                if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_GUIDE)){//导游
+                    ActivityUtils.startActivity(PersonCenterActivity.class);
+                }else  if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_MANAGER)){//管理人员
+                    ActivityUtils.startActivity(ManagerPersonCenterActivity.class);
+                }else if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_STAFF)){//维护人员
+                    ActivityUtils.startActivity(MaintainPersonCenterActivity.class);
+                }
             }
         });
     }

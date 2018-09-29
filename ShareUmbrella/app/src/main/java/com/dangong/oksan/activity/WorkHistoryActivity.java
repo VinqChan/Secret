@@ -2,12 +2,16 @@ package com.dangong.oksan.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
-import com.dangong.oksan.model.OrderDetail;
-import com.dangong.oksan.view.PullRereshRecycleView;
 import com.dangong.oksan.adapter.WorkHistoryListAdapter;
+import com.dangong.oksan.api.ApiUtils;
+import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.model.SiteWorkLoggModel;
+import com.dangong.oksan.view.PullRereshRecycleView;
+import com.lljjcoder.style.citylist.Toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,9 @@ public class WorkHistoryActivity extends BaseActivity {
     @BindView(R.id.work_history_recyclerview)
     PullRereshRecycleView workHistoryRecyclerview;
     private WorkHistoryListAdapter mAdapter;
+    private List<SiteWorkLoggModel.ResultBean> listData = new ArrayList<>();
+    private int limit = 5;
+    private int offset  = 1;
 
     @Override
     public int getLayoutId() {
@@ -40,19 +47,73 @@ public class WorkHistoryActivity extends BaseActivity {
     }
 
     private void getData() {
-        List<OrderDetail.OrderDetailItem> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            OrderDetail.OrderDetailItem item = new OrderDetail().new OrderDetailItem();
-            item.setDeviceId("1");
-            item.setDeviceName("1");
-            item.setDeviceTypeId("1");
-            item.setInspectProjectId("1");
-            item.setProjectCycle("1");
-            list.add(item);
-        }
-        mAdapter = new WorkHistoryListAdapter(list, WorkHistoryActivity.this);
-        workHistoryRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        workHistoryRecyclerview.setAdapter(mAdapter);
+        ApiUtils.getSiteWorkHistory(limit+"", offset+"", new ApiCallBack() {
+            @Override
+            public void success(final Object response) {
+                listData = (List<SiteWorkLoggModel.ResultBean>) response;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter = new WorkHistoryListAdapter(listData, WorkHistoryActivity.this);
+                        workHistoryRecyclerview.setLayoutManager(new LinearLayoutManager(WorkHistoryActivity.this));
+                        workHistoryRecyclerview.setReFreshEnabled(false);
+                        workHistoryRecyclerview.setLoadMoreEnabled(true);
+                        // 监听刷新事件
+                        workHistoryRecyclerview.setRefreshAndLoadMoreListener(new PullRereshRecycleView.OnRefreshAndLoadMoreListener() {
+                            @Override
+                            public void onRefresh() {
+
+                            }
+
+                            @Override
+                            public void onLoadMore() {
+                                offset+=limit;
+                                Log.e(TAG, "------onLoadMore: "+offset );
+                                ApiUtils.getSiteWorkHistory(limit+"", offset+"", new ApiCallBack() {
+
+                                    @Override
+                                    public void success( Object response) {
+                                        final   List<SiteWorkLoggModel.ResultBean> list = (List<SiteWorkLoggModel.ResultBean>) response;
+                                        if(list.size()==0){
+                                            workHistoryRecyclerview.setloadMoreComplete();
+                                            return;
+                                        }
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                listData.addAll(list);
+                                                mAdapter.notifyDataSetChanged();
+                                                workHistoryRecyclerview.setloadMoreComplete();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void fail() {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                workHistoryRecyclerview.setloadMoreComplete();
+                                                workHistoryRecyclerview.setNoMoreData(true);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                        workHistoryRecyclerview.setAdapter(mAdapter);
+                    }
+                });
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
+
+
     }
 
     @Override

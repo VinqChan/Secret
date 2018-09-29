@@ -5,12 +5,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.dangong.oksan.activity.ScannerActivity.SCANNER_KEY;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_REMOVE;
 
 public class EnterMaintainActivity extends BaseActivity {
 
@@ -51,12 +55,18 @@ public class EnterMaintainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_shop_btn:
+                ActivityUtils.startActivity(AddShopMapActivity.class);
                 break;
             case R.id.site_manager_btn:
+                ActivityUtils.startActivity(ManagerAndMaintainMainActivity.class);
                 break;
             case R.id.remove_btn:
+                Bundle bundle = new Bundle();
+                bundle.putInt(SCANNER_KEY, TYPE_REMOVE);
+                ActivityUtils.startActivity(bundle,ScannerActivity.class);
                 break;
             case R.id.own_info_iv:
+                ActivityUtils.startActivity(ManagerPersonCenterActivity.class);
                 break;
         }
     }

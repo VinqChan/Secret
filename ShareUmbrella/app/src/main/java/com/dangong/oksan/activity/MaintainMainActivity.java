@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.constants.Constants;
+import com.dangong.oksan.util.DialogUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,7 +44,12 @@ public class MaintainMainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.start_maintain_btn:
-                ActivityUtils.startActivity(EnterMaintainActivity.class);
+                if(Constants.loginInfo.getCheckState().equals(Constants.CHECKSTATE_YES)){
+                    ActivityUtils.startActivity(EnterMaintainActivity.class);
+                }else {
+                    DialogUtil.showRealNameAuthDialog(this);
+                }
+
                 break;
             case R.id.own_info_iv:
                 break;

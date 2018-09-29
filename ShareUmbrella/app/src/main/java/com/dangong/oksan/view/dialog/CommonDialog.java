@@ -99,6 +99,10 @@ public class CommonDialog extends BaseDialog {
             titleJcsTv.setText("减长伞");
             titleJdsTv.setText("减短伞");
             titleJdssTv.setText("减登山伞");
+        }else {
+            titleJcsTv.setText("加长伞");
+            titleJdsTv.setText("加短伞");
+            titleJdssTv.setText("加登山伞");
         }
     }
 
@@ -112,6 +116,26 @@ public class CommonDialog extends BaseDialog {
 
     public String getMountainNum() {
         return numOfJdssTv.getText().toString();
+    }
+
+    public void setLongNum(String num) {
+        numOfJcsTv.setText(num);
+    }
+
+    public void setShortNum(String num) {
+        numOfJdsTv.setText(num);
+    }
+
+    public void setMountainNum(String num) {
+        numOfJdssTv.setText(num);
+    }
+
+    public void setnumOfBqmcds(String num) {
+        numOfBqmcdsTv.setText(num);
+    }
+
+    public void setnumOfBqmdds(String num) {
+        numOfBqmddsTv.setText(num);
     }
 
     /**
@@ -148,9 +172,15 @@ public class CommonDialog extends BaseDialog {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancle_btn:
+                if (listener != null) {
+                    listener.cancle();
+                }
                 dismiss();
                 break;
             case R.id.confirm_btn:
+                if (listener != null) {
+                    listener.sure();
+                }
                 dismiss();
                 break;
         }

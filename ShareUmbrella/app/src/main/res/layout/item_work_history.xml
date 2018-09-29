@@ -69,6 +69,7 @@
                 android:paddingLeft="15dp">
 
                 <TextView
+                    android:id="@+id/action_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="新增站点:"
@@ -80,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="1982"
+                    android:text=""
                     android:textColor="@color/gray_color"
                     android:textSize="@dimen/common_text_size" />
             </LinearLayout>
@@ -97,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:text="站点名称:"
                     android:textColor="@color/black_color"
+                    android:visibility="gone"
                     android:textSize="@dimen/common_text_size" />
 
                 <TextView

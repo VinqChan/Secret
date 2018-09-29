@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.dangong.oksan.R;
 import com.dangong.oksan.model.OrderDetail;
+import com.dangong.oksan.model.SiteWorkLoggModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,11 @@ public class WorkHistoryListAdapter extends RecyclerView.Adapter {
 
 
 
-    private List<OrderDetail.OrderDetailItem> listData = new ArrayList<>();
+    private List<SiteWorkLoggModel.ResultBean>  listData = new ArrayList<>();
     private Context mContext;
 
 
-    public WorkHistoryListAdapter(List<OrderDetail.OrderDetailItem> listData, Context mContext) {
+    public WorkHistoryListAdapter(List<SiteWorkLoggModel.ResultBean>  listData, Context mContext) {
         this.listData = listData;
         this.mContext = mContext;
     }
@@ -41,8 +42,39 @@ public class WorkHistoryListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final OrderDetail.OrderDetailItem order = listData.get(position);
-        ((WorkHistoryHolder) holder).dateTv.setText("11111");
+        final SiteWorkLoggModel.ResultBean order = listData.get(position);
+         // 操作状态类型 //0新增站点 1撤销站点 2入库 3 出库 4 汇报伞仓 5 汇报伞槽
+        String action ="";
+        int longNum = order.getLongUmbrella().endsWith("")?0:Integer.valueOf(order.getLongUmbrella());
+        int shortNum = order.getShorUmbrella().endsWith("")?0:Integer.valueOf(order.getShorUmbrella());
+        int alpenstockNum = order.getAlpenstock().endsWith("")?0:Integer.valueOf(order.getAlpenstock());
+        switch (order.getSiteSatus()){
+            case "0":
+                action="新增站点 ：";
+                ((WorkHistoryHolder) holder).siteNameCode.setText(order.getName());
+            break;
+            case "1":
+                action="撤销站点 ：";
+                ((WorkHistoryHolder) holder).siteNameCode.setText(order.getName());
+                break;
+            case "2":
+                action="入库 ：";
+                ((WorkHistoryHolder) holder).siteNameCode.setText("长伞 "+longNum+"把 "+"短伞 "+shortNum+"把 "+"登山伞 "+alpenstockNum+"把 ");
+                break;
+            case "3":
+                action="出库 ：";
+                ((WorkHistoryHolder) holder).siteNameCode.setText("长伞 "+longNum+"把 "+"短伞 "+shortNum+"把 "+"登山伞 "+alpenstockNum+"把 ");                break;
+            case "4":
+                action="汇报伞仓 ：";
+                ((WorkHistoryHolder) holder).siteNameCode.setText("长伞 "+longNum+"把 "+"短伞 "+shortNum+"把 "+"登山伞 "+alpenstockNum+"把 ");                break;
+            case "5":
+                action="汇报伞槽  ：";
+                ((WorkHistoryHolder) holder).siteNameCode.setText("长伞 "+longNum+"把 "+"短伞 "+shortNum+"把 "+"登山伞 "+alpenstockNum+"把 ");                break;
+        }
+        ((WorkHistoryHolder) holder).actionTv.setText(action);
+        ((WorkHistoryHolder) holder).dateTv.setText(order.getTime());
+
+
     }
 
     @Override
@@ -59,6 +91,8 @@ public class WorkHistoryListAdapter extends RecyclerView.Adapter {
         TextView addSiteCode;
         @BindView(R.id.site_name_code)
         TextView siteNameCode;
+        @BindView(R.id.action_tv)
+        TextView actionTv;
 
         public WorkHistoryHolder(View itemView) {
             super(itemView);

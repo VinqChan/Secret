@@ -2,6 +2,7 @@ package com.dangong.oksan.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,9 +22,11 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
 import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.util.permission.PermissionCenter;
 import com.dangong.oksan.api.ApiUtils;
 import com.dangong.oksan.util.permission.PermissionCallBack;
+import com.lljjcoder.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -141,8 +144,21 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void success(Object response) {
                 stopLoading();
-                ToastUtils.showShort("登录成功！");
-                ActivityUtils.startActivity(AddShopMapActivity.class);
+                //ToastUtils.showShort("登录成功！");
+                Constants.loginInfo.setRoleId(Constants.ROLEID_STAFF); //TODO test
+                if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_GUIDE)){//导游
+                    if(Constants.loginInfo.getRoleId().equals(Constants.CHECKSTATE_YES)){//审核通过
+                        ActivityUtils.startActivity(AddShopMapActivity.class);
+                    }else {
+                        ActivityUtils.startActivity(MainActivity.class);
+                    }
+                }else  if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_MANAGER)){//管理人员
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY, ManagerAndMaintainMainActivity.TYPE_MANAGER);
+                    ActivityUtils.startActivity(bundle, ManagerAndMaintainMainActivity.class);
+                }else if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_STAFF)){//维护人员
+                    ActivityUtils.startActivity(MaintainMainActivity.class);
+                }
                 SPUtils.getInstance().put(KEY_PHONE,phoneNum);
                 SPUtils.getInstance().put(KEY_PASSWORD,password);
             }

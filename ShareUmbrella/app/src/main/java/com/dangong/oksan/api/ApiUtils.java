@@ -1,25 +1,29 @@
 package com.dangong.oksan.api;
 
 import android.util.Base64;
+import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.callback.ApiCallBack;
 import com.dangong.oksan.callback.LoginResultCallBack;
-import com.dangong.oksan.callback.NearShopResultCallBack;
 import com.dangong.oksan.callback.ResultCallBack;
 import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.BaseTransferEntity;
 import com.dangong.oksan.model.GetNearShopRequestModel;
 import com.dangong.oksan.model.LoginResult;
 import com.dangong.oksan.model.NearShopModel;
+import com.dangong.oksan.model.ReportRequestModel;
 import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.model.ScannerModel;
 import com.dangong.oksan.model.ScannerRequestModel;
 import com.dangong.oksan.model.ShopModel;
 import com.dangong.oksan.model.SiteIdRequestModel;
 import com.dangong.oksan.model.SiteModel;
+import com.dangong.oksan.model.SiteWorkLoggModel;
+import com.dangong.oksan.model.SiteWorkLoggRequest;
 import com.dangong.oksan.model.StockModel;
+import com.dangong.oksan.model.StockRequest;
 import com.dangong.oksan.model.WorkHistoryModel;
 import com.dangong.oksan.model.WorkHistoryRequestModel;
 import com.dangong.oksan.util.MD5Util;
@@ -27,7 +31,6 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -41,6 +44,8 @@ import okhttp3.Response;
  */
 
 public class ApiUtils {
+
+    private static final String TAG = "oksan";
 
     /**
      * 注册发送验证码接口
@@ -65,12 +70,12 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {getRegisterCode}" + response.getResult());
                         if (response.isSuccess()) {
+                            Log.e(TAG, "------getRegisterCode ----: " + new Gson().toJson(response.getResult()));
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort(response.getResult());
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });
@@ -111,12 +116,12 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {register}" + response.getResult());
                         if (response.isSuccess()) {
+                            Log.e(TAG, "------register ----: " + new Gson().toJson(response.getResult()));
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort(response.getResult());
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });
@@ -145,12 +150,13 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {logincode}" + response.getResult());
+
                         if (response.isSuccess()) {
+                            Log.e(TAG, "------logincode ----: " + new Gson().toJson(response.getResult()));
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort(response.getResult());
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });
@@ -179,12 +185,13 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {logincode}" + response.getResult());
+
                         if (response.isSuccess()) {
+                            Log.e(TAG, "------modifycode ----: " + new Gson().toJson(response.getResult()));
                             callBack.success(response);
                         } else {
                             callBack.fail();
-                            ToastUtils.showShort(response.getResult());
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }
                 });
@@ -217,8 +224,9 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(ResponseModel response, int id) {
-                        LogUtils.d("[oksan] {logincode}" + response.getMessage());
+
                         if (response.isSuccess()) {
+                            Log.e(TAG, "------psdmodify ----: " + new Gson().toJson(response.getResult()));
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -253,11 +261,22 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(LoginResult response, int id) {
-                        LogUtils.d("[oksan] {logincode}" + response.getMessage());
+
                         if (response.isSuccess()) {
-                            Constants.RANDOM_KEY = response.getResult().getRandomKey();
-                            Constants.TOKEN = response.getResult().getToken();
-                            Constants.PHONE = phone;
+                            Log.e(TAG, "------codelogin ----: " + new Gson().toJson(response.getResult()));
+                            Constants.loginInfo.setAccount(response.getResult().getAccount());
+                            Constants.loginInfo.setCheckState(response.getResult().getCheckState());
+                            Constants.loginInfo.setCity(response.getResult().getCity());
+                            Constants.loginInfo.setEmail(response.getResult().getEmail());
+                            Constants.loginInfo.setName(response.getResult().getName());
+                            Constants.loginInfo.setPhone(response.getResult().getPhone());
+                            Constants.loginInfo.setProvince(response.getResult().getProvince());
+                            Constants.loginInfo.setRandomKey(response.getResult().getRandomKey());
+                            Constants.loginInfo.setRoleId(response.getResult().getRoleId());
+                            Constants.loginInfo.setStatus(response.getResult().getStatus());
+                            Constants.loginInfo.setWorkNo(response.getResult().getWorkNo());
+                            Constants.loginInfo.setToken(response.getResult().getToken());
+
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -292,11 +311,20 @@ public class ApiUtils {
 
                     @Override
                     public void onResponse(LoginResult response, int id) {
-                        LogUtils.d("[oksan] {logincode}" + response.getMessage());
                         if (response.isSuccess()) {
-                            Constants.RANDOM_KEY = response.getResult().getRandomKey();
-                            Constants.TOKEN = response.getResult().getToken();
-                            Constants.PHONE = phone;
+                            Log.e(TAG, "-------pswlogin ----: " + new Gson().toJson(response.getResult()));
+                            Constants.loginInfo.setAccount(response.getResult().getAccount());
+                            Constants.loginInfo.setCheckState(response.getResult().getCheckState());
+                            Constants.loginInfo.setCity(response.getResult().getCity());
+                            Constants.loginInfo.setEmail(response.getResult().getEmail());
+                            Constants.loginInfo.setName(response.getResult().getName());
+                            Constants.loginInfo.setPhone(response.getResult().getPhone());
+                            Constants.loginInfo.setProvince(response.getResult().getProvince());
+                            Constants.loginInfo.setRandomKey(response.getResult().getRandomKey());
+                            Constants.loginInfo.setRoleId(response.getResult().getRoleId());
+                            Constants.loginInfo.setStatus(response.getResult().getStatus());
+                            Constants.loginInfo.setWorkNo(response.getResult().getWorkNo());
+                            Constants.loginInfo.setToken(response.getResult().getToken());
                             callBack.success(response);
                         } else {
                             callBack.fail();
@@ -331,6 +359,7 @@ public class ApiUtils {
                 ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
 
                 if (model.isSuccess()) {
+                    Log.e(TAG, "-------addShop ----: " + new Gson().toJson(model.getResult()));
                     callBack.success(model);
                 } else {
                     ToastUtils.showShort(model.getMessage());
@@ -367,6 +396,7 @@ public class ApiUtils {
                 SiteModel model = new Gson().fromJson(response.body().string(), SiteModel.class);
 
                 if (model.isSuccess()) {
+                    Log.e(TAG, "-------checkgoods ----: " + new Gson().toJson(model.getResult()));
                     callBack.success(model);
                 } else {
                     ToastUtils.showShort(model.getMessage());
@@ -403,6 +433,7 @@ public class ApiUtils {
                 ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
 
                 if (model.isSuccess()) {
+                    Log.e(TAG, "-------removeSite ----: " + new Gson().toJson(model.getResult()));
                     callBack.success(model);
                 } else {
                     ToastUtils.showShort(model.getMessage());
@@ -439,6 +470,7 @@ public class ApiUtils {
                 ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
 
                 if (model.isSuccess()) {
+                    Log.e(TAG, "-------getinvitecode ----: " + new Gson().toJson(model.getResult()));
                     callBack.success(model);
                 } else {
                     ToastUtils.showShort(model.getMessage());
@@ -451,20 +483,18 @@ public class ApiUtils {
     }
 
     /**
-     * 进货/减货/汇报表
+     * 进货/减货
      *
      * @param model
      * @param type
      * @param callBack
      */
-    public static void stock(StockModel model, int type, final ApiCallBack callBack) {
+    public static void stock(StockRequest model, int type, final ApiCallBack callBack) {
         String url = "";
-        if (type == 0) {
+        if (type == 2) {
             url = "/site/outstock";
         } else if (type == 1) {
             url = "/site/stock";
-        } else {
-            url = "/site/report";
         }
         final Request request = getRequest(model, url);
 
@@ -483,7 +513,9 @@ public class ApiUtils {
                 ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
 
                 if (model.isSuccess()) {
-                    callBack.success(model);
+                    Log.e(TAG, "-------stock ----: " + new Gson().toJson(model.getResult()));
+                    callBack.success(model.getResult());
+                    ToastUtils.showLong(model.getResult());
                 } else {
                     ToastUtils.showShort(model.getMessage());
                     callBack.fail();
@@ -520,6 +552,7 @@ public class ApiUtils {
                 ScannerModel model = new Gson().fromJson(response.body().string(), ScannerModel.class);
 
                 if (model.isSuccess()) {
+                    Log.e(TAG, "-------scanner ----: " + new Gson().toJson(model.getResult()));
                     if (model != null) {
                         Constants.SITEID = model.getResult().getSiteId();
                         Constants.SNCODE = model.getResult().getSiteNum();
@@ -563,6 +596,7 @@ public class ApiUtils {
                 WorkHistoryModel model = new Gson().fromJson(response.body().string(), WorkHistoryModel.class);
 
                 if (model.isSuccess()) {
+                    Log.e(TAG, "-------getWorkHistory ----: " + new Gson().toJson(model.getResult()));
                     callBack.success(model);
                 } else {
                     ToastUtils.showShort(model.getMessage());
@@ -574,71 +608,121 @@ public class ApiUtils {
 
     }
 
-    public static void getNearShop(double longitude, double latitude, int range,String city,final ApiCallBack callBack) {
-        HashMap<String, String> hearder = new HashMap<>();
-        hearder.put("Content-Type", "application/form-data");
-        hearder.put("Authorization", "Bearer " + Constants.TOKEN);
-        OkHttpUtils
-                .post()
-                .headers(hearder)
-                .addParams("longitude",longitude+"")
-                .addParams("latitude", latitude+"")
-                .addParams("range", range+"")
-                .addParams("city", city)
-                .url(Constants.SERVICE_BASE_URL + "/shop/getNearShop")
-                .build()
-                .execute(new NearShopResultCallBack() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        LogUtils.d("[oksan] {getNearShop}" + e.getMessage());
-                        ToastUtils.showShort("服务异常，请稍后再试！");
-                        callBack.fail();
-                    }
+    /**
+     * 站点存货汇报
+     *
+     * @param model
+     * @param callBack
+     */
+    public static void report(ReportRequestModel model, final ApiCallBack callBack) {
 
-                    @Override
-                    public void onResponse(NearShopModel response, int id) {
-                        LogUtils.d("[oksan] {getNearShop}" + response.getResult());
-                        if (response.isSuccess()) {
-                            callBack.success(response);
-                        } else {
-                            callBack.fail();
-                            ToastUtils.showShort(response.getMessage());
-                        }
-                    }
-                });
-//        GetNearShopRequestModel model = new GetNearShopRequestModel();
-//        model.setCity(city);
-//        model.setLatitude(latitude);
-//        model.setLongitude(longitude);
-//        model.setRange(range);
-//        final Request request = getRequest(model, "shop/getNearShop");
-//
-//        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                LogUtils.e(e.toString());
-//                ToastUtils.showShort("服务异常，请稍后再试！");
-//                callBack.fail();
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                LogUtils.e(request.body());
-//
-//                NearShopModel model = new Gson().fromJson(response.body().string(), NearShopModel.class);
-//
-//                if (model.isSuccess()) {
-//                    callBack.success(model);
-//                } else {
-//                    ToastUtils.showShort(model.getMessage());
-//                    callBack.fail();
-//                }
-//
-//            }
-//        });
+        final Request request = getRequest(model, "/site/report");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body().toString());
+
+                ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
+
+                if (model.isSuccess()) {
+                    Log.e(TAG, "-------report ----: " + new Gson().toJson(model.getResult()));
+                    ToastUtils.showLong(model.getResult());
+                    callBack.success(model);
+                } else {
+                    ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
 
     }
 
+    public static void getNearShop(double longitude, double latitude, double range, String city, final ApiCallBack callBack) {
+
+        GetNearShopRequestModel model = new GetNearShopRequestModel();
+        model.setCity(city);
+        model.setLatitude(latitude);
+        model.setLongitude(longitude);
+        model.setRange(range);
+        final Request request = getRequest(model, "/shop/getNearShop");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body());
+
+                NearShopModel model = new Gson().fromJson(response.body().string(), NearShopModel.class);
+
+                if (model.isSuccess()) {
+                    Log.e(TAG, "-------getNearShop ----: " + new Gson().toJson(model.getResult()));
+                    callBack.success(model);
+                } else {
+                    ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * 获取站点操作日志
+     * @param limit
+     * @param offset
+     * @param callBack
+     */
+    public static void getSiteWorkHistory(String limit , String offset, final ApiCallBack callBack) {
+
+        SiteWorkLoggRequest model = new SiteWorkLoggRequest();
+        model.setLimit(limit);
+        model.setOffset(offset);
+
+        final Request request = getRequest(model, "/site/logging");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body());
+
+                SiteWorkLoggModel model = new Gson().fromJson(response.body().string(), SiteWorkLoggModel.class);
+
+                if (model.isSuccess()) {
+                    Log.e(TAG, "-------getSiteWorkHistory ----: " + new Gson().toJson(model.getResult()));
+                    callBack.success(model.getResult());
+                } else {
+                    Log.e(TAG, "-------getSiteWorkHistory fial ----: " + model.getMessage());
+                   // ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
 
     public static BaseTransferEntity getBaseTransferEntity(Object object) {
         String jsonString = new Gson().toJson(object);
@@ -646,7 +730,7 @@ public class ApiUtils {
         if (encode.contains("\n")) {
             encode = encode.replace("\n", "");
         }
-        String md5 = MD5Util.encrypt(encode + Constants.RANDOM_KEY);
+        String md5 = MD5Util.encrypt(encode + Constants.loginInfo.getRandomKey());
         BaseTransferEntity baseTransferEntity = new BaseTransferEntity();
         baseTransferEntity.setObject(encode);
         baseTransferEntity.setSign(md5);
@@ -661,7 +745,7 @@ public class ApiUtils {
         return new Request.Builder()
                 .url(Constants.SERVICE_BASE_URL + url)
                 .addHeader("Content-Type", "multipart/form-data")
-                .addHeader("Authorization", "Bearer " + Constants.TOKEN)
+                .addHeader("Authorization", "Bearer " + Constants.loginInfo.getToken())
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
     }
