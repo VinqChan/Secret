@@ -5,6 +5,10 @@ package com.dangong.oksan.util;
  */
 
 import android.os.Handler;
+import android.util.Log;
+
+import com.dangong.oksan.model.ResponseModel;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -90,8 +94,10 @@ public final class OKHttpThreadCallback implements Callback {
      * @param call
      * @param response
      */
-    private void postSuccess(final Call call, final Response response) {
+    private void postSuccess(final Call call, final Response response) throws IOException {
         if (UICallback != null && UIHandler != null) {
+            ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
+            Log.e("", "upload onResponse: "+new Gson().toJson(model));
             UIHandler.post(new Runnable() {
                 @Override
                 public void run() {

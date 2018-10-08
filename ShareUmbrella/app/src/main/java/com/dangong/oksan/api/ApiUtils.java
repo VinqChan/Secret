@@ -93,7 +93,7 @@ public class ApiUtils {
      * @param city
      * @param callBack
      */
-    public static void register(String phone, String code, String password, String inviteCode, String roleId, String province, String city, final ApiCallBack callBack) {
+    public static void register(String phone,String name, String code, String password, String inviteCode, String roleId, String province, String city, final ApiCallBack callBack) {
 
         OkHttpUtils
                 .post()
@@ -103,6 +103,7 @@ public class ApiUtils {
                 .addParams("inviteCode", inviteCode)
                 .addParams("roleId", roleId)
                 .addParams("province", province)
+                .addParams("name", name)
                 .addParams("city", city)
                 .url(Constants.SERVICE_BASE_URL + "/appuser/register")
                 .build()
@@ -354,7 +355,6 @@ public class ApiUtils {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                LogUtils.e(request.body().toString());
 
                 ResponseModel model = new Gson().fromJson(response.body().string(), ResponseModel.class);
 

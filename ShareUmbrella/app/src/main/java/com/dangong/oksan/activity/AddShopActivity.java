@@ -216,6 +216,7 @@ public class AddShopActivity extends BaseActivity {
         String managerId = managerCodeEt.getText().toString().trim();    //管理员工号
         String unitPhone = workTelephoneEt.getText().toString().trim();    //单位电话
         String pStatus = stateEt.getText().toString().trim(); //配置状态
+        int shopType = 0;
 
         if (StringUtils.isEmpty(name)) {
             ToastUtils.showShort("请输入店铺名称！");
@@ -224,6 +225,24 @@ public class AddShopActivity extends BaseActivity {
         if (StringUtils.isEmpty(type)) {
             ToastUtils.showShort("请选择店铺类型！");
             return;
+        }else {
+           switch (type){
+               case "酒店":
+                   shopType = 0;
+                   break;
+               case "景区内":
+                   shopType = 1;
+                   break;
+               case "餐饮铺":
+                   shopType = 2;
+                   break;
+               case "小区":
+                   shopType = 3;
+                   break;
+               case "单位":
+                   shopType = 4;
+                   break;
+           }
         }
         if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort("请选择省市区！");
@@ -261,10 +280,10 @@ public class AddShopActivity extends BaseActivity {
             ToastUtils.showShort("请输入站点管理员工号！");
             return;
         }
-        if (StringUtils.isEmpty(unitPhone)) {
-            ToastUtils.showShort("请输入座机号！");
-            return;
-        }
+//        if (StringUtils.isEmpty(unitPhone)) {
+//            ToastUtils.showShort("请输入座机号！");
+//            return;
+//        }
         if (StringUtils.isEmpty(pStatus)) {
             ToastUtils.showShort("请选择配置状态！");
             return;
@@ -274,7 +293,7 @@ public class AddShopActivity extends BaseActivity {
         model.setSiteId("0001");
         model.setSnCode(Constants.SNCODE);
         model.setName(name);
-        model.setType(0);
+        model.setType(shopType);
         model.setProvince(province);
         model.setCity(city);
         model.setRegion(region);
@@ -282,13 +301,10 @@ public class AddShopActivity extends BaseActivity {
         model.setPutPosition(putPosition);
         model.setBeginTime(beginTime);
         model.setEndTime(endTime);
-        model.setChargeName(chargeName);
-        model.setChargePhone(chargePhone);
-        model.setManagerName(managerName);
         model.setManagerId(managerId);
         model.setManagerPhone(managerPhone);
-        model.setUnitPhone(unitPhone);
         model.setpStatus(pStatus);
+        model.setHolderPhone("");
         model.setLatitude(latitude);
         model.setLongitude(longitude);
         ApiUtils.addShop(model, new ApiCallBack() {

@@ -5,26 +5,49 @@ package com.dangong.oksan.model;
  */
 
 public class ShopModel {
-    String siteId; //站点id
-    String snCode; //sn code
-    String name; //商铺名称
-    int type; //商铺名称
-    String province; //省
-    String city;    //市
-    String region;  //地区
-    String address; //具体位置
-    String putPosition; //排放位置
-    String beginTime;  //营业时间
-    String endTime;    //营业截止时间
-    String chargeName;  //主管姓名
-    String chargePhone;   //主管电话
-    String managerName;  //管理员姓名
-    String managerPhone; //管理员电话
-    String managerId;    //管理员工号
-    String unitPhone;    //单位电话
-    String pStatus; //配置状态
-    String latitude; //纬度
-    String longitude; //维度
+    private String siteId; //站点id
+    private String snCode; //sn code
+    private String name; //商铺名称
+    private int type; //商铺类型
+    private String province; //省
+    private String city; //市
+    private String region; //地区
+    private String address; //具体位置
+    private String putPosition; //排放位置
+    private String beginTime; //营业时间
+    private String endTime; //营业截止时间
+    private String managerPhone; //管理员电话
+    private String managerId; //管理员工号
+    private String holderPhone; //维护人员手机号码 可视为维护人员账号
+    private String pStatus; //配置状态
+    private String latitude; //纬度
+    private String longitude; //经度
+    private String shopId;//附近的商铺传入该值
+    private String uniqueCode;//二维码的key
+
+    public String getHolderPhone() {
+        return holderPhone;
+    }
+
+    public void setHolderPhone(String holderPhone) {
+        this.holderPhone = holderPhone;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getUniqueCode() {
+        return uniqueCode;
+    }
+
+    public void setUniqueCode(String uniqueCode) {
+        this.uniqueCode = uniqueCode;
+    }
 
     public String getSiteId() {
         return siteId;
@@ -114,30 +137,6 @@ public class ShopModel {
         this.endTime = endTime;
     }
 
-    public String getChargeName() {
-        return chargeName;
-    }
-
-    public void setChargeName(String chargeName) {
-        this.chargeName = chargeName;
-    }
-
-    public String getChargePhone() {
-        return chargePhone;
-    }
-
-    public void setChargePhone(String chargePhone) {
-        this.chargePhone = chargePhone;
-    }
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
-    }
-
     public String getManagerPhone() {
         return managerPhone;
     }
@@ -152,14 +151,6 @@ public class ShopModel {
 
     public void setManagerId(String managerId) {
         this.managerId = managerId;
-    }
-
-    public String getUnitPhone() {
-        return unitPhone;
-    }
-
-    public void setUnitPhone(String unitPhone) {
-        this.unitPhone = unitPhone;
     }
 
     public String getpStatus() {

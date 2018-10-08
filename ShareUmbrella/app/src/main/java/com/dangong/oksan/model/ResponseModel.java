@@ -10,7 +10,6 @@ public class ResponseModel implements Serializable {
     private String code;
     private String message;
     private String result;
-    private boolean isSuccess ;
 
     public boolean isSuccess() {
         return code.equals("200");

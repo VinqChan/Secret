@@ -244,7 +244,7 @@ public class RegisterActivity extends BaseActivity implements CountTimer.OnBacll
             return;
         }
         startLoading();
-        ApiUtils.register(phoneNum, code, password, invitationCode, role, mProvince, mCity, new ApiCallBack() {
+        ApiUtils.register(phoneNum,name, code, password, invitationCode, role, mProvince, mCity, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 ToastUtils.showShort("注册成功！");

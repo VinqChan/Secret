@@ -43,7 +43,7 @@ public class NearShopModel implements Serializable {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable {
         /**
          * address : 11111
          * city : 厦门市

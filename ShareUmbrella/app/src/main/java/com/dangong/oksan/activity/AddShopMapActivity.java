@@ -3,10 +3,13 @@ package com.dangong.oksan.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -16,7 +19,6 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
@@ -25,17 +27,19 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
 import com.dangong.oksan.adapter.ShopLocationListAdapter;
 import com.dangong.oksan.api.ApiUtils;
 import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.NearShopModel;
 import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.view.PullRereshRecycleView;
+import com.lljjcoder.Constant;
 
 import java.util.List;
 
@@ -45,7 +49,6 @@ import butterknife.OnClick;
 
 import static com.dangong.oksan.activity.ScannerActivity.SCANNER_KEY;
 import static com.dangong.oksan.activity.ScannerActivity.TYPE_OPEN;
-import static com.dangong.oksan.activity.ScannerActivity.TYPE_REMOVE;
 
 public class AddShopMapActivity extends BaseActivity {
 
@@ -62,6 +65,14 @@ public class AddShopMapActivity extends BaseActivity {
     PullRereshRecycleView locationRecyclerView;
     @BindView(R.id.own_info_iv)
     ImageView ownInfoIv;
+    @BindView(R.id.address_tv)
+    TextView addressTv;
+    @BindView(R.id.go_there_btn)
+    Button goThereBtn;
+    @BindView(R.id.shop_info_view)
+    RelativeLayout shopInfoView;
+    @BindView(R.id.withdrawal_rule_tv)
+    TextView withdrawalRuleTv;
     private BaiduMap mBaiduMap;
     LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
@@ -96,11 +107,11 @@ public class AddShopMapActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        getNearShop();
+
     }
 
     private void getNearShop() {
-        ApiUtils.getNearShop(116.4111328125, 39.6733703918, 2000.0, "", new ApiCallBack() {
+        ApiUtils.getNearShop(Constants.LONGITUDE, Constants.LATITUDE, 2000.0, "", new ApiCallBack() {
             @Override
             public void success(Object response) {
                 final NearShopModel nearShopModel = (NearShopModel) response;
@@ -150,7 +161,6 @@ public class AddShopMapActivity extends BaseActivity {
 
     private void setLayout(List<NearShopModel.ResultBean> list) {
 
-
         mAdapter = new ShopLocationListAdapter(list, this);
         locationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         locationRecyclerView.setAdapter(mAdapter);
@@ -175,23 +185,31 @@ public class AddShopMapActivity extends BaseActivity {
         });
 
         for (int i = 0; i < list.size(); i++) {
-            LatLng point = new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude());
+
+            LatLng point;
+            if (i == 0) {
+                point = new LatLng(24.510889, 118.184015);
+            } else {
+                point = new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude());
+            }
+
             BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
             OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
             Marker marker = (Marker) mBaiduMap.addOverlay(option2);
             //使用marker携带info信息，当点击事件的时候可以通过marker获得info信息
             Bundle bundle = new Bundle();
             //info必须实现序列化接口
-            bundle.putSerializable("info", point.latitude + " , " + point.longitude);
+            bundle.putSerializable("info", list.get(i));
             marker.setExtraInfo(bundle);
 
 
         }
-        //将地图显示在最后一个marker的位置
-        LatLng point = new LatLng(24.487216, 118.156801);
-        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
-        mBaiduMap.setMapStatus(msu);
+//        //将地图显示在最后一个marker的位置
+//        LatLng point = new LatLng(24.487216, 118.156801);
+//        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(point);
+//        mBaiduMap.setMapStatus(msu);
 
+        // DistanceUtil. getDistance(p1, p2);
     }
 
     @Override
@@ -201,21 +219,36 @@ public class AddShopMapActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.add_btn, R.id.maintain_btn,R.id.own_info_iv})
+    @OnClick({R.id.add_btn, R.id.maintain_btn, R.id.own_info_iv,R.id.go_there_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_btn:
                 Bundle bundle2 = new Bundle();
                 bundle2.putInt(SCANNER_KEY, TYPE_OPEN);
-                ActivityUtils.startActivity(bundle2,ScannerActivity.class);
+                // ActivityUtils.startActivity(bundle2,ScannerActivity.class);
+                ActivityUtils.startActivity(bundle2, AddShopActivity.class);
                 break;
             case R.id.maintain_btn:
-                Bundle bundle = new Bundle();
-                bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY, ManagerAndMaintainMainActivity.TYPE_MATAIN);
-                ActivityUtils.startActivity(bundle, ManagerAndMaintainMainActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY, ManagerAndMaintainMainActivity.TYPE_MATAIN);
+//                ActivityUtils.startActivity(bundle, ManagerAndMaintainMainActivity.class);
+
+                ActivityUtils.startActivity(NearShopListActivity.class);
                 break;
             case R.id.own_info_iv:
                 ActivityUtils.startActivity(MaintainPersonCenterActivity.class);
+                break;
+            case R.id.go_there_btn:
+                double distance = DistanceUtil. getDistance(new LatLng(Constants.LATITUDE, Constants.LONGITUDE), new LatLng(24.510889, 118.184015));
+                Log.e(TAG, "distance: "+distance );
+                Bundle bundle = new Bundle();
+                if(distance>5000){
+                    bundle.putString("route_type", "drive");
+                }else {
+                    bundle.putString("route_type", "walk");
+                }
+
+                ActivityUtils.startActivity(bundle,RoutePlanActivity.class);
                 break;
         }
     }
@@ -233,7 +266,7 @@ public class AddShopMapActivity extends BaseActivity {
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
-            LogUtils.d(TAG, "mylocation  " + mCurrentLat + "  " + mCurrentLon);
+
             mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
@@ -241,17 +274,22 @@ public class AddShopMapActivity extends BaseActivity {
                     .direction(mCurrentDirection).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
+
+            Constants.LATITUDE = locData.latitude;
+            Constants.LONGITUDE = locData.longitude;
             if (isFirstLoc) {
                 isFirstLoc = false;
                 LatLng ll = new LatLng(location.getLatitude(),
                         location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(18.0f);
+                builder.target(ll).zoom(14.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+                getNearShop();
             }
         }
 
         public void onReceivePoi(BDLocation poiLocation) {
+
         }
     }
 
@@ -261,18 +299,19 @@ public class AddShopMapActivity extends BaseActivity {
         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
-        //  mBaiduMap.setMyLocationEnabled(true);
+        mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
         mLocClient = new LocationClient(this);
-        //mLocClient.registerLocationListener(myListener);
+
+        mLocClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        //option.setScanSpan(1000);
+        option.setScanSpan(1000);
 
         mLocClient.setLocOption(option);
         mLocClient.start();
-
+        mLocClient.requestLocation();//发送请求
 
 //        LatLng point = new LatLng( 24.494577,118.192556);
 //        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
@@ -292,7 +331,10 @@ public class AddShopMapActivity extends BaseActivity {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Bundle info = marker.getExtraInfo();
-                ToastUtils.showShort((String) info.getSerializable("info"));
+                shopInfoView.setVisibility(View.VISIBLE);
+                NearShopModel.ResultBean shopInfo = (NearShopModel.ResultBean) info.getSerializable("info");
+                addressTv.setText(shopInfo.getAddress());
+
                 return false;
             }
         });

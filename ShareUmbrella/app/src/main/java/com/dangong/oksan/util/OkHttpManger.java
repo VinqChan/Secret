@@ -6,8 +6,10 @@ package com.dangong.oksan.util;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.dangong.oksan.constants.Constants;
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -127,7 +129,7 @@ public final class OkHttpManger {
     public Response uploadSync(String url, File[] files, String[] fileKeys, Param[] params) throws IOException {
         final RequestBody requestBody = buildMultipartFormRequestBody(files, fileKeys, params);
         final Request request = new Request.Builder().url(url).post(requestBody)
-                .addHeader("Content-Type", "multipart/form-data")
+                .addHeader("Content-Type", "application/octet-stream")
                 .addHeader("Authorization", "Bearer " + Constants.loginInfo.getToken()).build();
         return mOkHttpClient.newCall(request).execute();
     }
@@ -153,7 +155,11 @@ public final class OkHttpManger {
      */
     public void uploadAsync(String url, File[] files, String[] fileKeys, final OKHttpUICallback.ProgressCallback uploadListener, Param[] params) throws IOException {
         final RequestBody requestBody = buildMultipartFormRequestBody(files, fileKeys, params);
-        final Request request = new Request.Builder().url(url).post(new ProgressBody.ProgressRequestBody(requestBody, uploadListener, okHttpHandler)).build();
+        final Request request = new Request.Builder().url(url).post(new ProgressBody.ProgressRequestBody(requestBody, uploadListener, okHttpHandler))
+                .addHeader("Content-Type", "application/octet-stream")
+                .addHeader("Authorization", "Bearer " + Constants.loginInfo.getToken())
+                .build();
+
         mOkHttpClient.newCall(request).enqueue(new OKHttpThreadCallback(okHttpHandler, uploadListener, false));
     }
 

@@ -18,7 +18,10 @@ public class Constants {
     public static final int TYPE_IN_STOCK = 1;
     public static final int TYPE_REPORT = 2;
     public static  String SITEID = "0001";
-    public static  String SNCODE = "";
+    public static  String SNCODE = "0001";
+    public static  double LATITUDE = 0;
+    public static  double LONGITUDE = 0;
+
 
     public static LoginResult.Result loginInfo = new LoginResult().new Result();
 }

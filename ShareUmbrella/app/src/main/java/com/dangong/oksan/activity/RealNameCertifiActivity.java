@@ -8,23 +8,32 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
 import com.dangong.oksan.constants.Constants;
+import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.util.OKHttpUICallback;
 import com.dangong.oksan.util.OkHttpManger;
+import com.dangong.oksan.util.UpLoadUtils;
+import com.dangong.oksan.util.listener.ProgressListener;
+import com.dangong.oksan.util.listener.impl.UIProgressListener;
 import com.dangong.oksan.view.pictureTaker.PictureTakeDialog;
 import com.dangong.oksan.view.pictureTaker.PictureTaker;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Response;
 
 public class RealNameCertifiActivity extends BaseActivity {
@@ -139,46 +148,48 @@ public class RealNameCertifiActivity extends BaseActivity {
                     return;
                 }
                 loadingBar.setVisibility(View.VISIBLE);
-
-                HashMap<String, String> map = new HashMap<>();
-                map.put("phone", Constants.loginInfo.getPhone());
-                HashMap<String, String> hearder = new HashMap<>();
-                hearder.put("Content-Type", "application/octet-stream");
-                hearder.put("Authorization", "Bearer " + Constants.loginInfo.getToken());
-                File[] files = new File[2];
-                String[] keys = new String[2];
-                OkHttpManger.Param[] params = new OkHttpManger.Param[1];
-                params[0] = new OkHttpManger.Param("phone", Constants.loginInfo.getPhone());
-
-                keys[0] = "file";
-                keys[1] = "file";
-                files[0] = new File(path1);
-                files[1] = new File(path2);
-                try {
-                    OkHttpManger.getInstance().uploadAsync(Constants.SERVICE_BASE_URL + "/batch/upload", files, keys, new OKHttpUICallback.ProgressCallback() {
-                        @Override
-                        public void onSuccess(Call call, Response response, String path) {
-                            Log.e(TAG, "onSuccess: " + response);
-                            loadingBar.setVisibility(View.GONE);
-                            ToastUtils.showLong("上传成功！");
-                            finish();
-                        }
-
-                        @Override
-                        public void onProgress(long byteReadOrWrite, long contentLength, boolean done) {
-                            Log.e(TAG, "onProgress: " + byteReadOrWrite + " " + contentLength + "  " + done);
-                        }
-
-                        @Override
-                        public void onError(Call call, IOException e) {
-                            Log.e(TAG, "onError: " + e.getMessage());
-                            ToastUtils.showLong("上传失败！");
-                            loadingBar.setVisibility(View.GONE);
-                        }
-                    }, params);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                upload();
+//                HashMap<String, String> map = new HashMap<>();
+//                map.put("phone", Constants.loginInfo.getPhone());
+//                final File[] files = new File[2];
+//                final String[] keys = new String[2];
+//                final OkHttpManger.Param[] params = new OkHttpManger.Param[1];
+//                params[0] = new OkHttpManger.Param("phone", Constants.loginInfo.getPhone());
+//
+//                keys[0] = "file";
+//                keys[1] = "file";
+//                files[0] = new File(path1);
+//                files[1] = new File(path2);
+//
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            OkHttpManger.getInstance().uploadAsync("", files, keys, new OKHttpUICallback.ProgressCallback() {
+//                                @Override
+//                                public void onSuccess(Call call, final Response response, String path) {
+//                                    loadingBar.setVisibility(View.GONE);
+//                                    ToastUtils.showLong("上传成功！");
+//                                    finish();
+//                                }
+//
+//                                @Override
+//                                public void onProgress(long byteReadOrWrite, long contentLength, boolean done) {
+//                                    Log.e(TAG, "onProgress: " + byteReadOrWrite + " " + contentLength + "  " + done);
+//                                }
+//
+//                                @Override
+//                                public void onError(Call call, IOException e) {
+//                                    Log.e(TAG, "onError: " + e.getMessage());
+//                                    ToastUtils.showLong("上传失败！");
+//                                    loadingBar.setVisibility(View.GONE);
+//                                }
+//                            }, params);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }).start();
 
                 break;
         }
@@ -193,5 +204,84 @@ public class RealNameCertifiActivity extends BaseActivity {
             pictureTakeDialog = new PictureTakeDialog(this, pictureTaker);
         }
         pictureTakeDialog.show();
+    }
+    //多文件上传（带进度）
+    private void upload() {
+        //这个是非ui线程回调，不可直接操作UI
+        final ProgressListener progressListener = new ProgressListener() {
+            @Override
+            public void onProgress(long bytesWrite, long contentLength, boolean done) {
+                Log.i("TAG", "bytesWrite:" + bytesWrite);
+                Log.i("TAG", "contentLength" + contentLength);
+                Log.i("TAG", (100 * bytesWrite) / contentLength + " % done ");
+                Log.i("TAG", "done:" + done);
+                Log.i("TAG", "================================");
+            }
+        };
+
+
+        //这个是ui线程回调，可直接操作UI
+        UIProgressListener uiProgressRequestListener = new UIProgressListener() {
+            @Override
+            public void onUIProgress(long bytesWrite, long contentLength, boolean done) {
+                Log.i("TAG", "bytesWrite:" + bytesWrite);
+                Log.i("TAG", "contentLength" + contentLength);
+                Log.i("TAG", (100 * bytesWrite) / contentLength + " % done ");
+                Log.i("TAG", "done:" + done);
+                Log.i("TAG", "================================");
+                //ui层回调,设置当前上传的进度值
+                int progress = (int) ((100 * bytesWrite) / contentLength);
+
+                Log.e(TAG, "onUIProgress: "+"上传进度值：" + progress + "%");
+            }
+
+            //上传开始
+            @Override
+            public void onUIStart(long bytesWrite, long contentLength, boolean done) {
+                super.onUIStart(bytesWrite, contentLength, done);
+                Toast.makeText(getApplicationContext(),"开始上传",Toast.LENGTH_SHORT).show();
+            }
+
+            //上传结束
+            @Override
+            public void onUIFinish(long bytesWrite, long contentLength, boolean done) {
+                super.onUIFinish(bytesWrite, contentLength, done);
+                //uploadProgress.setVisibility(View.GONE); //设置进度条不可见
+                loadingBar.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+                finish();
+
+            }
+        };
+
+        //Constants.SERVICE_BASE_URL + "/batch/upload"
+        //开始Post请求,上传文件
+        UpLoadUtils.doPostRequest(Constants.SERVICE_BASE_URL + "/batch/upload", initUploadFile(), uiProgressRequestListener, new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                Log.i("TAG", "error------> "+e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RealNameCertifiActivity.this, "上传失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.i("TAG", "success---->"+response.body().string());
+            }
+        });
+
+    }
+    //初始化上传文件的数据
+    private List<String> initUploadFile(){
+        List<String> fileNames = new ArrayList<>();
+        fileNames.add(path1);
+        fileNames.add(path2);
+
+        return fileNames;
     }
 }
