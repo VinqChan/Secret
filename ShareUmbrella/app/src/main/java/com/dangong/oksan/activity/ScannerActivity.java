@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.api.ApiUtils;
@@ -36,6 +37,7 @@ public class ScannerActivity extends DeCodeActivity {
     public static final String SCANNER_KEY = "SCANNER_KEY";
     public static final int TYPE_OPEN = 1;//开伞仓锁
     public static final int TYPE_REMOVE = 2;//撤机
+    public static final int TYPE_ADDSHOP = 3;//添加商铺
 
 
     public static final int APPLY_READ_EXTERNAL_STORAGE = 0x111;
@@ -65,8 +67,21 @@ public class ScannerActivity extends DeCodeActivity {
     @Override
     public void init() {
         super.init();
-        scannerType = getIntent().getIntExtra(SCANNER_KEY, 0);
+
         initScannerView();
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        scannerType = getIntent().getIntExtra(SCANNER_KEY, 0);
+        if(scannerType == TYPE_ADDSHOP){
+            setTitle("新增商铺");
+        }else if(scannerType == TYPE_REMOVE){
+            setTitle("撤机");
+        }else {
+            setTitle("扫码借伞");
+        }
     }
 
     private void initScannerView() {
@@ -188,13 +203,15 @@ public class ScannerActivity extends DeCodeActivity {
         }
     }
 
-    private void scanner(String url) {
+    private void scanner(final String url) {
         ApiUtils.scanner(url, new ApiCallBack() {
             @Override
             public void success(Object response) {
                 ScannerModel model = ((ScannerModel) response);
                 Constants.SITEID = model.getResult().getSiteId();
                 Constants.SNCODE = model.getResult().getSiteNum();
+                Constants.UNIQUECODE = url;
+                ActivityUtils.startActivity(AddShopActivity.class);
                 finish();
             }
 

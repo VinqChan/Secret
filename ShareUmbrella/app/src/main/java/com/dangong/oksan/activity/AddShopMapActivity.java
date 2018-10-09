@@ -48,6 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.dangong.oksan.activity.ScannerActivity.SCANNER_KEY;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_ADDSHOP;
 import static com.dangong.oksan.activity.ScannerActivity.TYPE_OPEN;
 
 public class AddShopMapActivity extends BaseActivity {
@@ -186,13 +187,13 @@ public class AddShopMapActivity extends BaseActivity {
 
         for (int i = 0; i < list.size(); i++) {
 
-            LatLng point;
-            if (i == 0) {
-                point = new LatLng(24.510889, 118.184015);
-            } else {
-                point = new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude());
-            }
-
+//            LatLng point;
+//            if (i == 0) {
+//                point = new LatLng(24.510889, 118.184015);
+//            } else {
+//                point = new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude());
+//            }
+            LatLng point = new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude());
             BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_dy_dw);
             OverlayOptions option2 = new MarkerOptions().position(point).icon(bitmap);
             Marker marker = (Marker) mBaiduMap.addOverlay(option2);
@@ -224,9 +225,9 @@ public class AddShopMapActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.add_btn:
                 Bundle bundle2 = new Bundle();
-                bundle2.putInt(SCANNER_KEY, TYPE_OPEN);
-                // ActivityUtils.startActivity(bundle2,ScannerActivity.class);
-                ActivityUtils.startActivity(bundle2, AddShopActivity.class);
+                bundle2.putInt(SCANNER_KEY, TYPE_ADDSHOP);
+                ActivityUtils.startActivity(bundle2,ScannerActivity.class);
+                //ActivityUtils.startActivity(bundle2, AddShopActivity.class);
                 break;
             case R.id.maintain_btn:
 //                Bundle bundle = new Bundle();

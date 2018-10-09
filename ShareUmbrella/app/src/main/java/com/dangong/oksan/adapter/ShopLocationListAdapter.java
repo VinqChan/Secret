@@ -48,7 +48,7 @@ public class ShopLocationListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final NearShopModel.ResultBean mode = listData.get(position);
-         ((LocationHolder) holder).addressTv.setText(mode.getAddress());
+         ((LocationHolder) holder).addressTv.setText(mode.getName());
         View itemView = ((LinearLayout) holder.itemView).getChildAt(0);
         itemView.setBackgroundResource(R.drawable.bg_linerlayout);
         if (mOnItemClickListener != null) {

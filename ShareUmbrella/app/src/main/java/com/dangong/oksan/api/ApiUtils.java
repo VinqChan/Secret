@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.dangong.oksan.callback.ApiCallBack;
 import com.dangong.oksan.callback.LoginResultCallBack;
 import com.dangong.oksan.callback.ResultCallBack;
+import com.dangong.oksan.callback.ShopTypeResultCallBack;
 import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.BaseTransferEntity;
 import com.dangong.oksan.model.GetNearShopRequestModel;
@@ -18,6 +19,7 @@ import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.model.ScannerModel;
 import com.dangong.oksan.model.ScannerRequestModel;
 import com.dangong.oksan.model.ShopModel;
+import com.dangong.oksan.model.ShopTypeResultModel;
 import com.dangong.oksan.model.SiteIdRequestModel;
 import com.dangong.oksan.model.SiteModel;
 import com.dangong.oksan.model.SiteWorkLoggModel;
@@ -31,6 +33,8 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -335,6 +339,42 @@ public class ApiUtils {
                 });
     }
 
+    /**
+     * 获取商铺类型列表
+     *
+     * @param callBack
+     */
+    public static void shoptype( final ApiCallBack callBack) {
+       Map<String,String> header = new HashMap<>();
+        header.put("Content-Type", "multipart/form-data");
+        header.put("Authorization", "Bearer " + Constants.loginInfo.getToken());
+
+        OkHttpUtils
+                .post()
+                .headers(header)
+                .url(Constants.SERVICE_BASE_URL + "/shop/shoptype")
+                .build()
+                .execute(new ShopTypeResultCallBack() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.d("[oksan] {shoptype}" + e.getMessage());
+                        ToastUtils.showShort("服务异常，请稍后再试！");
+                        callBack.fail();
+                    }
+
+                    @Override
+                    public void onResponse(ShopTypeResultModel response, int id) {
+                        if (response.isSuccess()) {
+                            Log.e(TAG, "-------shoptype ----: " + new Gson().toJson(response.getResult()));
+
+                            callBack.success(response);
+                        } else {
+                            callBack.fail();
+                            ToastUtils.showShort(response.getMessage());
+                        }
+                    }
+                });
+    }
 
     /**
      * 添加店铺

@@ -19,13 +19,19 @@ import com.dangong.oksan.callback.BussinessTimePickerCallBack;
 import com.dangong.oksan.callback.CustomerPickerCallBack;
 import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.ShopModel;
+import com.dangong.oksan.model.ShopTypeResultModel;
 import com.dangong.oksan.util.PickerUtils;
+import com.lljjcoder.Constant;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
 import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,7 +93,8 @@ public class AddShopActivity extends BaseActivity {
     CityPickerView mPicker = new CityPickerView();
     @BindView(R.id.agent_telephone_et)
     EditText agentTelephoneEt;
-
+    String shopTypes[];
+    Map<String,Integer> shopTypeMap = new HashMap<>();
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_shop;
@@ -104,6 +111,26 @@ public class AddShopActivity extends BaseActivity {
         ownInfoIv.setVisibility(View.VISIBLE);
         mPicker.init(this);
         initCityPicker();
+        getShopType();
+    }
+
+    private void getShopType() {
+        ApiUtils.shoptype(new ApiCallBack() {
+            @Override
+            public void success(Object response) {
+                List<ShopTypeResultModel.ResultBean> dataList = ((ShopTypeResultModel)response).getResult();
+                 shopTypes = new String[dataList.size()];
+                for (int i = 0; i < dataList.size() ; i++) {
+                    shopTypes[i] = dataList.get(i).getTypeName();
+                    shopTypeMap.put(dataList.get(i).getTypeName(),dataList.get(i).getId());
+                }
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
     }
 
     private void initCityPicker() {
@@ -164,8 +191,8 @@ public class AddShopActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.selete_shop_type_rl:
-                String[] str1 = new String[]{"酒店", "景区内", "餐饮铺", "小区", "单位"};
-                PickerUtils.customerPicker(this, str1, new CustomerPickerCallBack() {
+               // String[] str1 = new String[]{"酒店", "景区内", "餐饮铺", "小区", "单位"};
+                PickerUtils.customerPicker(this, shopTypes, new CustomerPickerCallBack() {
                     @Override
                     public void selecte(String selecteItem) {
                         shopTypeEt.setText(selecteItem);
@@ -226,23 +253,7 @@ public class AddShopActivity extends BaseActivity {
             ToastUtils.showShort("请选择店铺类型！");
             return;
         }else {
-           switch (type){
-               case "酒店":
-                   shopType = 0;
-                   break;
-               case "景区内":
-                   shopType = 1;
-                   break;
-               case "餐饮铺":
-                   shopType = 2;
-                   break;
-               case "小区":
-                   shopType = 3;
-                   break;
-               case "单位":
-                   shopType = 4;
-                   break;
-           }
+            shopType =shopTypeMap.get(type);
         }
         if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort("请选择省市区！");
@@ -290,7 +301,7 @@ public class AddShopActivity extends BaseActivity {
         }
         startLoading();
         ShopModel model = new ShopModel();
-        model.setSiteId("0001");
+        model.setSiteId(Constants.SITEID);
         model.setSnCode(Constants.SNCODE);
         model.setName(name);
         model.setType(shopType);
@@ -305,8 +316,10 @@ public class AddShopActivity extends BaseActivity {
         model.setManagerPhone(managerPhone);
         model.setpStatus(pStatus);
         model.setHolderPhone("");
-        model.setLatitude(latitude);
-        model.setLongitude(longitude);
+        model.setLatitude(Constants.LATITUDE+"");
+        model.setLongitude(Constants.LONGITUDE+"");
+        model.setUniqueCode(Constants.UNIQUECODE);
+
         ApiUtils.addShop(model, new ApiCallBack() {
             @Override
             public void success(Object response) {
