@@ -1,5 +1,6 @@
 package com.dangong.oksan.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -59,6 +60,7 @@ public class RealNameCertifiActivity extends BaseActivity {
     private int type = 0;
     private String path1 = "";
     private String path2 = "";
+    private ProgressDialog dialog ;
 
 
     @Override
@@ -82,6 +84,10 @@ public class RealNameCertifiActivity extends BaseActivity {
         } else {
             setTitle(getString(R.string.realnamecerfi));
         }
+        dialog= new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setTitle("正在上传中...");
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
     }
 
     @Override
@@ -147,7 +153,7 @@ public class RealNameCertifiActivity extends BaseActivity {
                     ToastUtils.showShort("请上传手持导游相关证据");
                     return;
                 }
-                loadingBar.setVisibility(View.VISIBLE);
+                //loadingBar.setVisibility(View.VISIBLE);
                 upload();
 //                HashMap<String, String> map = new HashMap<>();
 //                map.put("phone", Constants.loginInfo.getPhone());
@@ -231,7 +237,7 @@ public class RealNameCertifiActivity extends BaseActivity {
                 Log.i("TAG", "================================");
                 //ui层回调,设置当前上传的进度值
                 int progress = (int) ((100 * bytesWrite) / contentLength);
-
+                dialog.setProgress(progress);
                 Log.e(TAG, "onUIProgress: "+"上传进度值：" + progress + "%");
             }
 
@@ -239,16 +245,20 @@ public class RealNameCertifiActivity extends BaseActivity {
             @Override
             public void onUIStart(long bytesWrite, long contentLength, boolean done) {
                 super.onUIStart(bytesWrite, contentLength, done);
-                Toast.makeText(getApplicationContext(),"开始上传",Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onUIStart: ");
+                dialog.show();
+                //Toast.makeText(getApplicationContext(),"开始上传",Toast.LENGTH_SHORT).show();
             }
 
             //上传结束
             @Override
             public void onUIFinish(long bytesWrite, long contentLength, boolean done) {
                 super.onUIFinish(bytesWrite, contentLength, done);
+                Log.e(TAG, "onUIFinish: ");
                 //uploadProgress.setVisibility(View.GONE); //设置进度条不可见
-                loadingBar.setVisibility(View.GONE);
+               // loadingBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
                 finish();
 
             }
