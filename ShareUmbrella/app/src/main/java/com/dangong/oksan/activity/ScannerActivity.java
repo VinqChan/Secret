@@ -35,9 +35,10 @@ public class ScannerActivity extends DeCodeActivity {
     public static final int EXTRA_LASER_LINE_MODE_1 = 1;
     public static final int EXTRA_LASER_LINE_MODE_2 = 2;
     public static final String SCANNER_KEY = "SCANNER_KEY";
-    public static final int TYPE_OPEN = 1;//开伞仓锁
+    public static final int TYPE_OPEN_SAN_CANG = 1;//开伞仓锁
     public static final int TYPE_REMOVE = 2;//撤机
     public static final int TYPE_ADDSHOP = 3;//添加商铺
+    public static final int TYPE_OPEN_SAN_CAO = 4;//开伞槽
 
 
     public static final int APPLY_READ_EXTERNAL_STORAGE = 0x111;
@@ -75,11 +76,13 @@ public class ScannerActivity extends DeCodeActivity {
     public void initView() {
         super.initView();
         scannerType = getIntent().getIntExtra(SCANNER_KEY, 0);
-        if(scannerType == TYPE_ADDSHOP){
+        if (scannerType == TYPE_ADDSHOP) {
             setTitle("新增商铺");
-        }else if(scannerType == TYPE_REMOVE){
+        } else if (scannerType == TYPE_REMOVE) {
             setTitle("撤机");
-        }else {
+        } else if (scannerType == TYPE_OPEN_SAN_CAO) {
+            setTitle("开伞槽");
+        } else {
             setTitle("扫码借伞");
         }
     }
@@ -194,6 +197,7 @@ public class ScannerActivity extends DeCodeActivity {
                 URIResult uriResult = (URIResult) bundle.getSerializable(Scanner.Scan.RESULT);
                 String[] split = uriResult.getUri().split("/");
                 if (split.length != 0) {
+
                     scanner(split[split.length - 1]);
                 } else {
                     ToastUtils.showShort("扫码失败！");
@@ -204,22 +208,42 @@ public class ScannerActivity extends DeCodeActivity {
     }
 
     private void scanner(final String url) {
-        ApiUtils.scanner(url, new ApiCallBack() {
-            @Override
-            public void success(Object response) {
-                ScannerModel model = ((ScannerModel) response);
-                Constants.SITEID = model.getResult().getSiteId();
-                Constants.SNCODE = model.getResult().getSiteNum();
-                Constants.UNIQUECODE = url;
-                ActivityUtils.startActivity(AddShopActivity.class);
-                finish();
-            }
+        switch (scannerType){
+            case TYPE_ADDSHOP:
+                ApiUtils.scanner(url, new ApiCallBack() {
+                    @Override
+                    public void success(Object response) {
+                        ScannerModel model = ((ScannerModel) response);
+                        Constants.SITEID = model.getResult().getSiteId();
+                        Constants.SNCODE = model.getResult().getSiteNum();
+                        Constants.UNIQUECODE = url;
+                        ActivityUtils.startActivity(AddShopActivity.class);
+                        finish();
+                    }
 
-            @Override
-            public void fail() {
-                finish();
-            }
-        });
+                    @Override
+                    public void fail() {
+                        finish();
+                    }
+                });
+                break;
+            case TYPE_OPEN_SAN_CAO:
+                ApiUtils.opensancao(url, new ApiCallBack() {
+                    @Override
+                    public void success(Object response) {
+                        ToastUtils.showLong((String)response);
+                        ActivityUtils.startActivity(AddShopActivity.class);
+                        finish();
+                    }
+
+                    @Override
+                    public void fail() {
+
+                    }
+                });
+                break;
+        }
+
     }
 
     @OnClick(R.id.title_back_iv)

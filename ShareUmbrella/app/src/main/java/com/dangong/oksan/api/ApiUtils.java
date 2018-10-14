@@ -14,6 +14,7 @@ import com.dangong.oksan.model.BaseTransferEntity;
 import com.dangong.oksan.model.GetNearShopRequestModel;
 import com.dangong.oksan.model.LoginResult;
 import com.dangong.oksan.model.NearShopModel;
+import com.dangong.oksan.model.OpenSanCaoRequest;
 import com.dangong.oksan.model.ReportRequestModel;
 import com.dangong.oksan.model.ResponseModel;
 import com.dangong.oksan.model.ScannerModel;
@@ -58,7 +59,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void getRegisterCode(String phone, final ApiCallBack callBack) {
-
+        Log.e(TAG, "getRegisterCode paramter: " + phone);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -97,8 +98,8 @@ public class ApiUtils {
      * @param city
      * @param callBack
      */
-    public static void register(String phone,String name, String code, String password, String inviteCode, String roleId, String province, String city, final ApiCallBack callBack) {
-
+    public static void register(String phone, String name, String code, String password, String inviteCode, String roleId, String province, String city, final ApiCallBack callBack) {
+        Log.e(TAG, "getRegisterCode paramter: " + phone + "," + city + "," + password + "," + inviteCode + "," + roleId + "," + province + "," + city);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -139,7 +140,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void logincode(String phone, final ApiCallBack callBack) {
-
+        Log.e(TAG, "logincode paramter: " + phone);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -174,7 +175,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void modifycode(String phone, final ApiCallBack callBack) {
-
+        Log.e(TAG, "modifycode paramter: " + phone);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -211,7 +212,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void psdmodify(String phone, String code, String password, final ApiCallBack callBack) {
-
+        Log.e(TAG, "psdmodify paramter: " + phone + "," + code);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -249,7 +250,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void codelogin(final String phone, String code, final ApiCallBack callBack) {
-
+        Log.e(TAG, "codelogin paramter: " + phone + "," + code);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -299,7 +300,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void pswlogin(final String phone, String password, final ApiCallBack callBack) {
-
+        Log.e(TAG, "pswlogin paramter: " + phone + "," + password);
         OkHttpUtils
                 .post()
                 .addParams("phone", phone)
@@ -344,8 +345,8 @@ public class ApiUtils {
      *
      * @param callBack
      */
-    public static void shoptype( final ApiCallBack callBack) {
-       Map<String,String> header = new HashMap<>();
+    public static void shoptype(final ApiCallBack callBack) {
+        Map<String, String> header = new HashMap<>();
         header.put("Content-Type", "multipart/form-data");
         header.put("Authorization", "Bearer " + Constants.loginInfo.getToken());
 
@@ -382,7 +383,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void addShop(ShopModel model, final ApiCallBack callBack) {
-
+        Log.e(TAG, "addShop paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, "/add/shop");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -419,6 +420,7 @@ public class ApiUtils {
     public static void checkgoods(String siteId, final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
         model.setSiteId(siteId);
+        Log.e(TAG, "checkgoods paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, "/site/checkgoods");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -455,6 +457,7 @@ public class ApiUtils {
      */
     public static void removeSite(String siteId, final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
+        Log.e(TAG, "removeSite paramter: " + new Gson().toJson(model));
         model.setSiteId(siteId);
         final Request request = getRequest(model, "/site/destory");
 
@@ -492,6 +495,7 @@ public class ApiUtils {
      */
     public static void getinvitecode(final ApiCallBack callBack) {
         SiteIdRequestModel model = new SiteIdRequestModel();
+        Log.e(TAG, "getinvitecode paramter: " + new Gson().toJson(model));
         model.setSiteId("");
         final Request request = getRequest(model, "/appuser/getinvitecode");
 
@@ -536,6 +540,7 @@ public class ApiUtils {
         } else if (type == 1) {
             url = "/site/stock";
         }
+        Log.e(TAG, "stock paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, url);
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -574,6 +579,7 @@ public class ApiUtils {
      */
     public static void scanner(String tdCode, final ApiCallBack callBack) {
         ScannerRequestModel model = new ScannerRequestModel();
+        Log.e(TAG, "scanner paramter: " + new Gson().toJson(model));
         model.setTdCode(tdCode);
         final Request request = getRequest(model, "/site/scan");
 
@@ -619,6 +625,7 @@ public class ApiUtils {
         WorkHistoryRequestModel model = new WorkHistoryRequestModel();
         model.setLimit(limit);
         model.setOffset(offset);
+        Log.e(TAG, "getWorkHistory paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, "/site/logging");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -655,7 +662,7 @@ public class ApiUtils {
      * @param callBack
      */
     public static void report(ReportRequestModel model, final ApiCallBack callBack) {
-
+        Log.e(TAG, "report paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, "/site/report");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -686,6 +693,15 @@ public class ApiUtils {
 
     }
 
+    /**
+     * 附近店铺
+     *
+     * @param longitude
+     * @param latitude
+     * @param range
+     * @param city
+     * @param callBack
+     */
     public static void getNearShop(double longitude, double latitude, double range, String city, final ApiCallBack callBack) {
 
         GetNearShopRequestModel model = new GetNearShopRequestModel();
@@ -693,6 +709,7 @@ public class ApiUtils {
         model.setLatitude(latitude);
         model.setLongitude(longitude);
         model.setRange(range);
+        Log.e(TAG, "getNearShop paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, "/shop/getNearShop");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -724,16 +741,17 @@ public class ApiUtils {
 
     /**
      * 获取站点操作日志
+     *
      * @param limit
      * @param offset
      * @param callBack
      */
-    public static void getSiteWorkHistory(String limit , String offset, final ApiCallBack callBack) {
+    public static void getSiteWorkHistory(String limit, String offset, final ApiCallBack callBack) {
 
         SiteWorkLoggRequest model = new SiteWorkLoggRequest();
         model.setLimit(limit);
         model.setOffset(offset);
-
+        Log.e(TAG, "getSiteWorkHistory paramter: " + new Gson().toJson(model));
         final Request request = getRequest(model, "/site/logging");
 
         OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
@@ -755,7 +773,48 @@ public class ApiUtils {
                     callBack.success(model.getResult());
                 } else {
                     Log.e(TAG, "-------getSiteWorkHistory fial ----: " + model.getMessage());
-                   // ToastUtils.showShort(model.getMessage());
+                    // ToastUtils.showShort(model.getMessage());
+                    callBack.fail();
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * 打开伞槽
+     * @param uniqueCode
+     * @param callBack
+     */
+    public static void opensancao(String uniqueCode, final ApiCallBack callBack) {
+
+        OpenSanCaoRequest model = new OpenSanCaoRequest();
+        model.setUniqueCode(uniqueCode);
+
+        Log.e(TAG, "opensancao paramter: " + new Gson().toJson(model));
+        final Request request = getRequest(model, "/site/openum");
+
+        OkHttpUtils.getInstance().getOkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtils.e(e.toString());
+                ToastUtils.showShort("服务异常，请稍后再试！");
+                callBack.fail();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtils.e(request.body());
+
+                LoginResult model = new Gson().fromJson(response.body().string(), LoginResult.class);
+
+                if (model.isSuccess()) {
+                    Log.e(TAG, "-------opensancao ----: " + new Gson().toJson(model.getResult()));
+                    callBack.success(model.getResult());
+                } else {
+                    Log.e(TAG, "-------opensancao fial ----: " + model.getMessage());
+                    // ToastUtils.showShort(model.getMessage());
                     callBack.fail();
                 }
 

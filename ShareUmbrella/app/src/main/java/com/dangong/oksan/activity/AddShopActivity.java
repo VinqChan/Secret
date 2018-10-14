@@ -21,7 +21,6 @@ import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.model.ShopModel;
 import com.dangong.oksan.model.ShopTypeResultModel;
 import com.dangong.oksan.util.PickerUtils;
-import com.lljjcoder.Constant;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -94,7 +93,10 @@ public class AddShopActivity extends BaseActivity {
     @BindView(R.id.agent_telephone_et)
     EditText agentTelephoneEt;
     String shopTypes[];
-    Map<String,Integer> shopTypeMap = new HashMap<>();
+    Map<String, Integer> shopTypeMap = new HashMap<>();
+    @BindView(R.id.belong_telephone_et)
+    EditText belongTelephoneEt;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_shop;
@@ -118,11 +120,11 @@ public class AddShopActivity extends BaseActivity {
         ApiUtils.shoptype(new ApiCallBack() {
             @Override
             public void success(Object response) {
-                List<ShopTypeResultModel.ResultBean> dataList = ((ShopTypeResultModel)response).getResult();
-                 shopTypes = new String[dataList.size()];
-                for (int i = 0; i < dataList.size() ; i++) {
+                List<ShopTypeResultModel.ResultBean> dataList = ((ShopTypeResultModel) response).getResult();
+                shopTypes = new String[dataList.size()];
+                for (int i = 0; i < dataList.size(); i++) {
                     shopTypes[i] = dataList.get(i).getTypeName();
-                    shopTypeMap.put(dataList.get(i).getTypeName(),dataList.get(i).getId());
+                    shopTypeMap.put(dataList.get(i).getTypeName(), dataList.get(i).getId());
                 }
             }
 
@@ -191,7 +193,7 @@ public class AddShopActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.selete_shop_type_rl:
-               // String[] str1 = new String[]{"酒店", "景区内", "餐饮铺", "小区", "单位"};
+                // String[] str1 = new String[]{"酒店", "景区内", "餐饮铺", "小区", "单位"};
                 PickerUtils.customerPicker(this, shopTypes, new CustomerPickerCallBack() {
                     @Override
                     public void selecte(String selecteItem) {
@@ -242,6 +244,7 @@ public class AddShopActivity extends BaseActivity {
         String managerPhone = managerTelephoneEt.getText().toString().trim(); //管理员电话
         String managerId = managerCodeEt.getText().toString().trim();    //管理员工号
         String unitPhone = workTelephoneEt.getText().toString().trim();    //单位电话
+        String belongPhone = belongTelephoneEt.getText().toString().trim();    //归属人电话
         String pStatus = stateEt.getText().toString().trim(); //配置状态
         int shopType = 0;
 
@@ -252,8 +255,8 @@ public class AddShopActivity extends BaseActivity {
         if (StringUtils.isEmpty(type)) {
             ToastUtils.showShort("请选择店铺类型！");
             return;
-        }else {
-            shopType =shopTypeMap.get(type);
+        } else {
+            shopType = shopTypeMap.get(type);
         }
         if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort("请选择省市区！");
@@ -295,6 +298,10 @@ public class AddShopActivity extends BaseActivity {
 //            ToastUtils.showShort("请输入座机号！");
 //            return;
 //        }
+        if (StringUtils.isEmpty(belongPhone)) {
+            ToastUtils.showShort("请输入归属人手机号码！");
+            return;
+        }
         if (StringUtils.isEmpty(pStatus)) {
             ToastUtils.showShort("请选择配置状态！");
             return;
@@ -315,10 +322,11 @@ public class AddShopActivity extends BaseActivity {
         model.setManagerId(managerId);
         model.setManagerPhone(managerPhone);
         model.setpStatus(pStatus);
-        model.setHolderPhone("");
-        model.setLatitude(Constants.LATITUDE+"");
-        model.setLongitude(Constants.LONGITUDE+"");
+        model.setHolderPhone(Constants.loginInfo.getPhone());
+        model.setLatitude(Constants.LATITUDE + "");
+        model.setLongitude(Constants.LONGITUDE + "");
         model.setUniqueCode(Constants.UNIQUECODE);
+        model.setBelongerPhone(belongPhone);
 
         ApiUtils.addShop(model, new ApiCallBack() {
             @Override

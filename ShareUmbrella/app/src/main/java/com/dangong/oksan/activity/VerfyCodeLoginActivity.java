@@ -1,5 +1,6 @@
 package com.dangong.oksan.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +17,12 @@ import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
 import com.dangong.oksan.api.ApiUtils;
 import com.dangong.oksan.callback.ApiCallBack;
+import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.util.CountTimer;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
 
 public class VerfyCodeLoginActivity extends BaseActivity implements CountTimer.OnBacllkCountTimer {
 
@@ -39,6 +42,8 @@ public class VerfyCodeLoginActivity extends BaseActivity implements CountTimer.O
     @BindView(R.id.withdrawal_rule_tv)
     TextView withdrawalRuleTv;
     private CountTimer countTimer;
+    private static final String KEY_PHONE = "login_phone_num";
+    private static final String KEY_PASSWORD= "login_password";
     @Override
     public int getLayoutId() {
         return R.layout.activity_code_login;
@@ -83,8 +88,21 @@ public class VerfyCodeLoginActivity extends BaseActivity implements CountTimer.O
             @Override
             public void success(Object response) {
                 stopLoading();
-                ToastUtils.showShort("登录成功！");
-                ActivityUtils.startActivity(MainActivity.class);
+                //ToastUtils.showShort("登录成功！");
+                Constants.loginInfo.setRoleId(Constants.ROLEID_STAFF); //TODO test
+                if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_GUIDE)){//导游
+                    if(Constants.loginInfo.getRoleId().equals(Constants.CHECKSTATE_YES)){//审核通过
+                        ActivityUtils.startActivity(AddShopMapActivity.class);
+                    }else {
+                        ActivityUtils.startActivity(MainActivity.class);
+                    }
+                }else  if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_MANAGER)){//管理人员
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(ManagerAndMaintainMainActivity.TYPE_KEY, ManagerAndMaintainMainActivity.TYPE_MANAGER);
+                    ActivityUtils.startActivity(bundle, ManagerAndMaintainMainActivity.class);
+                }else if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_STAFF)){//维护人员
+                    ActivityUtils.startActivity(MaintainMainActivity.class);
+                }
             }
 
             @Override

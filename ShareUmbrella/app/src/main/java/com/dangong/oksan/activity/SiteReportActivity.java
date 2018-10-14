@@ -191,8 +191,8 @@ public class SiteReportActivity extends BaseActivity {
                     @Override
                     public void sure() {
                         StockRequest stockRequest = new StockRequest();
-                        stockRequest.setAlpenstock(mLongNum);
-                        stockRequest.setLongUmbrella(mShortNum);
+                        stockRequest.setLongUmbrella(mLongNum);
+                        stockRequest.setShorUmbrella(mShortNum);
                         stockRequest.setAlpenstock(mDssNum);
                         stockRequest.setPhone(Constants.loginInfo.getPhone());
                         stockRequest.setSiteId(Constants.SITEID);

@@ -50,6 +50,7 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.constants.Constants;
 import com.dangong.oksan.map.RouteLineAdapter;
 import com.dangong.oksan.map.overlayutil.BikingRouteOverlay;
 import com.dangong.oksan.map.overlayutil.DrivingRouteOverlay;
@@ -57,6 +58,7 @@ import com.dangong.oksan.map.overlayutil.MassTransitRouteOverlay;
 import com.dangong.oksan.map.overlayutil.OverlayManager;
 import com.dangong.oksan.map.overlayutil.TransitRouteOverlay;
 import com.dangong.oksan.map.overlayutil.WalkingRouteOverlay;
+import com.dangong.oksan.model.NearShopModel;
 
 import java.util.List;
 
@@ -96,6 +98,7 @@ public class RoutePlanActivity extends BaseActivity implements BaiduMap.OnMapCli
     String startNodeStr = "西二旗地铁站";
     String endNodeStr = "百度科技园";
     boolean hasShownDialogue = false;
+    private NearShopModel.ResultBean selectLocation;
     private String routeType = "";
 
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +137,7 @@ public class RoutePlanActivity extends BaseActivity implements BaiduMap.OnMapCli
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
         routeType = getIntent().getStringExtra("route_type");
+        selectLocation = (NearShopModel.ResultBean) getIntent().getSerializableExtra("selectLocation");
         route(routeType);
     }
 
@@ -144,8 +148,8 @@ public class RoutePlanActivity extends BaseActivity implements BaiduMap.OnMapCli
         mBaidumap.clear();
         // 处理搜索按钮响应
         // 设置起终点信息，对于tranist search 来说，城市名无意义
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName("北京", startNodeStr);
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName("北京", endNodeStr);
+        PlanNode stNode = PlanNode.withCityNameAndPlaceName(Constants.CURR_CITY, Constants.CURR_ADRESS);
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName(selectLocation.getCity(), selectLocation.getAddress());
         if (routeType.equals("drive")) {//驾车
             mSearch.drivingSearch((new DrivingRoutePlanOption())
                     .from(stNode).to(enNode));
@@ -353,19 +357,20 @@ public class RoutePlanActivity extends BaseActivity implements BaiduMap.OnMapCli
             Toast.makeText(RoutePlanActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
         }
         if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
-            // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
-            // result.getSuggestAddrInfo()
-            AlertDialog.Builder builder = new AlertDialog.Builder(RoutePlanActivity.this);
-            builder.setTitle("提示");
-            builder.setMessage("检索地址有歧义，请重新设置。\n可通过getSuggestAddrInfo()接口获得建议查询信息");
-            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.create().show();
-            return;
+//            // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+//            // result.getSuggestAddrInfo()
+//            AlertDialog.Builder builder = new AlertDialog.Builder(RoutePlanActivity.this);
+//            builder.setTitle("提示");
+//            builder.setMessage("检索地址有歧义，请重新设置。\n可通过getSuggestAddrInfo()接口获得建议查询信息");
+//            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                }
+//            });
+//            builder.create().show();
+//            return;
+            result.getSuggestAddrInfo();
         }
         if (result.error == SearchResult.ERRORNO.NO_ERROR) {
             nodeIndex = -1;

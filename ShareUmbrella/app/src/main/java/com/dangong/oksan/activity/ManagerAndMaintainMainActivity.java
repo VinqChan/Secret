@@ -10,9 +10,14 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.dangong.oksan.R;
 import com.dangong.oksan.activity.base.BaseActivity;
+import com.dangong.oksan.api.ApiUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.dangong.oksan.activity.ScannerActivity.SCANNER_KEY;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_OPEN_SAN_CAO;
+import static com.dangong.oksan.activity.ScannerActivity.TYPE_REMOVE;
 
 /**
  * 维护人员站点管理/管理员站点管理
@@ -93,6 +98,9 @@ public class ManagerAndMaintainMainActivity extends BaseActivity {
             case R.id.open_san_btn:
                 break;
             case R.id.qshc_btn:
+                Bundle bundle2 = new Bundle();
+                bundle2.putInt(SCANNER_KEY, TYPE_OPEN_SAN_CAO);
+                ActivityUtils.startActivity(bundle2,ScannerActivity.class);
                 break;
             case R.id.lpdh_ll:
                 ActivityUtils.startActivity(GiftShopActivity.class);

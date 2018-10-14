@@ -17,9 +17,11 @@ public class Constants {
     public static final int TYPE_OUT_STOCK = 0;
     public static final int TYPE_IN_STOCK = 1;
     public static final int TYPE_REPORT = 2;
-    public static  String SITEID = "";
+    public static  String SITEID = "0001";
     public static  String SNCODE = "";
     public static  String UNIQUECODE = "";
+    public static  String CURR_CITY = "";
+    public static  String CURR_ADRESS = "";
     public static  double LATITUDE = 0;
     public static  double LONGITUDE = 0;
 

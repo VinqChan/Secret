@@ -24,6 +24,15 @@ public class ShopModel {
     private String longitude; //经度
     private String shopId;//附近的商铺传入该值
     private String uniqueCode;//二维码的key
+    private String belongerPhone;//归属人手机号码
+
+    public String getBelongerPhone() {
+        return belongerPhone;
+    }
+
+    public void setBelongerPhone(String belongerPhone) {
+        this.belongerPhone = belongerPhone;
+    }
 
     public String getHolderPhone() {
         return holderPhone;
