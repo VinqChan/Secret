@@ -126,6 +126,9 @@
             android:name=".activity.GuardHistoryActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".activity.OrderHistoryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".activity.InvatationRewardActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

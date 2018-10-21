@@ -118,7 +118,7 @@ public class ManagerPersonCenterActivity extends BaseActivity {
                 showPicturePckDialog();
                 break;
             case R.id.history_rl:
-                ActivityUtils.startActivity(GuardHistoryActivity.class);
+                ActivityUtils.startActivity(OrderHistoryActivity.class);
                 break;
             case R.id.gift_shop_rl:
                 ActivityUtils.startActivity(GiftShopActivity.class);
