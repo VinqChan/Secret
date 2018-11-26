@@ -28,8 +28,6 @@ import com.dangong.oksan.api.ApiUtils;
 import com.dangong.oksan.util.permission.PermissionCallBack;
 import com.lljjcoder.Constant;
 
-import java.util.Calendar;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -84,29 +82,10 @@ public class LoginActivity extends BaseActivity {
         wm.getDefaultDisplay().getMetrics(dm);
         Log.e(TAG, " height *  width: "+ dm.heightPixels  +" * "+dm.widthPixels);
     }
-    private static final long EXPIRES_PERMANENT;
-    private static final long EXPIRES_TEMPORARY;
-
-    static {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.set(2100, 1 - 1, 1);
-        EXPIRES_PERMANENT = calendar.getTimeInMillis();
-        calendar.set(2019, 1 - 1, 30);
-        EXPIRES_TEMPORARY = calendar.getTimeInMillis();
-    }
-
-    public boolean isExpired() {
-        return EXPIRES_TEMPORARY < System.currentTimeMillis();
-    }
 
     @Override
     public void init() {
         super.init();
-
-        if(isExpired()){
-            Log.e(TAG, "expired! " );
-            finish();
-        }
 
         PermissionCenter.getInstance().checkPermission(this, new PermissionCallBack() {
 
