@@ -96,7 +96,7 @@ public class ApiUtils {
      * @param roleId
      * @param province
      * @param city
-     * @param callBack
+     * @param callBackl
      */
     public static void register(String phone, String name, String code, String password, String inviteCode, String roleId, String province, String city, final ApiCallBack callBack) {
         Log.e(TAG, "getRegisterCode paramter: " + phone + "," + city + "," + password + "," + inviteCode + "," + roleId + "," + province + "," + city);
@@ -406,7 +406,6 @@ public class ApiUtils {
                     ToastUtils.showShort(model.getMessage());
                     callBack.fail();
                 }
-
             }
         });
 

@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        titleBackIv.setVisibility(View.GONE);
         String phone = SPUtils.getInstance().getString(KEY_PHONE);
         String password = SPUtils.getInstance().getString(KEY_PASSWORD);
         if(!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(password)){
@@ -145,7 +146,7 @@ public class LoginActivity extends BaseActivity {
             public void success(Object response) {
                 stopLoading();
                 //ToastUtils.showShort("登录成功！");
-                Constants.loginInfo.setRoleId(Constants.ROLEID_MANAGER); //TODO test
+               // Constants.loginInfo.setRoleId(Constants.ROLEID_MANAGER); //TODO test
                 if(Constants.loginInfo.getRoleId() .equals(Constants.ROLEID_GUIDE)){//导游
                     if(Constants.loginInfo.getRoleId().equals(Constants.CHECKSTATE_YES)){//审核通过
                         ActivityUtils.startActivity(AddShopMapActivity.class);

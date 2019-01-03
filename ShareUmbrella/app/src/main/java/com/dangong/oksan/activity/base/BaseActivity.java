@@ -13,7 +13,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,16 +24,11 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.dangong.oksan.R;
-import com.dangong.oksan.activity.AddShopMapActivity;
-import com.dangong.oksan.activity.MainActivity;
-import com.dangong.oksan.activity.MaintainMainActivity;
 import com.dangong.oksan.activity.MaintainPersonCenterActivity;
-import com.dangong.oksan.activity.ManagerAndMaintainMainActivity;
 import com.dangong.oksan.activity.ManagerPersonCenterActivity;
 import com.dangong.oksan.activity.PersonCenterActivity;
 import com.dangong.oksan.constants.Constants;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -54,20 +48,7 @@ import crossoverone.statuslib.StatusUtil;
  **************************************/
 public abstract class BaseActivity extends Activity {
     public static final String TAG = BaseActivity.class.getName();
-    private static final long EXPIRES_PERMANENT;
-    private static final long EXPIRES_TEMPORARY;
 
-    static {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.set(2100, 1 - 1, 1);
-        EXPIRES_PERMANENT = calendar.getTimeInMillis();
-        calendar.set(2019, 1 - 1, 30);
-        EXPIRES_TEMPORARY = calendar.getTimeInMillis();
-    }
-
-    public boolean isExpired() {
-        return EXPIRES_TEMPORARY < System.currentTimeMillis();
-    }
     /**
      * 使用者定义并使用的广播
      */
@@ -111,10 +92,6 @@ public abstract class BaseActivity extends Activity {
         setStatusColor();
         setSystemInvadeBlack();
         init();
-        if(isExpired()){
-            Log.e(TAG, "expired! " );
-            finish();
-        }
     }
 
     protected void setStatusColor() {
