@@ -45,7 +45,7 @@
                 android:layout_toStartOf="@+id/arrow_1"
                 android:layout_marginTop="3dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/img_default_customer" />
+                android:src="@drawable/ic_default_head" />
 
             <ImageView
                 android:id="@+id/arrow_1"

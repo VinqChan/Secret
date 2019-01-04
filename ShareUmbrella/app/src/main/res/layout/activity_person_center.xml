@@ -27,7 +27,7 @@
                     android:id="@+id/custom_header_view"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/img_default_customer" />
+                    android:src="@drawable/ic_default_head" />
 
                 <TextView
                     android:id="@+id/phone_num_tv"
